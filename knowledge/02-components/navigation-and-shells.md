@@ -42,7 +42,7 @@ M3 distinguishes two tab tiers with distinct visual weight and token specs (`.co
 Material's `TopAppBar` measures its `actions` slot **before** allocating remaining horizontal width to `title` and `navigationIcon`. On a narrow `600dp`–`800dp` desktop window—especially when a custom window caption (`— □ ×` = `~138dp`) shares the top row—a `Row` of 5–7 toolbar buttons **crushes the title and back arrow to zero width**.
 
 ### 3.2 Canonical Solutions: `AppBarRow` vs. Custom `Layout` (`AdaptiveBar`)
-1. **Material `AppBarRow` / `AppBarColumn` (Stable in `1.5.0-rc01` / `1.13.0-beta02`):**
+1. **Material `AppBarRow` / `AppBarColumn` (Stable in `1.5.0-rc01` / `1.13.0-rc01`):**
    - `AppBarRow(maxItemCount = ..., overflowIndicator = { state -> ... })` automatically moves trailing `clickableItem` / `toggleableItem` entries into an overflow menu once `maxItemCount` or width constraints are exceeded (`.corpus/compose-maven-api/pages/expressive-api-reference.md:516-538`).
 2. **Priority-Driven Custom `Layout` (`AdaptiveBar` Pattern for Desktop + Mobile):**
    - When title bars, window caption controls, drag regions, and priority-ordered actions must coexist in one row without `SubcomposeLayout` crashes:
@@ -72,7 +72,31 @@ On multi-window desktops with custom integrated title bars, flat full-bleed mobi
 
 ---
 
+## 5. Single Canonical Entry Point & Anti-Duplication Rules (No Duplicate Visual Anchors on One Screen)
+
+Within any single viewport state, every destination or primary command must have **exactly one persistent visual entry point**. Legitimate multi-path access comes from **cross-modality shortcuts**—one visual control plus a keyboard shortcut (`Mod+K`, `Mod+F`), plus a secondary right-click context menu or command palette—never from painting two competing visible buttons or two navigation chrome bars for the same target on the same screen.
+
+1. **FAB vs. App Bar & Inline Actions:**
+   - M3 explicitly specifies: *"A FAB shouldn't contain notifications or actions found elsewhere on a screen"* and *"Don't display multiple FABs on a single screen"* (`.corpus/m3-expressive/pages/components/floating-action-button.md:243,304`).
+   - App bars should surface only 1–2 essential page-scoped actions and *"Avoid using multiple filled or tonal buttons"* side-by-side (`.corpus/m3-expressive/pages/components/app-bars.md:328-348`). Whenever a primary action is promoted to a FAB or wide-window hero button, **remove** any duplicate icon button for that same action from the `TopAppBar` or inline header.
+2. **Mutually Exclusive Navigation Chrome:**
+   - Never display `WideNavigationRail` / sidebar and `ShortNavigationBar` at the same time (`.corpus/m3-expressive/pages/components/navigation-rail.md:476-484`).
+   - Never stack a bottom `HorizontalFloatingToolbar` carrying local navigation controls above a `ShortNavigationBar` (`.corpus/m3-expressive/pages/components/toolbars.md:289-310`), and keep tab bars strictly for top-level section navigation rather than view actions (`.corpus/apple-hig/pages/tab-bars.md:21-76`).
+3. **Adaptive Destination Deduplication Across Breakpoints:**
+   - Follow a strict single-anchor entry policy when layout chrome shifts from `Compact` (`< 600dp`) to `Medium`/`Expanded` (`>= 600dp`): if destinations such as *Settings*, *Search*, *Downloads*, or *History* move into the persistent `WideNavigationRail` or sidebar (e.g., Windows `NavigationView` pinned footer Settings item), **suppress** their compact-only entry points (`TopAppBar` gear/search icon or compact summary hub cards) so wide screens never show two visible *Settings* or *Search* icons simultaneously (`.corpus/windows-fluent/pages/windows/design/app-settings/guidelines-for-app-settings.md:34-47`).
+4. **Toolbar Pinned vs. Overflow Mutual Exclusion:**
+   - Any action currently rendered visibly inline on a toolbar or command bar must **not** also appear inside the trailing `⋮` More overflow menu at that width (`.corpus/windows-fluent/pages/windows/design/app-settings/guidelines-for-app-settings.md:46`). Overflow builders (`AppBarRow`, `AdaptiveBar`) must place *only* evicted items in overflow.
+5. **Overlay, System Menu & Scroll Indicator Deduplication:**
+   - Do not duplicate controls in both an active floating overlay/capture HUD and the underlying viewport (`.corpus/apple-hig/pages/camera-control.md:68-76`), nor add custom inline controls duplicating standard edit-menu or share-sheet commands (`.corpus/apple-hig/pages/edit-menus.md:42`, `.corpus/apple-hig/pages/activity-views.md:25`).
+   - Do not add explicit `"Open"` buttons on list rows, cards, or desktop notifications when tapping the item itself already opens it (`.corpus/linux-hig/pages/gnome/patterns/feedback/notifications.md:65`).
+   - Do not show both a `PageControl` dot indicator and a scroll bar/indicator along the same scroll axis (`.corpus/apple-hig/pages/scroll-views.md:60`).
+
+---
+
 ## Sources & Cross-References
-- `.corpus/m3-expressive/pages/foundations/layout/scaffold.md`, `components/navigation-bar.md`, `components/navigation-rail.md`, `components/tabs.md`, `components/app-bars.md`
+- `.corpus/m3-expressive/pages/foundations/layout/scaffold.md`, `components/navigation-bar.md`, `components/navigation-rail.md`, `components/tabs.md`, `components/app-bars.md`, `components/floating-action-button.md`, `components/toolbars.md`
+- `.corpus/apple-hig/pages/tab-bars.md`, `camera-control.md`, `edit-menus.md`, `activity-views.md`, `scroll-views.md`
+- `.corpus/windows-fluent/pages/windows/design/app-settings/guidelines-for-app-settings.md`
+- `.corpus/linux-hig/pages/gnome/patterns/feedback/notifications.md`
 - `.corpus/compose-maven-api/pages/material3-token-constants.md`, `expressive-api-reference.md`
 - `.corpus/compose-android/pages/design/ui/mobile/guides/foundations/system-bars.md`

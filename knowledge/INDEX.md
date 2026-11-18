@@ -49,7 +49,7 @@
 - **[UI Copy, UX Writing, and AP Style Reference](05-ux-writing/ui-copy-and-ap-style.md)** — M3 Content Design + AP Stylebook + Google/Microsoft/Fluent 2/18F/Apple/GNOME/KDE synthesis: capitalization matrices, UI vs. prose numerals & `tnum`, punctuation & Unicode `…` rules, avoiding middle-dot separators (`·`), active error/button/notification formulas, 200% scaling & CJK rules, and `contentDescription`/alt-text accessibility copy.
 
 ### `06-version-tracking/` — Live Maven Pins, Parity Diffs & Dual-Target Roadmaps
-- **[Bleeding-Edge Compose & Material 3 Expressive Version Matrix](06-version-tracking/bleeding-edge-matrix.md)** — Live Maven Central / Google Maven matrix (`compose-bom-alpha`, `material3 1.5.0-rc01`, JetBrains CMP `1.13.0-beta02`), AndroidX-vs-CMP API parity diff, and graduated vs. `@ExperimentalMaterial3ExpressiveApi` symbol tracking.
+- **[Bleeding-Edge Compose & Material 3 Expressive Version Matrix](06-version-tracking/bleeding-edge-matrix.md)** — Live Maven Central / Google Maven matrix (`compose-bom-alpha`, `material3 1.5.0-rc01`, JetBrains CMP `1.13.0-rc01`), AndroidX-vs-CMP API parity diff, and graduated vs. `@ExperimentalMaterial3ExpressiveApi` symbol tracking.
 - **[Dual-Target Version Unification & Skiko 0.156+ Native GPU Interop](06-version-tracking/dual-target-unification-and-skiko-interop.md)** — Gradle `.module` redirect mechanics (`alpha` vs. stable BOM resolution), CMP `1.12.x` (`Skiko 0.150.x`) vs. `1.13.x` (`Skiko 0.156.1` `Direct3DRenderer`/`FrameDriver`), D3D11/D3D12 zero-copy interop, TDR recovery, and ProGuard `-keep` rules.
 
 ---

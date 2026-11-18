@@ -72,6 +72,9 @@ Do **not** equate `Esc` with global Android system Back:
 - **No Unsolicited Red-Dot Anxiety Badges:** Apple HIG restricts app-icon badges strictly to unread notifications (`.corpus/apple-hig/pages/notifications.md:71-73`); avoid decorative red notification dots on settings rows or static navigation tabs.
 - **Desktop Tray Fallbacks:** On Windows, bypass AWT `PopupMenu` (ANSI `AppendMenuA` corrupts UTF-8/CJK on Windows) in favor of `AppendMenuW` via FFM; on GNOME Linux, assume no persistent tray exists and rely on single-instance IPC reactivation.
 
+### 3.6 Single Canonical Entry Point (Cross-OS Anti-Duplication)
+Across all five platforms, keep **one persistent visual entry point** per destination or action on any single screen—never stack a rail/sidebar with a bottom `ShortNavigationBar`, never duplicate a Settings/Search entry in both a wide sidebar and a `TopAppBar`, and never mirror a visible toolbar action inside `⋮` More overflow or add `"Open"` buttons to clickable notifications. Secondary access belongs to keyboard shortcuts (`Mod+K` / `Mod+F`) and right-click context menus; see [navigation-and-shells.md](../02-components/navigation-and-shells.md#5-single-canonical-entry-point--anti-duplication-rules-no-duplicate-visual-anchors-on-one-screen).
+
 ---
 
 ## Sources & Cross-References

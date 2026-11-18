@@ -1,12 +1,12 @@
-# Material 3 Expressive Component Catalog (Compose `1.5.0-rc01` / CMP `1.13.0-beta02`)
+# Material 3 Expressive Component Catalog (Compose `1.5.0-rc01` / CMP `1.13.0-rc01`)
 
 > **Scope:** Component-by-component engineering reference for the 14 new and updated **Material 3 Expressive (`M3E`)** components—covering anatomy, exact tokens (`dp`), when-to-use vs. avoid rules, verified Compose signatures, and `@OptIn` / cross-target parity status from `manifests/api/material3-expressive-surface.json`.
 
 ---
 
-## 1. Graduation & Opt-In Quick Matrix (`1.5.0-rc01` vs. `1.13.0-beta02`)
+## 1. Graduation & Opt-In Quick Matrix (`1.5.0-rc01` vs. `1.13.0-rc01`)
 
-| Component | Compose Entry Point(s) | Opt-In Status (AndroidX `1.5.0-rc01` & CMP `1.13.0-beta02`) | Cross-Target Parity |
+| Component | Compose Entry Point(s) | Opt-In Status (AndroidX `1.5.0-rc01` & CMP `1.13.0-rc01`) | Cross-Target Parity |
 | --- | --- | --- | --- |
 | **Button Group** | `ButtonGroup`, `ButtonGroupDefaults`, `ButtonGroupScope` | Graduated (Stable) | `identical` |
 | **Split Button** | `SplitButtonLayout`, `SplitButtonDefaults` | Graduated (Stable) | `identical` |
@@ -59,7 +59,7 @@
       spacing: Dp = SplitButtonDefaults.Spacing,
   )
   ```
-- **Historical Rename Trap:** Earlier alpha pins (`1.5.0-alpha25`) experimented with `SplitButton`; in both `1.5.0-rc01` and CMP `1.13.0-beta02`, the canonical layout composable is **`SplitButtonLayout`** (`.corpus/compose-maven-api/pages/expressive-api-reference.md:174-183`).
+- **Historical Rename Trap:** Earlier alpha pins (`1.5.0-alpha25`) experimented with `SplitButton`; in both `1.5.0-rc01` and CMP `1.13.0-rc01`, the canonical layout composable is **`SplitButtonLayout`** (`.corpus/compose-maven-api/pages/expressive-api-reference.md:174-183`).
 - **When to Use vs. Avoid:** Use when one action represents 80%+ of invocations and 2–5 secondary variants exist. Avoid when all options are equally likely (use a menu or `ButtonGroup` instead).
 
 ### 2.3 `ToggleButton`, `FilledTonalToggleButton` & `IconToggleButton`
@@ -99,7 +99,7 @@
       content: @Composable RowScope.() -> Unit,
   )
   ```
-- **When to Use vs. Avoid:** Use `HorizontalFloatingToolbar` for page-scoped contextual actions (media/editor formatting, multi-select actions) that float above scrolling content and optionally collapse via `FloatingToolbarDefaults.exitAlwaysScrollBehavior(...)`. **Never** use a floating toolbar for top-level app navigation (use `ShortNavigationBar` or `WideNavigationRail`) or when it obscures critical bottom input bars.
+- **When to Use vs. Avoid:** Use `HorizontalFloatingToolbar` for page-scoped contextual actions (media/editor formatting, multi-select actions) that float above scrolling content and optionally collapse via `FloatingToolbarDefaults.exitAlwaysScrollBehavior(...)`. **Never** use a floating toolbar for top-level app navigation (use `ShortNavigationBar` or `WideNavigationRail`), never display a floating toolbar alongside a `ShortNavigationBar`, and never duplicate a FAB or inline bar action across multiple visible anchors on one screen (see [navigation-and-shells.md](navigation-and-shells.md#5-single-canonical-entry-point--anti-duplication-rules-no-duplicate-visual-anchors-on-one-screen)).
 
 ---
 
@@ -110,7 +110,7 @@
 - **Tokens & Geometry:** Container `48dp × 48dp`, active morphing polygon `38dp` (`md.comp.loading-indicator.*`), also available in `PullToRefreshDefaults.LoadingIndicator(...)` (`.corpus/m3-expressive/pages/components/loading-indicator.md:233-235`).
 - **Critical Usage Guardrail:**
   - **Do NOT use `LoadingIndicator` alongside a determinate progress bar** (e.g., on a download/extraction card that already displays a `LinearProgressIndicator`), and avoid displaying it for sub-`200ms` transitions (wait `200ms` before showing to avoid flicker). When frozen by `MotionDurationScale = 0f` or static screenshots, an intermediate morph frame looks like a broken blob unless replaced by a static icon when `reduced == true`.
-  - **Compose Opt-In:** Both `LoadingIndicator` and `ContainedLoadingIndicator` remain `@ExperimentalMaterial3ExpressiveApi` in `1.5.0-rc01` and `1.13.0-beta02`.
+  - **Compose Opt-In:** Both `LoadingIndicator` and `ContainedLoadingIndicator` remain `@ExperimentalMaterial3ExpressiveApi` in `1.5.0-rc01` and `1.13.0-rc01`.
 
 ### 3.2 `LinearWavyProgressIndicator` & `CircularWavyProgressIndicator`
 - **Purpose:** Determinate and indeterminate progress indicators with expressive sinusoidal wave geometry (`amplitude`, `wavelength`, `waveSpeed`) and an explicit `4dp` `stopIndicator` dot on determinate linear tracks (`.corpus/m3-expressive/pages/components/progress-indicators.md:260-269`, `.corpus/compose-maven-api/pages/expressive-api-reference.md:430-472`).
@@ -146,7 +146,7 @@
 
 ### 5.1 `SegmentedListItem` (`ListItemShapes`)
 - **Purpose:** Expressive grouped list cards separated by a **`2dp` gap (`md.comp.list.segmented.gap`)** with rounded outer group corners and smaller (`4dp`–`8dp`) inner corners, replacing flat edge-to-edge lists divided by `HorizontalDivider` (`.corpus/m3-expressive/pages/components/lists.md:491-511`, `.corpus/compose-maven-api/pages/expressive-api-reference.md:636-686`).
-- **Four Graduated Overloads (`1.5.0-rc01` & `1.13.0-beta02`):**
+- **Four Graduated Overloads (`1.5.0-rc01` & `1.13.0-rc01`):**
   1. Static (no `onClick` — *missing in older CMP `1.12.0-alpha03` / `alpha22`!*)
   2. Clickable (`onClick`, `onLongClick`)
   3. Selectable (`selected`, `onClick`, `onLongClick`)
@@ -161,7 +161,7 @@
 
 ### 5.3 Expressive Search (`SearchBar`, `ExpandedFullScreenSearchBar`, `ExpandedDockedSearchBar`)
 - **Purpose:** Contained `56dp`-tall search pill (`360dp..720dp` width, `30dp` avatar inside `48dp` target) expanding cleanly into either a full-screen overlay (`Compact` / `< 600dp` width) or a docked floating card (`Medium+` / `360..720dp` width, height `240dp .. 2/3 screen`, `2dp` bar-to-results gap) (`.corpus/m3-expressive/pages/components/search.md:100-140`, `.corpus/compose-maven-api/pages/expressive-api-reference.md:721-754`).
-- **API Status:** `SearchBar` still carries `@ExperimentalMaterial3Api`, while `ExpandedFullScreenSearchBar` and `ExpandedDockedSearchBar` (taking `SearchBarState`) are graduated stable in `1.5.0-rc01` and `1.13.0-beta02`.
+- **API Status:** `SearchBar` still carries `@ExperimentalMaterial3Api`, while `ExpandedFullScreenSearchBar` and `ExpandedDockedSearchBar` (taking `SearchBarState`) are graduated stable in `1.5.0-rc01` and `1.13.0-rc01`.
 - **Touch Exit Rule:** Always expose an explicit trailing **Clear / Cancel** button inside active search bars so touch-only users without a physical `Esc` key can clear and exit search effortlessly.
 
 ---

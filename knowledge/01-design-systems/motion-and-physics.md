@@ -18,7 +18,7 @@ A common error in M3 Expressive migrations is replacing *everything* with `Motio
 
 ## 2. `MotionScheme.expressive()` vs. `MotionScheme.standard()`
 
-In AndroidX `material3` `1.5.0-rc01` and JetBrains CMP `1.13.0-beta02`, `MotionScheme` is **graduated (stable)** with identical APIs (`.corpus/compose-maven-api/pages/expressive-api-reference.md:43-57`):
+In AndroidX `material3` `1.5.0-rc01` and JetBrains CMP `1.13.0-rc01`, `MotionScheme` is **graduated (stable)** with identical APIs (`.corpus/compose-maven-api/pages/expressive-api-reference.md:43-57`):
 
 ```kotlin
 // Top-level theme injection (MaterialExpressiveTheme defaults to expressive)

@@ -26,7 +26,7 @@ Material 3 Expressive is not a breaking "Material 4"; it is an additive evolutio
 
 ## 2. `MaterialExpressiveTheme` vs. `MaterialTheme` (Compose Runtime Behavior)
 
-In AndroidX `material3` `1.5.0-rc01` and JetBrains CMP `1.13.0-beta02`, `MaterialExpressiveTheme` is **graduated (no `@OptIn` required)** and shares an identical signature across both targets (`manifests/api/material3-expressive-surface.json`, `.corpus/compose-maven-api/pages/expressive-api-reference.md:14-23`):
+In AndroidX `material3` `1.5.0-rc01` and JetBrains CMP `1.13.0-rc01`, `MaterialExpressiveTheme` is **graduated (no `@OptIn` required)** and shares an identical signature across both targets (`manifests/api/material3-expressive-surface.json`, `.corpus/compose-maven-api/pages/expressive-api-reference.md:14-23`):
 
 ```kotlin
 @Composable
@@ -41,7 +41,7 @@ fun MaterialExpressiveTheme(
 
 ### Why `MaterialExpressiveTheme` Matters Beyond Aesthetics
 1. **Activates Expressive Component Defaults:** `MaterialExpressiveTheme` populates `LocalUsingExpressiveTheme`, causing Material 3 components (buttons, navigation items, menus, toolbars) to automatically select expressive shapes and behaviors without passing manual `shapes = ...` at every call site.
-2. **Enforces a Unified `MotionScheme`:** Provides `MaterialTheme.motionScheme` (`MotionScheme.expressive()` or `MotionScheme.standard()`) into `CompositionLocal`, replacing ad-hoc `tween()` / `spring()` literals. Note that `MaterialTheme` in 1.5.0-rc01 / 1.13.0-beta02 also exposes a 5-parameter overload accepting `motionScheme` (`.corpus/compose-maven-api/pages/expressive-api-reference.md:40`), while `MaterialExpressiveTheme` defaults to expressive semantics.
+2. **Enforces a Unified `MotionScheme`:** Provides `MaterialTheme.motionScheme` (`MotionScheme.expressive()` or `MotionScheme.standard()`) into `CompositionLocal`, replacing ad-hoc `tween()` / `spring()` literals. Note that `MaterialTheme` in 1.5.0-rc01 / 1.13.0-rc01 also exposes a 5-parameter overload accepting `motionScheme` (`.corpus/compose-maven-api/pages/expressive-api-reference.md:40`), while `MaterialExpressiveTheme` defaults to expressive semantics.
 3. **Content Color Caveat:** Neither `MaterialTheme` nor `MaterialExpressiveTheme` sets `LocalContentColor` (whose default is `Color.Black`). Always wrap root content in `Surface(color = MaterialTheme.colorScheme.background)` (or `Scaffold`) so dark themes set `LocalContentColor = onSurface`.
 
 ---
@@ -89,7 +89,7 @@ M3 defines **26 standard roles** plus **add-on fixed & bright/dim surface roles*
 
 ## 4. 10-Step `Shapes` Scale, Optical Roundness & 35 Expressive Shapes
 
-M3 Expressive replaced M2's 3-level container-size scale with a **10-step roundedness scale** (`manifests/tokens/m3-expressive-tokens.json`, `.corpus/m3-expressive/pages/styles/shape.md:145-196`). In `material3` `1.5.0-rc01` / CMP `1.13.0-beta02`, all 8 `CornerBasedShape` properties on `Shapes` are graduated (stable), while `MaterialShapes` (the 35-shape morph library) still requires `@ExperimentalMaterial3ExpressiveApi` (`manifests/api/material3-expressive-surface.json`).
+M3 Expressive replaced M2's 3-level container-size scale with a **10-step roundedness scale** (`manifests/tokens/m3-expressive-tokens.json`, `.corpus/m3-expressive/pages/styles/shape.md:145-196`). In `material3` `1.5.0-rc01` / CMP `1.13.0-rc01`, all 8 `CornerBasedShape` properties on `Shapes` are graduated (stable), while `MaterialShapes` (the 35-shape morph library) still requires `@ExperimentalMaterial3ExpressiveApi` (`manifests/api/material3-expressive-surface.json`).
 
 ### 4.1 10-Step Shape Scale Table
 
@@ -122,7 +122,7 @@ M3 Expressive replaced M2's 3-level container-size scale with a **10-step rounde
 
 ## 5. 30-Step Typography (`15 Baseline + 15 *Emphasized`) & CJK Engineering
 
-M3 Expressive doubles the Material type scale from 15 to **30 styles**: 15 baseline styles plus 15 `*Emphasized` counterparts (`.corpus/m3-expressive/pages/styles/typography.md:21, 63-90`, `manifests/tokens/m3-expressive-tokens.json`). **All 30 `Typography` properties are graduated (stable)** in `material3` `1.5.0-rc01` and CMP `1.13.0-beta02`.
+M3 Expressive doubles the Material type scale from 15 to **30 styles**: 15 baseline styles plus 15 `*Emphasized` counterparts (`.corpus/m3-expressive/pages/styles/typography.md:21, 63-90`, `manifests/tokens/m3-expressive-tokens.json`). **All 30 `Typography` properties are graduated (stable)** in `material3` `1.5.0-rc01` and CMP `1.13.0-rc01`.
 
 ### 5.1 Complete 30-Step Type Scale Token Table
 
