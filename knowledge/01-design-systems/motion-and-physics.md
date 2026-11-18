@@ -123,6 +123,16 @@ Simply reading `isReducedMotion()` inside individual components leaves Material'
 
 ---
 
+## 5. Causal Motion, Physical Intuition & Anti-Gimmick Restraint
+
+Expressive physics exists to clarify cause-and-effect and guide attention—not to turn every screen into ambient kinetic noise (`无因不动，动必有根` — *zero unprovoked motion*):
+
+1. **At Rest, Keep the Screen 100% Calm and Still:** Ban continuous idle breathing loops, pulsing glow halos, twinkling empty-state icons, or gratuitous `rememberInfiniteTransition` motion when nothing is actively transferring or loading. Unprovoked loops burn idle GPU/battery frames, distract peripheral vision from primary reading/editing tasks, and look broken when frozen by Reduced Motion.
+2. **Require an Explicit Physical or State Cause:** Every deformation, parallax (`HorizontalMultiBrowseCarousel`), neighbor-width squeeze (`ButtonGroup`), or menu fan-out (`FloatingActionButtonMenu`) must be **directly triggered** by either a **continuous user gesture** (scroll, drag, hover, press) or a **discrete state transition** (play/pause, selection toggle, active indeterminate wait).
+3. **Respect Physical & Skeuomorphic Metaphors:** When rendering objects with real-world physical analogies (vinyl records, mechanical/analog dials, stacked folder sleeves, desktop window islands), preserve their true geometric silhouette (`CircleShape` for records/dials, stable `shapes.large` corners for window islands) and express life through **causal physics**—such as angular velocity spin-up and damped spin-down inertia on play/pause, subtle `Canvas` specular highlights, or spring press deflection. **Never** warp physical metaphors or media covers into novelty `MaterialShapes` polygons (`Cookie12Sided`, `Clover4Leaf`); reserve `MaterialShapes` morphs exclusively for abstract interactive controls and active `LoadingIndicator` waits (see [m3-expressive-foundations.md](m3-expressive-foundations.md#43-physical-intuition--anti-gimmick-shape-restraint)).
+
+---
+
 ## Sources & Cross-References
 - `manifests/tokens/m3-expressive-tokens.json` (`motion_scheme`, `motion_easing`, `motion_duration`)
 - `manifests/api/material3-expressive-surface.json` & `.corpus/compose-maven-api/pages/expressive-api-reference.md`

@@ -33,8 +33,14 @@ Code in `commonMain` or `jvmSharedMain` compiled and tested on Desktop JVM runs 
    - **Rule:** Always write `[0-9]` instead of `\d` (and `[^0-9]` instead of `\D`) in all Android-reachable source sets.
 - **Enforcement:** Add a static source-scanner test (`AndroidRegexGuardTest`) checking `commonMain`, `jvmSharedMain`, `androidMain` for `\\p{(?:Is|In)[A-Z]` and `\\[dD]`, paired with an Android instrumentation smoke test feeding mathematical-bold and full-width digits into parsers.
 
-### 2.2 AGP 9, R8, Insets, and Process Lifecycle
+### 2.2 AGP 9, `compileSdk` 37.1, R8, Insets, and Process Lifecycle
 - **AGP 9 Built-In Kotlin:** AGP 9 (`9.3+`) includes Kotlin Android support natively; applying `org.jetbrains.kotlin.android` is a hard build error.
+- **AGP 9 `compileSdk` Minor API Level (`37.1`) for Compose `1.13` / M3 `1.5.0-rc01`:** AndroidX Compose `1.13` and Material 3 `1.5.0-rc01` AAR metadata require Android API `37.1` (`minCompileSdkExtension`). Plain `compileSdk = 37` fails AAR metadata checks; both `com.android.application` and `com.android.kotlin.multiplatform.library` must declare:
+  ```kotlin
+  compileSdk {
+      version = release(37) { minorApiLevel = 1 }
+  }
+  ```
 - **Test APK Transitive Alignment:** Because Android `androidTest` runs in-process with the app APK, AGP forces test dependencies to match app runtime versions (keep `androidx.test.*` aligned with runtime `concurrent-futures` / `lifecycle` pins).
 - **System Bars & Cutouts:** Keep `usesCleartextTraffic="false"` (normalize `http://` -> `https://` in media mappers). Apply `LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES` only on fullscreen player/viewer windows/dialogs—never globally in the app theme.
 - **Foreground Services & Notifications:** Gate foreground service notifications strictly via `ProcessLifecycleOwner` (`AppVisibility`) so progress notifications appear only when backgrounded with active transfers and retract automatically on resume.
@@ -80,12 +86,13 @@ Calling `java.awt.FileDialog` (`isVisible = true`) or `javax.swing.JFileChooser`
 - **D3D12 / D3D11 Device Reset Recovery (`GpuDeviceWatch`):**
   - On GPU driver reset/upgrade (NVIDIA Event 153 / Windows TDR), Skiko `0.150` `Direct3DRedrawer` ignores `HRESULT` failures: frames freeze, and the next window resize crashes the JVM with `EXCEPTION_ACCESS_VIOLATION` in `makeDirectXSurface`.
   - Inspect `SkiaLayer.getRedrawer$skiko` -> `Direct3DRedrawer.device` (`ID3D12Device` at native pointer slot `6`) and invoke `GetDeviceRemovedReason` (vtable slot `37`) via FFM before resize and on a 1Hz heartbeat; on non-zero `HRESULT`, bump `generation++` to recreate Compose windows cleanly.
-  - **Skiko Version Lock Warning (`0.150.x` vs. `0.152`–`0.156.1`):** Starting in Skiko `0.152` through `0.156.1` (CMP `1.13.0-alpha01`–`1.13.0-beta02`), `SkiaLayer.getRedrawer$skiko()`, `org.jetbrains.skiko.redrawer.Direct3DRedrawer`, and `ContextHandler` were **removed** and replaced by `SkiaLayer.frameDriverManager` and `org.jetbrains.skiko.renderer.Direct3DRenderer` (owning `device` and `DirectContext context` directly). This breaks `mediamp 0.5.0`–`0.5.3` D3D11 zero-copy video surfaces into black screens or `IllegalStateException`, and requires updating `GpuDeviceWatch` when upgrading to CMP `1.13+`. (Note: `compose-windows-touch:0.1.0` reflection targets remain intact in `ui-desktop:1.13.0-beta02`.) See [dual-target-unification-and-skiko-interop.md](../06-version-tracking/dual-target-unification-and-skiko-interop.md).
+  - **Skiko Version Lock Warning (`0.150.x` vs. `0.152`–`0.156.1`):** Starting in Skiko `0.152` through `0.156.1` (CMP `1.13.0-alpha01`–`1.13.0-rc01`), `SkiaLayer.getRedrawer$skiko()`, `org.jetbrains.skiko.redrawer.Direct3DRedrawer`, and `ContextHandler` were **removed** and replaced by `SkiaLayer.frameDriverManager` (`FrameDriver` / `FrameProducer`) and `org.jetbrains.skiko.renderer.Direct3DRenderer` (owning `device` and `DirectContext context` directly). Additionally, `ui-skiko:1.13.0-rc01` deprecates `Canvas.nativeCanvas` in favor of `androidx.compose.ui.graphics.skiaCanvas` (with `NativeCanvas` deprecated at `DeprecationLevel.ERROR`). This breaks `mediamp 0.5.0`–`0.5.3` D3D11 zero-copy video surfaces into black screens or `IllegalStateException`, and requires updating `GpuDeviceWatch` when upgrading to CMP `1.13+`. (Note: `compose-windows-touch:0.1.0` reflection targets remain intact in `ui-desktop:1.13.0-rc01`.) See [dual-target-unification-and-skiko-interop.md](../06-version-tracking/dual-target-unification-and-skiko-interop.md).
 - **UTF-8 System Tray (`WindowsSystemTray`) & Non-Focus-Stealing Toasts:**
   - Compose Desktop's `Tray` uses `java.awt.PopupMenu`, whose `WMenuItemPeer` passes UTF-8 bytes from JDK 18+ straight into ANSI `AppendMenuA`—garbling CJK/Unicode menu items on CP936/non-UTF-8 Windows locales.
   - Use `java.awt.TrayIcon` (for icon + wide tooltip only) and intercept right-click to show an FFM `user32.dll` Unicode menu (`CreatePopupMenu` + `AppendMenuW` + `TrackPopupMenu`) styled with `uxtheme.dll` dark-mode ordinals (`135` / `136`).
   - For lightweight in-app notifications on Desktop, prefer a non-focus-stealing pass-through capsule overlay (`DesktopToastOverlay`) over `TrayIcon.displayMessage` (which forces noisy OS notification center banners).
-- **Windows Test & Storage Gotchas:**
+- **Windows Test, Storage & JAR File-Locking Gotchas:**
+  - **JAR File-Locking by Running Desktop Processes:** On Windows NTFS, if an earlier JVM desktop instance or daemon still holds `*-desktop.jar` open, `:shared:desktopJar` fails with `Unable to delete file ...` even when `:shared:compileKotlinDesktop` succeeds. Terminate stale desktop app JVM processes before running full desktop JAR/packaging tasks.
   - **Robolectric on Windows ARM64:** Robolectric's native runtime is unsupported on Windows 11 `aarch64`—gate Robolectric `androidHostTest` runs on Linux/x64 CI or macOS.
   - **`DataStore` `File.renameTo` on Windows:** Atomic `DataStore` file replacement fails intermittently on Windows when another reader/antivirus holds a file handle; serialize preference writes cleanly and avoid parallel file-backed `DataStore` races in Windows unit tests.
 - **Windows ARM64 & Bundled Natives:**

@@ -24,9 +24,12 @@ from rtx.index import build_index
 from rtx.query import (
     get_status,
     query_api,
+    query_api_batch,
     query_component,
+    query_component_batch,
     query_copy,
     query_tokens,
+    query_tokens_batch,
     run_doctor,
     search_corpus,
 )
@@ -215,14 +218,9 @@ def _cmd_search(paths: RepoPaths, args: argparse.Namespace) -> int:
     return 0
 
 
-def _cmd_api(paths: RepoPaths, args: argparse.Namespace) -> int:
-    query = " ".join(args.query)
-    res = query_api(paths, query, target=args.target, diff_only=args.diff, limit=args.limit)
-    if args.json:
-        _print_json(res)
-        return 0
-
-    if res["versions"]:
+def _print_api_result(paths: RepoPaths, res: dict, *, target: str | None, diff_only: bool, limit: int, show_versions: bool = True) -> None:
+    query = res["query"]
+    if show_versions and res["versions"]:
         print("Tracked Maven Versions:")
         for v in res["versions"]:
             print(
@@ -234,16 +232,16 @@ def _cmd_api(paths: RepoPaths, args: argparse.Namespace) -> int:
 
     symbols = res["symbols"]
     if not symbols:
-        if args.diff:
-            all_res = query_api(paths, query, target=args.target, diff_only=False, limit=args.limit)
+        if diff_only:
+            all_res = query_api(paths, query, target=target, diff_only=False, limit=limit)
             if all_res["symbols"]:
                 print(
                     f"No parity diffs for '{query}' — {len(all_res['symbols'])} matching symbol(s) "
                     "have identical signatures across AndroidX and CMP (omit --diff to inspect)."
                 )
-                return 0
+                return
         print(f"No API symbols matched: {query}")
-        return 0
+        return
 
     print(f"API Symbols ({len(symbols)}):")
     for sym in symbols:
@@ -265,16 +263,49 @@ def _cmd_api(paths: RepoPaths, args: argparse.Namespace) -> int:
                 print(f"  cmp:      {sig_line}")
         if sym["artifact"] or sym["version"]:
             print(f"  artifact: {sym['artifact']} {sym['version']} ({sym['source_file']})")
+
+
+def _cmd_api(paths: RepoPaths, args: argparse.Namespace) -> int:
+    queries = list(args.query)
+    if len(queries) == 1:
+        res = query_api(paths, queries[0], target=args.target, diff_only=args.diff, limit=args.limit)
+        if args.json:
+            _print_json(res)
+            return 0
+        _print_api_result(paths, res, target=args.target, diff_only=args.diff, limit=args.limit)
+        return 0
+
+    batch = query_api_batch(paths, queries, target=args.target, diff_only=args.diff, limit=args.limit)
+    if args.json:
+        _print_json(batch)
+        return 0
+
+    seen_coords: set[str] = set()
+    all_versions: list[dict] = []
+    for item in batch["results"]:
+        for v in item["versions"]:
+            if v["coordinate"] not in seen_coords:
+                seen_coords.add(v["coordinate"])
+                all_versions.append(v)
+    if all_versions:
+        print("Tracked Maven Versions:")
+        for v in all_versions:
+            print(
+                f"  - {v['coordinate']} ({v['ecosystem']}): "
+                f"latest={v['latest'] or '-'} | alpha={v['alpha'] or '-'} | "
+                f"beta={v['beta'] or '-'} | rc={v['rc'] or '-'} | stable={v['stable'] or '-'}"
+            )
+        print()
+
+    for idx, item in enumerate(batch["results"], start=1):
+        print(f"=== [{idx}/{len(queries)}] API: {item['query']} ===")
+        _print_api_result(paths, item, target=args.target, diff_only=args.diff, limit=args.limit, show_versions=False)
+        if idx < len(queries):
+            print()
     return 0
 
 
-def _cmd_component(paths: RepoPaths, args: argparse.Namespace) -> int:
-    name = " ".join(args.name)
-    res = query_component(paths, name)
-    if args.json:
-        _print_json(res)
-        return 0
-
+def _print_component_result(res: dict) -> None:
     print(f"=== Component: {res['component']} ===")
 
     if res["knowledge"]:
@@ -315,16 +346,31 @@ def _cmd_component(paths: RepoPaths, args: argparse.Namespace) -> int:
 
     if not any(res[k] for k in ("knowledge", "compose_apis", "tokens", "m3_expressive", "compose_docs", "platform_hig")):
         print("No component entries found yet. Run `rtx sync` / `rtx index` or check spelling.")
+
+
+def _cmd_component(paths: RepoPaths, args: argparse.Namespace) -> int:
+    names = list(args.name)
+    if len(names) == 1:
+        res = query_component(paths, names[0])
+        if args.json:
+            _print_json(res)
+            return 0
+        _print_component_result(res)
+        return 0
+
+    batch = query_component_batch(paths, names)
+    if args.json:
+        _print_json(batch)
+        return 0
+    for idx, item in enumerate(batch["results"], start=1):
+        _print_component_result(item)
+        if idx < len(names):
+            print()
     return 0
 
 
-def _cmd_token(paths: RepoPaths, args: argparse.Namespace) -> int:
-    query = " ".join(args.query)
-    res = query_tokens(paths, query, category=args.category, limit=args.limit)
-    if args.json:
-        _print_json(res)
-        return 0
-
+def _print_token_result(res: dict) -> None:
+    query = res["query"]
     if res["tokens"]:
         print(f"Design Tokens ({len(res['tokens'])}):")
         for t in res["tokens"]:
@@ -340,6 +386,27 @@ def _cmd_token(paths: RepoPaths, args: argparse.Namespace) -> int:
         print("\nRelated Knowledge References:")
         for ref in res["knowledge_refs"][:4]:
             print(f"  - {ref['path']}:{ref['line']} ({ref['heading']}) :: {ref['snippet']}")
+
+
+def _cmd_token(paths: RepoPaths, args: argparse.Namespace) -> int:
+    queries = list(args.query)
+    if len(queries) == 1:
+        res = query_tokens(paths, queries[0], category=args.category, limit=args.limit)
+        if args.json:
+            _print_json(res)
+            return 0
+        _print_token_result(res)
+        return 0
+
+    batch = query_tokens_batch(paths, queries, category=args.category, limit=args.limit)
+    if args.json:
+        _print_json(batch)
+        return 0
+    for idx, item in enumerate(batch["results"], start=1):
+        print(f"=== [{idx}/{len(queries)}] Token: {item['query']} ===")
+        _print_token_result(item)
+        if idx < len(queries):
+            print()
     return 0
 
 
@@ -464,22 +531,22 @@ def build_parser() -> argparse.ArgumentParser:
     p_search.set_defaults(func=_cmd_search)
 
     p_api = sub.add_parser("api", help="Query Maven/bytecode API signatures & AndroidX vs CMP parity")
-    p_api.add_argument("query", nargs="+", help="Symbol name, package, annotation, or artifact query")
+    p_api.add_argument("query", nargs="+", help="One or more symbol names, packages, annotations, or artifact queries")
     p_api.add_argument("--target", choices=["common", "android", "desktop", "ios"], help="Filter by target")
     p_api.add_argument("--diff", action="store_true", help="Show only symbols with AndroidX vs CMP parity deltas")
-    p_api.add_argument("--limit", type=int, default=30, help="Max symbol results")
+    p_api.add_argument("--limit", type=int, default=30, help="Max symbol results per query")
     p_api.add_argument("--json", action="store_true", help="Emit JSON output")
     p_api.set_defaults(func=_cmd_api)
 
     p_comp = sub.add_parser("component", help="Unified M3E tokens + Compose API + Adaptive + HIG view")
-    p_comp.add_argument("name", nargs="+", help="Component name (e.g. SplitButton, NavigationRail, Dialog)")
+    p_comp.add_argument("name", nargs="+", help="One or more component names (e.g. SplitButton FloatingToolbar NavigationRail)")
     p_comp.add_argument("--json", action="store_true", help="Emit JSON output")
     p_comp.set_defaults(func=_cmd_component)
 
     p_tok = sub.add_parser("token", help="Query M3 Expressive color, shape, typography, and motion tokens")
-    p_tok.add_argument("query", nargs="+", help="Token query (e.g. MotionScheme, largeIncreased, displayLargeEmphasized)")
+    p_tok.add_argument("query", nargs="+", help="One or more token queries (e.g. MotionScheme largeIncreased displayLargeEmphasized)")
     p_tok.add_argument("--category", help="Filter by token category (color, shape, typography, motion, etc.)")
-    p_tok.add_argument("--limit", type=int, default=40, help="Max token results")
+    p_tok.add_argument("--limit", type=int, default=40, help="Max token results per query")
     p_tok.add_argument("--json", action="store_true", help="Emit JSON output")
     p_tok.set_defaults(func=_cmd_token)
 

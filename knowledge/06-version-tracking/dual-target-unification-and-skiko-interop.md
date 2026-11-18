@@ -14,6 +14,7 @@ Compose Multiplatform projects frequently hit an unexpected API split in `common
 1. **CMP `.module` Android redirection:** `org.jetbrains.compose.material3:material3` does not ship a separate implementation on Android; its Gradle `.module` metadata (`material3-android-<ver>.module`) declares a dependency on `androidx.compose.material3:material3:<mapped-ver>`.
    - `1.12.0-alpha03` redirects Android → `androidx.compose.material3:material3:1.5.0-alpha22`
    - `1.13.0-beta02` redirects Android → `androidx.compose.material3:material3:1.5.0-beta02`
+   - `1.13.0-rc01` redirects Android → `androidx.compose.material3:material3:1.5.0-rc01`
 2. **Pre-release BOM override trap:** If `androidMain` or `:app` applies `androidx.compose:compose-bom-alpha` (or `compose-bom-beta`) whose pinned `material3` version exceeds CMP's redirected version (e.g., `1.5.0-alpha25 > 1.5.0-alpha22`, or `1.5.0-rc01 > 1.5.0-beta02`), Gradle max-version resolution upgrades **only Android** to the BOM's newer `material3`. Desktop stays pinned to the CMP artifact's version.
 3. **Stable BOM unification pattern:** If Android uses the **stable** BOM (`androidx.compose:compose-bom:2026.09.00`, which pins `material3 = 1.4.0` and `ui/foundation = 1.12.1`) while `commonMain` declares `org.jetbrains.compose.material3:material3:<cmp-m3-ver>`, Gradle resolves `max(1.4.0, <mapped-ver>) = <mapped-ver>` on Android—locking **both Android and Desktop onto the exact same `material3` API surface** with zero shims.
 
@@ -30,9 +31,10 @@ Maven Central resolution & `.module` metadata verify why `cmp-material3` cannot 
 | `1.13.0-alpha02` | `androidx.compose.material3:material3:1.5.0-alpha28` | `1.13.0-alpha02` | `0.152+` |
 | `1.13.0-beta01` | `androidx.compose.material3:material3:1.5.0-beta01` | `1.13.0-beta01` | `0.156+` |
 | `1.13.0-beta02` | `androidx.compose.material3:material3:1.5.0-beta02` | `1.13.0-beta02` | **`0.156.1`** (`ui-skiko:1.13.0-beta02`) |
+| `1.13.0-rc01` | `androidx.compose.material3:material3:1.5.0-rc01` | `1.13.0-rc01` | **`0.156.1`** (`ui-skiko:1.13.0-rc01`) |
 
 - There is **no** `1.12.0` / `1.12.1` / `1.12.2` release of `org.jetbrains.compose.material3:material3` newer than `1.12.0-alpha03`.
-- Adopting `cmp-material3:1.13.0-beta02` pulls `org.jetbrains.compose.ui:ui-desktop:1.13.0-beta02` → `ui-skiko-desktop:1.13.0-beta02` → **`org.jetbrains.skiko:skiko:0.156.1`**.
+- Adopting `cmp-material3:1.13.0-rc01` (or `1.13.0-beta02`) pulls `org.jetbrains.compose.ui:ui-desktop:1.13.0-rc01` → `ui-skiko-desktop:1.13.0-rc01` → **`org.jetbrains.skiko:skiko:0.156.1`**.
 
 ---
 
@@ -40,13 +42,14 @@ Maven Central resolution & `.module` metadata verify why `cmp-material3` cannot 
 
 Inspecting `skiko-awt-0.156.1.jar` vs. `skiko-awt-0.150.1` reveals the exact internal class/field refactoring that breaks Skiko `0.150.x` D3D11/D3D12 video-surface interop (e.g., `org.openani.mediamp:mediamp-mpv-desktop:0.5.0`–`0.5.3`) and TDR device-loss watches:
 
-| Interop Role | Skiko `0.150.x` (CMP `1.12.x`) | Skiko `0.156.1` (CMP `1.13.0-beta02`) Exact `javap -p -s` Signature | Impact |
+| Interop Role | Skiko `0.150.x` (CMP `1.12.x`) | Skiko `0.156.1` (CMP `1.13.0-rc01`) Exact `javap -p -s` Signature | Impact |
 |---|---|---|---|
 | Layer → Driver / Redrawer | `SkiaLayer.getRedrawer$skiko()` | **Removed**; replaced by:<br>`SkiaLayer.getFrameDriver$org_jetbrains_skiko_skiko()Lorg/jetbrains/skiko/renderer/FrameDriver;`<br>and `private final RenderApiFallbackManager<FrameDriver> frameDriverManager` (`RenderApiFallbackManager.getCurrent()Ljava/lang/Object;`) | Breaks `SkiaLayer.class.getMethod("getRedrawer$skiko")` in `mediamp` `SkiaLayerRedrawer` (`0.5.0`–`0.5.3`) and legacy TDR watches |
 | Driver → Renderer | *(Redrawer returned directly)* | `org.jetbrains.skiko.renderer.FrameDriver` → `private final FrameProducer producer` (`getRenderer(): AwtRenderer` / `access$getRenderer(FrameDriver): AwtRenderer`) and `FrameProducer.getRenderer$org_jetbrains_skiko_skiko()Lorg/jetbrains/skiko/renderer/AwtRenderer;` (`private final AwtRenderer renderer`) | New hop required to obtain the active `AwtRenderer` |
 | Direct3D Backend Class | `org.jetbrains.skiko.redrawer.Direct3DRedrawer` (`device: J`, `contextHandler`) | **Removed**; replaced by `org.jetbrains.skiko.renderer.Direct3DRenderer extends AwtRenderer` (`private long device` descriptor `J`, `private long adapter` descriptor `J`, `private final long getDevice()J`) | Breaks `Class.forName("org.jetbrains.skiko.redrawer.Direct3DRedrawer")` and class-name assertions in `mediamp` `SkiaDirectXInterop` (`0.5.0`–`0.5.3`) |
 | Skia `DirectContext` | `org.jetbrains.skiko.context.ContextHandler` (`private DirectContext context`) | **`ContextHandler` removed**; `private org.jetbrains.skia.DirectContext context` (descriptor `Lorg/jetbrains/skia/DirectContext;`) now lives **directly on `Direct3DRenderer`** (`ensureContext()` calls `DirectContext.Companion.makeDirect3D(adapter, getDirectXDevice(device), getDirectXCommandQueue(device))`) | Breaks `SkiaDirectXInterop$RedrawerAccess` (`getDeclaredField("contextHandler")` / `ContextHandler.context`) |
-| `WM_POINTER` Touch Bridge Targets | `ComposeWindow.composePanel` → `ComposePanel._composeContainer` → `mediator` → `ComposeScene.sendPointerEvent-UGFwazM` | **All intact** in `ui-desktop-1.13.0-beta02.jar`: `ComposeWindow.composePanel` (`ComposeWindowPanel`), `ComposeWindowPanel._composeContainer`, `ComposeContainer.mediator`, `ComposeSceneMediator.getSceneBoundsInPx()` & `access$getScene` / `scene$delegate`, 10-arg `ComposeScene.sendPointerEvent-UGFwazM` | Desktop `WM_POINTER` touch injection remains compatible without changes |
+| Skia `Canvas` Access (`ui-skiko`) | `Canvas.nativeCanvas` (`NativeCanvas`) | `SkiaBackedCanvas_skikoKt.getNativeCanvas` is **`@Deprecated`** (*"Naming alignment to avoid ambiguity: use `[Canvas.skiaCanvas]` extension instead"*); replaced by `androidx.compose.ui.graphics.SkiaBackedCanvas_skikoKt.getSkiaCanvas(Canvas): org.jetbrains.skia.Canvas` (`import androidx.compose.ui.graphics.skiaCanvas`) | Replace `canvas.nativeCanvas` calls in `desktopMain` / `skikoMain` custom `Canvas` renderers with `canvas.skiaCanvas` to clear CMP `1.13` deprecation warnings |
+| `WM_POINTER` Touch Bridge Targets | `ComposeWindow.composePanel` → `ComposePanel._composeContainer` → `mediator` → `ComposeScene.sendPointerEvent-UGFwazM` | **All intact** in `ui-desktop-1.13.0-rc01.jar`: `ComposeWindow.composePanel` (`ComposeWindowPanel`), `ComposeWindowPanel._composeContainer`, `ComposeContainer.mediator`, `ComposeSceneMediator.access$getScene` (`ComposeScene`), 10-arg `ComposeScene.sendPointerEvent-UGFwazM` | Desktop `WM_POINTER` touch injection remains compatible without changes |
 
 ### MediaMP `0.5.3` Interop Chain (`mediamp-mpv-desktop-0.5.3.jar` `javap -p -s`)
 1. `MpvMediampPlayerSurfaceProvider.Surface(MpvMediampPlayer, Modifier, Composer, Int)` delegates to `MpvMediampPlayerSurface_desktopKt.MpvMediampPlayerSurface(player, modifier)`.
@@ -63,10 +66,10 @@ Inspecting `skiko-awt-0.156.1.jar` vs. `skiko-awt-0.150.1` reveals the exact int
 ### Path A — Immediate Zero-Risk Unification (`material3 1.5.0-alpha22` + CMP `1.12.2`)
 Use when hardware zero-copy D3D11→D3D12 video via unmodified upstream `mediamp` (`0.5.0`–`0.5.3`) is required immediately:
 1. **Switch Android BOM from `compose-bom-alpha` to stable `androidx.compose:compose-bom:2026.09.00`** (`ui/foundation 1.12.1`, `material3 1.4.0`). `cmp-material3:1.12.0-alpha03`'s Android `.module` redirect (`1.5.0-alpha22 > 1.4.0`) pins **both Android and Desktop to `1.5.0-alpha22`**.
-2. **Align stable `1.12.x` patch versions:** `composeMultiplatform = "1.12.2"` (Skiko `0.150.2`), `cmp-material3 = "1.12.0-alpha03"`, `cmp-adaptive = "1.3.0"`, `cmp-navigation3-ui = "1.2.0"`, `mediamp = "0.5.3"`. Keep `compose-gradle-plugin` decoupled at `1.13.0-beta02` (or `1.13.0-alpha01`) if JDK 25 `buildTypes.release.aot` packaging is needed.
+2. **Align stable `1.12.x` patch versions:** `composeMultiplatform = "1.12.2"` (Skiko `0.150.2`), `cmp-material3 = "1.12.0-alpha03"`, `cmp-adaptive = "1.3.0"`, `cmp-navigation3-ui = "1.2.0"`, `mediamp = "0.5.3"`. Keep `compose-gradle-plugin` decoupled at `1.13.0-rc01` (or `1.13.0-beta02`) if JDK 25 `buildTypes.release.aot` packaging is needed.
 3. **Remove `M3Compat` `expect/actual` splits:** Both targets share `ListItem(headlineContent = ...)` and `SplitButtonLayout(...)` directly in `commonMain`.
 
-### Path B — Bleeding-Edge Unification (`CMP 1.13.0-beta02` + `material3 1.5.0-beta02`)
+### Path B — Bleeding-Edge Unification (`CMP 1.13.0-rc01` + `material3 1.5.0-rc01`)
 Use to adopt the graduated M3 Expressive API surface (where `MaterialExpressiveTheme`, `MotionScheme`, all 4 `SegmentedListItem` overloads, `SplitButtonLayout`, and `WideNavigationRail` are stable without opt-ins; see [bleeding-edge-matrix.md §3.1](bleeding-edge-matrix.md)):
 
 1. **Adapt Desktop MediaMP D3D11/D3D12 Interop for Skiko `0.156.1` (`Direct3DRenderer`):**
@@ -96,18 +99,22 @@ Use to adopt the graduated M3 Expressive API surface (where `MaterialExpressiveT
      }
      ```
    - Retain existing `ComposeWindow` / `ComposeWindowPanel` / `ComposeContainer` / `ComposeSceneMediator` / `ComposeScene` keep rules for `compose-windows-touch:0.1.0`.
-3. **Verify Fractional DPI Scaling:** Test 125% and 150% Windows display scaling on `Direct3DRenderer` (`Skiko 0.156.1`) to confirm whether pixel-aligned content layout workarounds remain necessary.
-4. **Pin Parity Versions Across Targets:**
-   - `composeMultiplatform = "1.13.0-beta02"`, `composeMultiplatformMaterial3 = "1.13.0-beta02"`, `composeMultiplatformAdaptive = "1.3.0"` (or `1.4.0-alpha01`), `navigation3Multiplatform = "1.2.0"`, paired with stable `androidx.compose:compose-bom:2026.09.00` so `cmp-material3:1.13.0-beta02` locks Android and Desktop to identical **`material3 1.5.0-beta02`** parity (or upgrade both once `1.13.0-rc01` / `1.5.0-rc01` ships).
+3. **Migrate Skiko `Canvas.nativeCanvas` → `Canvas.skiaCanvas`:**
+   - In CMP `1.13.x` (`org.jetbrains.compose.ui:ui-skiko`, `SkiaBackedCanvas_skikoKt`), `Canvas.nativeCanvas` is `@Deprecated` (`replaceWith = ReplaceWith("skiaCanvas", "androidx.compose.ui.graphics.skiaCanvas")`); update Desktop/Skiko custom `drawIntoCanvas { canvas -> ... }` calls to `import androidx.compose.ui.graphics.skiaCanvas` and `canvas.skiaCanvas`.
+4. **Verify Fractional DPI Scaling:** Test 125% and 150% Windows display scaling on `Direct3DRenderer` (`Skiko 0.156.1`) to confirm whether pixel-aligned content layout workarounds remain necessary.
+5. **Pin Parity Versions & Android Minor SDK Level Across Targets:**
+   - `composeMultiplatform = "1.13.0-rc01"`, `composeMultiplatformMaterial3 = "1.13.0-rc01"`, `composeMultiplatformAdaptive = "1.3.0"` (or `1.4.0-alpha01`), `navigation3Multiplatform = "1.2.0"`, paired with stable `androidx.compose:compose-bom:2026.09.00` so `cmp-material3:1.13.0-rc01` locks Android and Desktop to identical **`material3 1.5.0-rc01`** parity.
+   - AndroidX Compose `1.13` / Material 3 `1.5.0-rc01` AAR metadata requires Android API `37.1`; in AGP 9 (`com.android.application` and `com.android.kotlin.multiplatform.library`), set `compileSdk { version = release(37) { minorApiLevel = 1 } }` rather than plain `compileSdk = 37`.
 
 ---
 
 ## 5. Decision Matrix
 
-| Criterion | Skewed Baseline (`bom-alpha` + `CMP 1.12.1`) | **Path A (Zero-Risk Now):** `compose-bom 2026.09.00` + `CMP 1.12.2` + `cmp-m3 1.12.0-alpha03` | **Path B (After Skiko `0.156` Interop Adaptation):** `CMP 1.13.0-beta02` + `cmp-m3 1.13.0-beta02` |
+| Criterion | Skewed Baseline (`bom-alpha` + `CMP 1.12.1`) | **Path A (Zero-Risk Now):** `compose-bom 2026.09.00` + `CMP 1.12.2` + `cmp-m3 1.12.0-alpha03` | **Path B (After Skiko `0.156` Interop Adaptation):** `CMP 1.13.0-rc01` + `cmp-m3 1.13.0-rc01` |
 |---|---|---|---|
-| Android vs. Desktop M3 Parity | `alpha25` vs. `alpha22` (skewed) | **`1.5.0-alpha22` vs. `1.5.0-alpha22`** (identical) | **`1.5.0-beta02` vs. `1.5.0-beta02`** (identical) |
+| Android vs. Desktop M3 Parity | `alpha25` vs. `alpha22` (skewed) | **`1.5.0-alpha22` vs. `1.5.0-alpha22`** (identical) | **`1.5.0-rc01` vs. `1.5.0-rc01`** (identical) |
 | `M3Compat` `expect/actual` Needed? | Yes | **No** | **No** (plus static `SegmentedListItem` & graduated M3E APIs) |
 | MediaMP D3D11 Zero-Copy | Works (`0.5.0`) | **Works (`0.5.3`)** | Works once adapted to `Direct3DRenderer` |
-| `compose-windows-touch 0.1.0` | Works | **Works** | **Works** (`javap` verified on `1.13.0-beta02`) |
+| `compose-windows-touch 0.1.0` | Works | **Works** | **Works** (`javap` verified on `1.13.0-rc01`) |
 | TDR `GpuDeviceWatch` | Works | **Works** | Requires `Direct3DRedrawer` → `Direct3DRenderer` update |
+| Custom Skiko Canvas Drawing | `canvas.nativeCanvas` | `canvas.nativeCanvas` | **`canvas.skiaCanvas`** (`nativeCanvas` deprecated in CMP `1.13`) |

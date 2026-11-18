@@ -1,11 +1,13 @@
 {
   "schema_version": 1,
-  "fetched_at": "2026-11-18T06:58:00Z",
+  "fetched_at": "2026-11-18T12:21:52Z",
   "repositories": {
     "google_maven": "https://dl.google.com/dl/android/maven2",
     "maven_central": "https://repo1.maven.org/maven2",
     "jetbrains_compose_dev": "https://maven.pkg.jetbrains.space/public/p/compose/dev"
   },
+  "jetbrains_dev_reachable": false,
+  "jetbrains_dev_probe_error": "FetchError: https://maven.pkg.jetbrains.space/public/p/compose/dev/org/jetbrains/compose/material3/material3/maven-metadata.xml: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1010)>",
   "jetbrains_dev_material3_latest": null,
   "artifacts": {
     "androidx.compose:compose-bom": {
@@ -40,6 +42,7 @@
       "artifact_id": "compose-bom",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "bom-stable"
     },
     "androidx.compose:compose-bom-alpha": {
@@ -74,6 +77,7 @@
       "artifact_id": "compose-bom-alpha",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "bom-alpha"
     },
     "androidx.compose:compose-bom-beta": {
@@ -108,6 +112,7 @@
       "artifact_id": "compose-bom-beta",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "bom-beta"
     },
     "androidx.compose.material3:material3": {
@@ -142,6 +147,7 @@
       "artifact_id": "material3",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-ui"
     },
     "androidx.compose.material3:material3-adaptive-navigation-suite": {
@@ -176,6 +182,7 @@
       "artifact_id": "material3-adaptive-navigation-suite",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-ui"
     },
     "androidx.compose.material3.adaptive:adaptive": {
@@ -210,6 +217,7 @@
       "artifact_id": "adaptive",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx.compose.material3.adaptive:adaptive-layout": {
@@ -244,6 +252,7 @@
       "artifact_id": "adaptive-layout",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx.compose.material3.adaptive:adaptive-navigation": {
@@ -278,6 +287,7 @@
       "artifact_id": "adaptive-navigation",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx.compose.material3.adaptive:adaptive-navigation3": {
@@ -312,6 +322,7 @@
       "artifact_id": "adaptive-navigation3",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx.compose.ui:ui": {
@@ -346,6 +357,7 @@
       "artifact_id": "ui",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx.compose.foundation:foundation": {
@@ -380,6 +392,7 @@
       "artifact_id": "foundation",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx.compose.animation:animation": {
@@ -414,6 +427,7 @@
       "artifact_id": "animation",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx.compose.runtime:runtime": {
@@ -448,6 +462,7 @@
       "artifact_id": "runtime",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx.navigation3:navigation3-runtime": {
@@ -482,6 +497,7 @@
       "artifact_id": "navigation3-runtime",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-nav3"
     },
     "androidx.navigation3:navigation3-ui": {
@@ -516,6 +532,7 @@
       "artifact_id": "navigation3-ui",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-nav3"
     },
     "androidx.lifecycle:lifecycle-viewmodel-compose": {
@@ -550,6 +567,7 @@
       "artifact_id": "lifecycle-viewmodel-compose",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-lifecycle"
     },
     "androidx.lifecycle:lifecycle-viewmodel-navigation3": {
@@ -584,24 +602,24 @@
       "artifact_id": "lifecycle-viewmodel-navigation3",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-lifecycle"
     },
     "org.jetbrains.compose:compose-gradle-plugin": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -610,7 +628,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-gradle-plugin",
       "coordinate": "org.jetbrains.compose:compose-gradle-plugin",
@@ -618,24 +637,24 @@
       "artifact_id": "compose-gradle-plugin",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-plugin"
     },
     "org.jetbrains.compose.runtime:runtime": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -644,7 +663,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-runtime",
       "coordinate": "org.jetbrains.compose.runtime:runtime",
@@ -652,24 +672,24 @@
       "artifact_id": "runtime",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
     "org.jetbrains.compose.ui:ui": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -678,7 +698,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-ui",
       "coordinate": "org.jetbrains.compose.ui:ui",
@@ -686,24 +707,24 @@
       "artifact_id": "ui",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
-    "org.jetbrains.compose.foundation:foundation": {
-      "total_versions": 121,
+    "org.jetbrains.compose.ui:ui-graphics": {
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -712,7 +733,43 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
+      ],
+      "key": "cmp-ui-graphics",
+      "coordinate": "org.jetbrains.compose.ui:ui-graphics",
+      "group_id": "org.jetbrains.compose.ui",
+      "artifact_id": "ui-graphics",
+      "ecosystem": "jetbrains",
+      "repo": "maven-central",
+      "jetbrains_dev_latest": null,
+      "role": "cmp-core"
+    },
+    "org.jetbrains.compose.foundation:foundation": {
+      "total_versions": 122,
+      "stable": "1.12.2",
+      "rc": "1.13.0-rc01",
+      "beta": "1.13.0-beta02",
+      "alpha": "1.13.0-alpha02",
+      "dev": "",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
+      "latest_stable": "1.12.2",
+      "latest_rc": "1.13.0-rc01",
+      "latest_beta": "1.13.0-beta02",
+      "latest_alpha": "1.13.0-alpha02",
+      "latest_dev": null,
+      "recent_versions": [
+        "1.12.0-beta03",
+        "1.12.0-rc01",
+        "1.12.0",
+        "1.12.1",
+        "1.12.2",
+        "1.13.0-alpha01",
+        "1.13.0-alpha02",
+        "1.13.0-beta01",
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-foundation",
       "coordinate": "org.jetbrains.compose.foundation:foundation",
@@ -720,24 +777,24 @@
       "artifact_id": "foundation",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
     "org.jetbrains.compose.animation:animation": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -746,7 +803,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-animation",
       "coordinate": "org.jetbrains.compose.animation:animation",
@@ -754,24 +812,59 @@
       "artifact_id": "animation",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
+    "org.jetbrains.skiko:skiko-awt": {
+      "total_versions": 80,
+      "stable": "0.156.1",
+      "rc": "",
+      "beta": "",
+      "alpha": "0.152.0-alpha02",
+      "dev": "",
+      "latest": "0.156.1",
+      "latest_any": "0.156.1",
+      "latest_stable": "0.156.1",
+      "latest_rc": null,
+      "latest_beta": null,
+      "latest_alpha": "0.152.0-alpha02",
+      "latest_dev": null,
+      "recent_versions": [
+        "0.144.6",
+        "0.148.1",
+        "0.148.2",
+        "0.150.0",
+        "0.150.1",
+        "0.150.2",
+        "0.152.0-alpha02",
+        "0.153.0",
+        "0.156.0",
+        "0.156.1"
+      ],
+      "key": "cmp-skiko-awt",
+      "coordinate": "org.jetbrains.skiko:skiko-awt",
+      "group_id": "org.jetbrains.skiko",
+      "artifact_id": "skiko-awt",
+      "ecosystem": "jetbrains",
+      "repo": "maven-central",
+      "jetbrains_dev_latest": null,
+      "role": "cmp-skiko"
+    },
     "org.jetbrains.compose.material3:material3": {
-      "total_versions": 103,
+      "total_versions": 104,
       "stable": "1.9.0",
-      "rc": "1.8.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.9.0",
-      "latest_rc": "1.8.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.11.0-alpha05",
         "1.11.0-alpha06",
         "1.11.0-alpha07",
         "1.12.0-alpha01",
@@ -780,7 +873,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-material3",
       "coordinate": "org.jetbrains.compose.material3:material3",
@@ -788,24 +882,24 @@
       "artifact_id": "material3",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-ui"
     },
     "org.jetbrains.compose.material3:material3-adaptive-navigation-suite": {
-      "total_versions": 42,
+      "total_versions": 43,
       "stable": "1.9.0",
-      "rc": "1.8.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.9.0",
-      "latest_rc": "1.8.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.11.0-alpha05",
         "1.11.0-alpha06",
         "1.11.0-alpha07",
         "1.12.0-alpha01",
@@ -814,7 +908,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-material3-nav-suite",
       "coordinate": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -822,6 +917,7 @@
       "artifact_id": "material3-adaptive-navigation-suite",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-ui"
     },
     "org.jetbrains.compose.material3.adaptive:adaptive": {
@@ -856,6 +952,7 @@
       "artifact_id": "adaptive",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "org.jetbrains.compose.material3.adaptive:adaptive-layout": {
@@ -890,6 +987,7 @@
       "artifact_id": "adaptive-layout",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "org.jetbrains.compose.material3.adaptive:adaptive-navigation": {
@@ -924,6 +1022,7 @@
       "artifact_id": "adaptive-navigation",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "org.jetbrains.compose.material3.adaptive:adaptive-navigation3": {
@@ -958,6 +1057,7 @@
       "artifact_id": "adaptive-navigation3",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "org.jetbrains.androidx.navigation3:navigation3-ui": {
@@ -992,6 +1092,7 @@
       "artifact_id": "navigation3-ui",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-nav3"
     },
     "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose": {
@@ -1026,6 +1127,7 @@
       "artifact_id": "lifecycle-viewmodel-compose",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-lifecycle"
     },
     "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3": {
@@ -1060,6 +1162,7 @@
       "artifact_id": "lifecycle-viewmodel-navigation3",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-lifecycle"
     }
   },
@@ -1096,6 +1199,7 @@
       "artifact_id": "compose-bom",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "bom-stable"
     },
     "androidx-compose-bom-alpha": {
@@ -1130,6 +1234,7 @@
       "artifact_id": "compose-bom-alpha",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "bom-alpha"
     },
     "androidx-compose-bom-beta": {
@@ -1164,6 +1269,7 @@
       "artifact_id": "compose-bom-beta",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "bom-beta"
     },
     "androidx-material3": {
@@ -1198,6 +1304,7 @@
       "artifact_id": "material3",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-ui"
     },
     "androidx-material3-nav-suite": {
@@ -1232,6 +1339,7 @@
       "artifact_id": "material3-adaptive-navigation-suite",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-ui"
     },
     "androidx-adaptive": {
@@ -1266,6 +1374,7 @@
       "artifact_id": "adaptive",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx-adaptive-layout": {
@@ -1300,6 +1409,7 @@
       "artifact_id": "adaptive-layout",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx-adaptive-navigation": {
@@ -1334,6 +1444,7 @@
       "artifact_id": "adaptive-navigation",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx-adaptive-navigation3": {
@@ -1368,6 +1479,7 @@
       "artifact_id": "adaptive-navigation3",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-adaptive"
     },
     "androidx-ui": {
@@ -1402,6 +1514,7 @@
       "artifact_id": "ui",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx-foundation": {
@@ -1436,6 +1549,7 @@
       "artifact_id": "foundation",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx-animation": {
@@ -1470,6 +1584,7 @@
       "artifact_id": "animation",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx-runtime": {
@@ -1504,6 +1619,7 @@
       "artifact_id": "runtime",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-core"
     },
     "androidx-navigation3-runtime": {
@@ -1538,6 +1654,7 @@
       "artifact_id": "navigation3-runtime",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-nav3"
     },
     "androidx-navigation3-ui": {
@@ -1572,6 +1689,7 @@
       "artifact_id": "navigation3-ui",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-nav3"
     },
     "androidx-lifecycle-viewmodel-compose": {
@@ -1606,6 +1724,7 @@
       "artifact_id": "lifecycle-viewmodel-compose",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-lifecycle"
     },
     "androidx-lifecycle-viewmodel-navigation3": {
@@ -1640,24 +1759,24 @@
       "artifact_id": "lifecycle-viewmodel-navigation3",
       "ecosystem": "androidx",
       "repo": "google",
+      "jetbrains_dev_latest": null,
       "role": "androidx-lifecycle"
     },
     "cmp-gradle-plugin": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -1666,7 +1785,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-gradle-plugin",
       "coordinate": "org.jetbrains.compose:compose-gradle-plugin",
@@ -1674,24 +1794,24 @@
       "artifact_id": "compose-gradle-plugin",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-plugin"
     },
     "cmp-runtime": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -1700,7 +1820,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-runtime",
       "coordinate": "org.jetbrains.compose.runtime:runtime",
@@ -1708,24 +1829,24 @@
       "artifact_id": "runtime",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
     "cmp-ui": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -1734,7 +1855,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-ui",
       "coordinate": "org.jetbrains.compose.ui:ui",
@@ -1742,24 +1864,24 @@
       "artifact_id": "ui",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
-    "cmp-foundation": {
-      "total_versions": 121,
+    "cmp-ui-graphics": {
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -1768,7 +1890,43 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
+      ],
+      "key": "cmp-ui-graphics",
+      "coordinate": "org.jetbrains.compose.ui:ui-graphics",
+      "group_id": "org.jetbrains.compose.ui",
+      "artifact_id": "ui-graphics",
+      "ecosystem": "jetbrains",
+      "repo": "maven-central",
+      "jetbrains_dev_latest": null,
+      "role": "cmp-core"
+    },
+    "cmp-foundation": {
+      "total_versions": 122,
+      "stable": "1.12.2",
+      "rc": "1.13.0-rc01",
+      "beta": "1.13.0-beta02",
+      "alpha": "1.13.0-alpha02",
+      "dev": "",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
+      "latest_stable": "1.12.2",
+      "latest_rc": "1.13.0-rc01",
+      "latest_beta": "1.13.0-beta02",
+      "latest_alpha": "1.13.0-alpha02",
+      "latest_dev": null,
+      "recent_versions": [
+        "1.12.0-beta03",
+        "1.12.0-rc01",
+        "1.12.0",
+        "1.12.1",
+        "1.12.2",
+        "1.13.0-alpha01",
+        "1.13.0-alpha02",
+        "1.13.0-beta01",
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-foundation",
       "coordinate": "org.jetbrains.compose.foundation:foundation",
@@ -1776,24 +1934,24 @@
       "artifact_id": "foundation",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
     "cmp-animation": {
-      "total_versions": 121,
+      "total_versions": 122,
       "stable": "1.12.2",
-      "rc": "1.12.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.12.2",
-      "latest_rc": "1.12.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.12.0-beta02",
         "1.12.0-beta03",
         "1.12.0-rc01",
         "1.12.0",
@@ -1802,7 +1960,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-animation",
       "coordinate": "org.jetbrains.compose.animation:animation",
@@ -1810,24 +1969,59 @@
       "artifact_id": "animation",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-core"
     },
+    "cmp-skiko-awt": {
+      "total_versions": 80,
+      "stable": "0.156.1",
+      "rc": "",
+      "beta": "",
+      "alpha": "0.152.0-alpha02",
+      "dev": "",
+      "latest": "0.156.1",
+      "latest_any": "0.156.1",
+      "latest_stable": "0.156.1",
+      "latest_rc": null,
+      "latest_beta": null,
+      "latest_alpha": "0.152.0-alpha02",
+      "latest_dev": null,
+      "recent_versions": [
+        "0.144.6",
+        "0.148.1",
+        "0.148.2",
+        "0.150.0",
+        "0.150.1",
+        "0.150.2",
+        "0.152.0-alpha02",
+        "0.153.0",
+        "0.156.0",
+        "0.156.1"
+      ],
+      "key": "cmp-skiko-awt",
+      "coordinate": "org.jetbrains.skiko:skiko-awt",
+      "group_id": "org.jetbrains.skiko",
+      "artifact_id": "skiko-awt",
+      "ecosystem": "jetbrains",
+      "repo": "maven-central",
+      "jetbrains_dev_latest": null,
+      "role": "cmp-skiko"
+    },
     "cmp-material3": {
-      "total_versions": 103,
+      "total_versions": 104,
       "stable": "1.9.0",
-      "rc": "1.8.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.9.0",
-      "latest_rc": "1.8.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.11.0-alpha05",
         "1.11.0-alpha06",
         "1.11.0-alpha07",
         "1.12.0-alpha01",
@@ -1836,7 +2030,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-material3",
       "coordinate": "org.jetbrains.compose.material3:material3",
@@ -1844,24 +2039,24 @@
       "artifact_id": "material3",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-ui"
     },
     "cmp-material3-nav-suite": {
-      "total_versions": 42,
+      "total_versions": 43,
       "stable": "1.9.0",
-      "rc": "1.8.0-rc01",
+      "rc": "1.13.0-rc01",
       "beta": "1.13.0-beta02",
       "alpha": "1.13.0-alpha02",
       "dev": "",
-      "latest": "1.13.0-beta02",
-      "latest_any": "1.13.0-beta02",
+      "latest": "1.13.0-rc01",
+      "latest_any": "1.13.0-rc01",
       "latest_stable": "1.9.0",
-      "latest_rc": "1.8.0-rc01",
+      "latest_rc": "1.13.0-rc01",
       "latest_beta": "1.13.0-beta02",
       "latest_alpha": "1.13.0-alpha02",
       "latest_dev": null,
       "recent_versions": [
-        "1.11.0-alpha05",
         "1.11.0-alpha06",
         "1.11.0-alpha07",
         "1.12.0-alpha01",
@@ -1870,7 +2065,8 @@
         "1.13.0-alpha01",
         "1.13.0-alpha02",
         "1.13.0-beta01",
-        "1.13.0-beta02"
+        "1.13.0-beta02",
+        "1.13.0-rc01"
       ],
       "key": "cmp-material3-nav-suite",
       "coordinate": "org.jetbrains.compose.material3:material3-adaptive-navigation-suite",
@@ -1878,6 +2074,7 @@
       "artifact_id": "material3-adaptive-navigation-suite",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-ui"
     },
     "cmp-adaptive": {
@@ -1912,6 +2109,7 @@
       "artifact_id": "adaptive",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "cmp-adaptive-layout": {
@@ -1946,6 +2144,7 @@
       "artifact_id": "adaptive-layout",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "cmp-adaptive-navigation": {
@@ -1980,6 +2179,7 @@
       "artifact_id": "adaptive-navigation",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "cmp-adaptive-navigation3": {
@@ -2014,6 +2214,7 @@
       "artifact_id": "adaptive-navigation3",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-adaptive"
     },
     "cmp-navigation3-ui": {
@@ -2048,6 +2249,7 @@
       "artifact_id": "navigation3-ui",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-nav3"
     },
     "cmp-lifecycle-viewmodel-compose": {
@@ -2082,6 +2284,7 @@
       "artifact_id": "lifecycle-viewmodel-compose",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-lifecycle"
     },
     "cmp-lifecycle-viewmodel-navigation3": {
@@ -2116,6 +2319,7 @@
       "artifact_id": "lifecycle-viewmodel-navigation3",
       "ecosystem": "jetbrains",
       "repo": "maven-central",
+      "jetbrains_dev_latest": null,
       "role": "cmp-lifecycle"
     }
   },
@@ -2915,21 +3119,21 @@
   },
   "cmp_android_redirects": {
     "cmp-material3": {
-      "version": "1.13.0-beta02",
-      "module_url": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3/1.13.0-beta02/material3-1.13.0-beta02.module",
+      "version": "1.13.0-rc01",
+      "module_url": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3/1.13.0-rc01/material3-1.13.0-rc01.module",
       "android_redirect": [
-        "androidx.compose.material3:material3:1.5.0-beta02",
+        "androidx.compose.material3:material3:1.5.0-rc01",
         "androidx.graphics:graphics-shapes:1.1.0"
       ],
-      "desktop_artifact": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3-desktop/1.13.0-beta02/material3-desktop-1.13.0-beta02.module"
+      "desktop_artifact": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3-desktop/1.13.0-rc01/material3-desktop-1.13.0-rc01.module"
     },
     "cmp-material3-nav-suite": {
-      "version": "1.13.0-beta02",
-      "module_url": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3-adaptive-navigation-suite/1.13.0-beta02/material3-adaptive-navigation-suite-1.13.0-beta02.module",
+      "version": "1.13.0-rc01",
+      "module_url": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3-adaptive-navigation-suite/1.13.0-rc01/material3-adaptive-navigation-suite-1.13.0-rc01.module",
       "android_redirect": [
-        "androidx.compose.material3:material3-adaptive-navigation-suite:1.5.0-beta02"
+        "androidx.compose.material3:material3-adaptive-navigation-suite:1.5.0-rc01"
       ],
-      "desktop_artifact": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3-adaptive-navigation-suite-desktop/1.13.0-beta02/material3-adaptive-navigation-suite-desktop-1.13.0-beta02.module"
+      "desktop_artifact": "https://repo1.maven.org/maven2/org/jetbrains/compose/material3/material3-adaptive-navigation-suite-desktop/1.13.0-rc01/material3-adaptive-navigation-suite-desktop-1.13.0-rc01.module"
     },
     "cmp-adaptive": {
       "version": "1.4.0-alpha01",

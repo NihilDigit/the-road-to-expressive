@@ -1,6 +1,6 @@
 # Bleeding-Edge Compose & Material 3 Expressive Version Matrix
 
-> **Snapshot Timestamp:** `2026-11-18T06:46:04Z`  
+> **Snapshot Timestamp:** `2026-11-18T12:21:52Z`  
 > **Authoritative Sources:** `manifests/api/compose-versions.json`, `manifests/api/material3-expressive-surface.json`, `.corpus/compose-maven-api/pages/versions-and-boms.md`, `.corpus/compose-maven-api/pages/parity-diff.md`.  
 > **CLI Queries:** Run `uv run rtx status` and `uv run rtx api <Symbol> --diff` to inspect live pinned bytecode signatures.
 
@@ -15,14 +15,14 @@ Compose Multiplatform (CMP) projects compile `commonMain` against **two distinct
 
 ### Crucial Decoupling & Redirection Mechanics
 - **JetBrains `.module` Redirection on Android:** On Android targets, Gradle `.module` metadata inside `org.jetbrains.compose.material3:material3`, `org.jetbrains.compose.material3.adaptive:*`, and `org.jetbrains.androidx.navigation3:navigation3-ui` **redirects to the corresponding `androidx.*` coordinate**. If your `:app` or `androidMain` declares an AndroidX BOM (`compose-bom-alpha`), Android resolves `max(redirectVersion, bomVersion)` via Gradle max-version conflict resolution—causing Android and Desktop to skew whenever `compose-bom-alpha` exceeds `cmp-material3`'s redirect!
-  - **How to Lock Android + Desktop to Identical Material 3 APIs:** Pair `cmp-material3` (`1.12.0-alpha03` -> `1.5.0-alpha22`, or `1.13.0-beta02` -> `1.5.0-beta02`) with the **stable** Android BOM (`compose-bom:2026.09.00`, `material3:1.4.0`). Because `1.5.0-* > 1.4.0`, `cmp-material3`'s `.module` redirect wins on Android, giving both targets the exact same Material 3 build with zero `M3Compat` shims. (See [dual-target-unification-and-skiko-interop.md](dual-target-unification-and-skiko-interop.md) for a full Gradle & bytecode walkthrough.)
-  - Verified redirects (`.corpus/compose-maven-api/pages/versions-and-boms.md#L528-L536`):
-    - `org.jetbrains.compose.material3:material3:1.13.0-beta02` -> `androidx.compose.material3:material3:1.5.0-beta02`
-    - `org.jetbrains.compose.material3:material3-adaptive-navigation-suite:1.13.0-beta02` -> `androidx.compose.material3:material3-adaptive-navigation-suite:1.5.0-beta02`
+  - **How to Lock Android + Desktop to Identical Material 3 APIs:** Pair `cmp-material3` (`1.12.0-alpha03` -> `1.5.0-alpha22`, or `1.13.0-rc01` -> `1.5.0-rc01`) with the **stable** Android BOM (`compose-bom:2026.09.00`, `material3:1.4.0`). Because `1.5.0-* > 1.4.0`, `cmp-material3`'s `.module` redirect wins on Android, giving both targets the exact same Material 3 build with zero `M3Compat` shims. (See [dual-target-unification-and-skiko-interop.md](dual-target-unification-and-skiko-interop.md) for a full Gradle & bytecode walkthrough.)
+  - Verified redirects (`.corpus/compose-maven-api/pages/versions-and-boms.md#L530-L538`):
+    - `org.jetbrains.compose.material3:material3:1.13.0-rc01` -> `androidx.compose.material3:material3:1.5.0-rc01`
+    - `org.jetbrains.compose.material3:material3-adaptive-navigation-suite:1.13.0-rc01` -> `androidx.compose.material3:material3-adaptive-navigation-suite:1.5.0-rc01`
     - `org.jetbrains.compose.material3.adaptive:adaptive*:1.4.0-alpha01` -> `androidx.compose.material3.adaptive:adaptive*:1.4.0-alpha03`
     - `org.jetbrains.androidx.navigation3:navigation3-ui:1.2.0` -> `androidx.navigation3:navigation3-runtime:1.2.0` + `navigation3-ui:1.2.0` + `androidx.savedstate:savedstate-compose:1.4.0`
 - **Independent Versioning Beyond the Core Plugin:** `org.jetbrains.compose:compose-gradle-plugin` no longer dictates `material3`, `adaptive`, `navigation3`, or `lifecycle` versions—all four publish on independent version lines.
-- **Gradle Plugin vs. Runtime Library Decoupling:** You can upgrade `org.jetbrains.compose` (the Gradle plugin) independently (e.g., to `1.13.0-alpha01+` / `1.13.0-beta02` for `buildTypes.release.aot` JDK 25 AOT DSL) while pinning runtime libraries (`org.jetbrains.compose.ui:ui`, `foundation`, `runtime`) to an earlier version (`1.12.0` / `1.12.1`) if native Skiko interop (e.g., MediaMP `0.5.0` D3D11) requires Skiko `0.150.x`.
+- **Gradle Plugin vs. Runtime Library Decoupling:** You can upgrade `org.jetbrains.compose` (the Gradle plugin) independently (e.g., to `1.13.0-rc01` for `buildTypes.release.aot` JDK 25 AOT DSL) while pinning runtime libraries (`org.jetbrains.compose.ui:ui`, `foundation`, `runtime`) to an earlier version (`1.12.0` / `1.12.2`) if native Skiko interop (e.g., MediaMP `0.5.0`–`0.5.3` D3D11) requires Skiko `0.150.x`.
   - **Rule:** When decoupling plugin and runtime versions, **never** use `compose.desktop.currentOs` or `compose.material3` Gradle DSL accessors—those follow the *plugin* version! Declare explicit Maven coordinates (`org.jetbrains.compose.desktop:desktop-jvm-<os>-<arch>:<runtimeVersion>`, `org.jetbrains.compose.material3:material3:<m3Version>`) and disable the plugin library-version compatibility check.
 
 ---
@@ -35,9 +35,10 @@ Compose Multiplatform (CMP) projects compile `commonMain` against **two distinct
 | --- | --- | --- | --- | --- | --- | --- |
 | **Compose BOM (Stable)** | `androidx.compose:compose-bom` | `2026.09.00` | `-` | *(N/A — explicit coordinates)* | `-` | `-` |
 | **Compose BOM (Alpha / Beta)** | `androidx.compose:compose-bom-alpha` / `-beta` | `2026.11.00` | `-` (tracks latest pre-release train) | *(N/A)* | `-` | `-` |
-| **Compose Plugin / Core (`runtime`, `ui`, `foundation`, `animation`)** | `androidx.compose.ui:ui` (etc.) | `1.12.1` | `1.13.0-rc01` (`alpha03`, `beta02`) | `org.jetbrains.compose:compose-gradle-plugin` & core modules | `1.12.2` | `1.13.0-beta02` (`alpha02`) |
-| **Material 3 (incl. Expressive)** | `androidx.compose.material3:material3` | `1.4.0` | **`1.5.0-rc01`** (`beta02`, `alpha29`) | `org.jetbrains.compose.material3:material3` | `1.9.0` | **`1.13.0-beta02`** (`alpha02`) |
-| **Adaptive Navigation Suite** | `androidx.compose.material3:material3-adaptive-navigation-suite` | `1.4.0` | **`1.5.0-rc01`** (`beta02`, `alpha29`) | `org.jetbrains.compose.material3:material3-adaptive-navigation-suite` | `1.9.0` | **`1.13.0-beta02`** (`alpha02`) |
+| **Compose Plugin / Core (`runtime`, `ui`, `ui-graphics`, `foundation`, `animation`)** | `androidx.compose.ui:ui` (etc.) | `1.12.1` | `1.13.0-rc01` (`alpha03`, `beta02`) | `org.jetbrains.compose:compose-gradle-plugin` & core modules | `1.12.2` | **`1.13.0-rc01`** (`beta02`, `alpha02`) |
+| **Skiko AWT (Desktop Rendering)** | *(Android HWUI)* | `-` | `-` | `org.jetbrains.skiko:skiko-awt` | **`0.156.1`** | `0.152.0-alpha02` |
+| **Material 3 (incl. Expressive)** | `androidx.compose.material3:material3` | `1.4.0` | **`1.5.0-rc01`** (`beta02`, `alpha29`) | `org.jetbrains.compose.material3:material3` | `1.9.0` | **`1.13.0-rc01`** (`beta02`, `alpha02`) |
+| **Adaptive Navigation Suite** | `androidx.compose.material3:material3-adaptive-navigation-suite` | `1.4.0` | **`1.5.0-rc01`** (`beta02`, `alpha29`) | `org.jetbrains.compose.material3:material3-adaptive-navigation-suite` | `1.9.0` | **`1.13.0-rc01`** (`beta02`, `alpha02`) |
 | **Material 3 Adaptive (`adaptive`, `adaptive-layout`, `adaptive-navigation`, `adaptive-navigation3`)** | `androidx.compose.material3.adaptive:adaptive*` | `1.3.0` | **`1.4.0-alpha03`** (`1.3.0-rc01`, `beta02`) | `org.jetbrains.compose.material3.adaptive:adaptive*` | `1.3.0` | **`1.4.0-alpha01`** (`1.3.0-rc01`, `beta02`) |
 | **Navigation 3 (`runtime`, `ui`)** | `androidx.navigation3:navigation3-runtime` / `navigation3-ui` | `1.2.1` | **`1.3.0-alpha04`** (`1.2.0-rc01`) | `org.jetbrains.androidx.navigation3:navigation3-ui` | **`1.2.0`** | `1.2.0-alpha02` / `beta01` / `rc01` |
 | **Lifecycle ViewModel Compose / Nav3** | `androidx.lifecycle:lifecycle-viewmodel-compose` / `-navigation3` | `2.11.0` | `2.12.0-alpha05` (`2.11.0-rc01`) | `org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose` / `-navigation3` | **`2.11.0`** | `2.11.0-alpha03` / `beta02` / `rc01` |
@@ -62,8 +63,8 @@ Inspected across 15 JARs/AARs (`1,628` symbols) via OpenJDK 21 `javap` in `manif
 
 | Module Pair | AndroidX Inspected | CMP Desktop Inspected | Identical | Opt-In Delta | Overload Delta | Android Only | CMP Only |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `material3` | `1.5.0-rc01` | `1.13.0-beta02` | 849 | **4** | 98 | 67 | 141 |
-| `material3-adaptive-navigation-suite` | `1.5.0-rc01` | `1.13.0-beta02` | 26 | 0 | 0 | 7 | 7 |
+| `material3` | `1.5.0-rc01` | `1.13.0-rc01` | 849 | **4** | 98 | 67 | 141 |
+| `material3-adaptive-navigation-suite` | `1.5.0-rc01` | `1.13.0-rc01` | 26 | 0 | 0 | 7 | 7 |
 | `adaptive` | `1.4.0-alpha03` | `1.4.0-alpha01` | 16 | 0 | 1 | 1 | 0 |
 | `adaptive-layout` | `1.4.0-alpha03` | `1.4.0-alpha01` | 136 | 0 | 26 | 1 | 86 |
 | `adaptive-navigation` | `1.4.0-alpha03` | `1.4.0-alpha01` | 9 | 0 | 0 | 3 | 0 |
@@ -72,12 +73,12 @@ Inspected across 15 JARs/AARs (`1,628` symbols) via OpenJDK 21 `javap` in `manif
 
 *(Most `android_only` / `cmp_only` entries in `adaptive-navigation3`, `material3-adaptive-navigation-suite`, and `material3` are synthetic compiler `getLambda$...` methods or CMP bundled locale string functions `translationFor`, `af`, `ar`, etc.)*
 
-### 3.1 Material 3 Expressive Graduation & Opt-In Status (`1.5.0-rc01` vs. `1.13.0-beta02`)
+### 3.1 Material 3 Expressive Graduation & Opt-In Status (`1.5.0-rc01` vs. `1.13.0-rc01`)
 
 - **Graduated to Stable (No `@OptIn` Required on Either Platform):**
   - **Theme & Motion:** `MaterialExpressiveTheme`, `MaterialTheme`, `MotionScheme`, `Shapes`, `Typography`, `ColorScheme`
-  - **Buttons & Toolbars:** `ButtonGroup`, `ButtonGroupDefaults`, `ButtonGroupScope`, `SplitButtonLayout`, `SplitButtonDefaults`, `ToggleButton`, `ToggleButtonDefaults`, `IconToggleButton`, `FilledIconToggleButton`, `OutlinedIconToggleButton`, `FloatingActionButtonMenu`, `FloatingActionButtonMenuItem`, `ToggleFloatingActionButton`, `ToggleFloatingActionButtonDefaults`, `HorizontalFloatingToolbar`, `VerticalFloatingToolbar`, `FloatingToolbarDefaults`, `FloatingToolbarScrollBehavior`
-  - **Progress & Lists & Bars:** `LinearWavyProgressIndicator`, `CircularWavyProgressIndicator`, `WavyProgressIndicatorDefaults`, `MediumFlexibleTopAppBar`, `LargeFlexibleTopAppBar`, `TopAppBarDefaults`, `AppBarRow`, `AppBarColumn`, `WideNavigationRail`, `WideNavigationRailItem`, `WideNavigationRailDefaults`, `WideNavigationRailState`, `ShortNavigationBar`, `ShortNavigationBarItem`, `ShortNavigationBarDefaults`, `SegmentedListItem` (all 4 overloads including static non-clickable + `onClick` + `selected` + `checked`), `HorizontalMultiBrowseCarousel`, `HorizontalUncontainedCarousel`, `HorizontalCenteredHeroCarousel`, `ExpandedFullScreenSearchBar`, `ExpandedDockedSearchBar`
+  - **Buttons & Toolbars:** `ButtonGroup`, `ButtonGroupDefaults`, `ButtonGroupScope`, `ButtonDefaults`, `SplitButtonLayout`, `SplitButtonDefaults`, `ToggleButton`, `ToggleButtonDefaults`, `IconToggleButton`, `FilledIconToggleButton`, `OutlinedIconToggleButton`, `FloatingActionButtonMenu`, `FloatingActionButtonMenuItem`, `ToggleFloatingActionButton`, `ToggleFloatingActionButtonDefaults`, `HorizontalFloatingToolbar`, `VerticalFloatingToolbar`, `FloatingToolbarDefaults`, `FloatingToolbarColors`, `FloatingToolbarScrollBehavior`
+  - **Progress & Lists & Bars:** `LinearWavyProgressIndicator`, `CircularWavyProgressIndicator`, `WavyProgressIndicatorDefaults`, `PullToRefreshDefaults`, `MediumFlexibleTopAppBar`, `LargeFlexibleTopAppBar`, `TopAppBarDefaults`, `AppBarRow`, `AppBarColumn`, `WideNavigationRail`, `WideNavigationRailItem`, `WideNavigationRailDefaults`, `WideNavigationRailState`, `ShortNavigationBar`, `ShortNavigationBarItem`, `ShortNavigationBarDefaults`, `SegmentedListItem` (all 4 overloads including static non-clickable + `onClick` + `selected` + `checked`), `HorizontalMultiBrowseCarousel`, `HorizontalUncontainedCarousel`, `HorizontalCenteredHeroCarousel`, `ExpandedFullScreenSearchBar`, `ExpandedDockedSearchBar`
 - **Still Requires `@ExperimentalMaterial3ExpressiveApi` on Both:**
   - `LoadingIndicator`, `ContainedLoadingIndicator`, `LoadingIndicatorDefaults`, `MaterialShapes`
 - **Still Requires `@ExperimentalMaterial3Api` on Both:**
@@ -88,7 +89,7 @@ Inspected across 15 JARs/AARs (`1,628` symbols) via OpenJDK 21 `javap` in `manif
 
 ### 3.2 Exact `opt_in_delta` & `android_only` Platform Deltas
 
-| Symbol | Module | Android (`1.5.0-rc01` / `1.4.0-alpha03` / `1.3.0-alpha04`) | CMP Desktop (`1.13.0-beta02` / `1.4.0-alpha01` / `1.2.0`) | Impact in `commonMain` |
+| Symbol | Module | Android (`1.5.0-rc01` / `1.4.0-alpha03` / `1.3.0-alpha04`) | CMP Desktop (`1.13.0-rc01` / `1.4.0-alpha01` / `1.2.0`) | Impact in `commonMain` |
 | --- | --- | --- | --- | --- |
 | `AlertDialog` | `material3` | Stable (no opt-in) | `@ExperimentalMaterial3Api` | Module-level `optIn` or `@OptIn(ExperimentalMaterial3Api::class)` needed for Desktop compilation! |
 | `BasicAlertDialog` | `material3` | Stable (no opt-in) | `@ExperimentalMaterial3Api` | Same as above |
@@ -99,11 +100,15 @@ Inspected across 15 JARs/AARs (`1,628` symbols) via OpenJDK 21 `javap` in `manif
 | `NavigableListDetailPaneScaffold` / `NavigableSupportingPaneScaffold` / `ThreePaneScaffoldPredictiveBackHandler` | `adaptive-navigation` | Present (`android_only`) | Absent | Prefer `ListDetailSceneStrategy` + `SupportingPaneSceneStrategy` in `commonMain` (identical across targets!) |
 | `TitleMetadataKey` / `UrlMetadataKey` / `toMutableTransform` | `navigation3-ui` | Present (`1.3.0-alpha04`) | Absent (`1.2.0`) | Do not use `1.3.0-alpha04` Navigation 3 metadata keys in `commonMain` until CMP `navigation3-ui` reaches `1.3.0` |
 
-### 3.3 Historical Pin Caveats (When Pinned Below `1.5.0-rc01` / `1.13.0-beta02`)
-If an app must pin CMP below `1.13.x` (e.g., CMP `1.12.0` / `1.12.1` + `org.jetbrains.compose.material3:material3:1.12.0-alpha03` -> Material3 `1.5.0-alpha22` due to Skiko `0.152` removing `ContextHandler` and breaking `mediamp 0.5.0`):
+### 3.3 CMP `1.13` UI-Graphics / Skiko Breaking & Deprecation Notes
+- **`Canvas.skiaCanvas` replaces `Canvas.nativeCanvas` (`ui-skiko:1.13.0-rc01`):** In `androidx.compose.ui.graphics.SkiaBackedCanvas_skikoKt` (`ui-skiko`), `val Canvas.nativeCanvas: org.jetbrains.skia.Canvas` is now `@Deprecated` in favor of `val Canvas.skiaCanvas: org.jetbrains.skia.Canvas` (`import androidx.compose.ui.graphics.skiaCanvas`). Additionally, `androidx.compose.ui.graphics.NativeCanvas` (`Canvas_skikoKt` in `ui-graphics`) carries `@Deprecated(level = DeprecationLevel.ERROR)`—reference `org.jetbrains.skia.Canvas` directly.
+- **Skiko `0.156.1` GPU Interop:** `SkiaLayer.getRedrawer$skiko()`, `Direct3DRedrawer`, and `ContextHandler` are removed in Skiko `0.156.1`, replaced by `SkiaLayer.frameDriverManager` (`FrameDriver` -> `FrameProducer`) and `org.jetbrains.skiko.renderer.Direct3DRenderer`. See [dual-target-unification-and-skiko-interop.md](dual-target-unification-and-skiko-interop.md).
+
+### 3.4 Historical Pin Caveats (When Pinned Below `1.5.0-rc01` / `1.13.0-rc01`)
+If an app must pin CMP below `1.13.x` (e.g., CMP `1.12.0` / `1.12.2` + `org.jetbrains.compose.material3:material3:1.12.0-alpha03` -> Material3 `1.5.0-alpha22` due to Skiko `0.152+` removing `ContextHandler` and breaking `mediamp 0.5.0`–`0.5.3`):
 - **`ListItem` overload drift:** `1.5.0-alpha25+` shifted `ListItem` to a trailing `content` lambda and deprecated `headlineContent`, whereas `alpha22` lacks the trailing-`content` overload—bridge via an `expect/actual` `M3Compat` wrapper.
-- **`SplitButtonLayout` vs. `SplitButton`:** Verify exact symbol name via `uv run rtx api SplitButton` (in `1.5.0-rc01` / `1.13.0-beta02`, the composable is `SplitButtonLayout`).
-- **Non-clickable `SegmentedListItem`:** Absent in `alpha22` (only `onClick` / `selected` / `checked` overloads existed); present in `1.5.0-rc01` / `1.13.0-beta02` (all 4 overloads verified).
+- **`SplitButtonLayout` vs. `SplitButton`:** Verify exact symbol name via `uv run rtx api SplitButton` (in `1.5.0-rc01` / `1.13.0-rc01`, the composable is `SplitButtonLayout`).
+- **Non-clickable `SegmentedListItem`:** Absent in `alpha22` (only `onClick` / `selected` / `checked` overloads existed); present in `1.5.0-rc01` / `1.13.0-rc01` (all 4 overloads verified).
 - **Opt-in drift:** `MediumFlexibleTopAppBar` required `@OptIn(ExperimentalMaterial3ExpressiveApi::class)` in `alpha22`, but graduated in `alpha25+` / `1.5.0-rc01`. Add module-wide opt-ins in `ui/build.gradle.kts` (`languageSettings.optIn(...)`) so `commonMain` compiles cleanly across skewed Android/Desktop Material3 versions.
 
 ```kotlin
@@ -134,7 +139,10 @@ Never rely on a single target compile (especially Android-only) after editing `c
 # Plus iOS compile/test gate on macOS runners:
 ./gradlew :shared:iosSimulatorArm64Test :ui:iosSimulatorArm64Test
 ```
-*Note:* Serialize Gradle invocations in multi-agent workflows—running two `./gradlew` processes concurrently crashes the shared Kotlin compiler daemon.
+*Note:*
+- Serialize Gradle invocations in multi-agent workflows—running two `./gradlew` processes concurrently crashes the shared Kotlin compiler daemon.
+- On **AGP 9**, AndroidX Compose `1.13` / Material 3 `1.5.0-rc01` AAR metadata requires Android API `37.1` (`compileSdk { version = release(37) { minorApiLevel = 1 } }`); plain `compileSdk = 37` fails metadata validation.
+- On **Windows NTFS**, terminate any running desktop dev JVM instance holding `*-desktop.jar` open before running `:shared:desktopJar` or packaging tasks (`Unable to delete file`).
 
 ### 4.2 `M3ApiProbe.kt` Test-Source-Set Gate
 Keep a compile-only API probe file (e.g., `shared/src/androidHostTest/.../M3ApiProbe.kt` or `ui/src/commonTest/.../M3ApiProbe.kt`) exercising every M3 Expressive theme, token, and component symbol your app relies on:

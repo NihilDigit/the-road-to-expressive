@@ -512,6 +512,37 @@ def query_component(paths: RepoPaths, name: str) -> dict[str, Any]:
     }
 
 
+def query_api_batch(
+    paths: RepoPaths,
+    queries: list[str],
+    *,
+    target: str | None = None,
+    diff_only: bool = False,
+    limit: int = 30,
+) -> dict[str, Any]:
+    """Run `query_api` over multiple symbol/artifact queries in one batch."""
+    results = [query_api(paths, q, target=target, diff_only=diff_only, limit=limit) for q in queries]
+    return {"queries": queries, "target": target, "diff_only": diff_only, "results": results}
+
+
+def query_component_batch(paths: RepoPaths, names: list[str]) -> dict[str, Any]:
+    """Run `query_component` over multiple component names in one batch."""
+    results = [query_component(paths, n) for n in names]
+    return {"queries": names, "results": results}
+
+
+def query_tokens_batch(
+    paths: RepoPaths,
+    queries: list[str],
+    *,
+    category: str | None = None,
+    limit: int = 40,
+) -> dict[str, Any]:
+    """Run `query_tokens` over multiple token queries in one batch."""
+    results = [query_tokens(paths, q, category=category, limit=limit) for q in queries]
+    return {"queries": queries, "category": category, "results": results}
+
+
 def query_copy(paths: RepoPaths, topic: str, *, limit: int = 15) -> dict[str, Any]:
     """Query UI copywriting & microcopy rules across UX writing and platform style guides."""
     db_path = ensure_index(paths)

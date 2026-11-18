@@ -456,3 +456,50 @@ def test_cross_repo_root_resolution(tmp_path: Path, monkeypatch: pytest.MonkeyPa
     assert (resolved / "src" / "rtx").is_dir()
     assert resolved != external_repo
 
+
+def test_batch_api_component_and_token_queries(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    paths = _seed_repo(tmp_path)
+    monkeypatch.setenv("RTX_ROOT", str(tmp_path))
+    build_index(paths)
+
+    # Batch `rtx api` text and JSON
+    assert main(["api", "SplitButtonLayout", "VerticalFloatingToolbar", "--target", "android"]) == 0
+    api_text = capsys.readouterr().out
+    assert "=== [1/2] API: SplitButtonLayout ===" in api_text
+    assert "=== [2/2] API: VerticalFloatingToolbar ===" in api_text
+    assert "SplitButtonLayout" in api_text
+    assert "VerticalFloatingToolbar" in api_text
+
+    assert main(["api", "SplitButtonLayout", "VerticalFloatingToolbar", "--json"]) == 0
+    api_json = json.loads(capsys.readouterr().out)
+    assert api_json["queries"] == ["SplitButtonLayout", "VerticalFloatingToolbar"]
+    assert len(api_json["results"]) == 2
+    assert api_json["results"][0]["symbols"][0]["name"] == "SplitButtonLayout"
+    assert api_json["results"][1]["symbols"][0]["name"] == "VerticalFloatingToolbar"
+
+    # Batch `rtx component` text and JSON
+    assert main(["component", "SplitButton", "VerticalFloatingToolbar"]) == 0
+    comp_text = capsys.readouterr().out
+    assert "=== Component: SplitButton ===" in comp_text
+    assert "=== Component: VerticalFloatingToolbar ===" in comp_text
+
+    assert main(["component", "SplitButton", "VerticalFloatingToolbar", "--json"]) == 0
+    comp_json = json.loads(capsys.readouterr().out)
+    assert comp_json["queries"] == ["SplitButton", "VerticalFloatingToolbar"]
+    assert len(comp_json["results"]) == 2
+    assert comp_json["results"][0]["component"] == "SplitButton"
+
+    # Batch `rtx token` text and JSON
+    assert main(["token", "largeIncreased", "MotionScheme"]) == 0
+    tok_text = capsys.readouterr().out
+    assert "=== [1/2] Token: largeIncreased ===" in tok_text
+    assert "=== [2/2] Token: MotionScheme ===" in tok_text
+
+    assert main(["token", "largeIncreased", "MotionScheme", "--json"]) == 0
+    tok_json = json.loads(capsys.readouterr().out)
+    assert tok_json["queries"] == ["largeIncreased", "MotionScheme"]
+    assert len(tok_json["results"]) == 2
+    assert tok_json["results"][0]["tokens"][0]["value"] == "20dp"
+

@@ -4,7 +4,7 @@ Live Maven version tracker, AAR/JAR bytecode surface extractor (`javap` via Open
 
 ## What It Produces
 
-- `manifests/api/compose-versions.json` — Live latest `stable`, `rc`, `beta`, `alpha`, and `dev` versions across Google Maven (`dl.google.com/dl/android/maven2`) and Maven Central (`repo1.maven.org/maven2`), plus `compose-bom` / `compose-bom-alpha` pin tables and JetBrains CMP `.module` AndroidX redirects.
+- `manifests/api/compose-versions.json` — Live latest `stable`, `rc`, `beta`, `alpha`, and `dev` versions across Google Maven (`dl.google.com/dl/android/maven2`), Maven Central (`repo1.maven.org/maven2`), and JetBrains Compose Dev (`maven.pkg.jetbrains.space/public/p/compose/dev`), including `org.jetbrains.skiko:skiko-awt`, `compose-bom` / `compose-bom-alpha` pin tables, and JetBrains CMP `.module` AndroidX redirects.
 - `manifests/api/material3-expressive-surface.json` — Bytecode-verified public & `@Composable` signatures, `@ExperimentalMaterial3ExpressiveApi` / `@ExperimentalMaterial3Api` / `@ExperimentalMaterial3AdaptiveApi` opt-in status, compiled numeric constants from `androidx.compose.material3.tokens.*` (`token_constants`), historical CMP alpha graduation deltas (`1.12.0-alpha03` -> latest), and exact parity diff across:
   - `material3` (AndroidX `-android` vs CMP `-desktop`)
   - `material3-adaptive-navigation-suite`

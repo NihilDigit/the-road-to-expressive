@@ -71,8 +71,10 @@ MAVEN_ARTIFACTS: list[tuple[str, str, str, str, str]] = [
     ("cmp-gradle-plugin", MAVEN_CENTRAL, "org.jetbrains.compose", "compose-gradle-plugin", "cmp-plugin"),
     ("cmp-runtime", MAVEN_CENTRAL, "org.jetbrains.compose.runtime", "runtime", "cmp-core"),
     ("cmp-ui", MAVEN_CENTRAL, "org.jetbrains.compose.ui", "ui", "cmp-core"),
+    ("cmp-ui-graphics", MAVEN_CENTRAL, "org.jetbrains.compose.ui", "ui-graphics", "cmp-core"),
     ("cmp-foundation", MAVEN_CENTRAL, "org.jetbrains.compose.foundation", "foundation", "cmp-core"),
     ("cmp-animation", MAVEN_CENTRAL, "org.jetbrains.compose.animation", "animation", "cmp-core"),
+    ("cmp-skiko-awt", MAVEN_CENTRAL, "org.jetbrains.skiko", "skiko-awt", "cmp-skiko"),
     ("cmp-material3", MAVEN_CENTRAL, "org.jetbrains.compose.material3", "material3", "cmp-ui"),
     ("cmp-material3-nav-suite", MAVEN_CENTRAL, "org.jetbrains.compose.material3", "material3-adaptive-navigation-suite", "cmp-ui"),
     ("cmp-adaptive", MAVEN_CENTRAL, "org.jetbrains.compose.material3.adaptive", "adaptive", "cmp-adaptive"),
@@ -420,9 +422,9 @@ def maven_path(group_id: str, artifact_id: str) -> str:
     return f"{group_id.replace('.', '/')}/{artifact_id}"
 
 
-def fetch_maven_versions(repo_base: str, group_id: str, artifact_id: str) -> list[str]:
+def fetch_maven_versions(repo_base: str, group_id: str, artifact_id: str, *, attempts: int = 4, timeout: float = 30.0) -> list[str]:
     url = f"{repo_base}/{maven_path(group_id, artifact_id)}/maven-metadata.xml"
-    _, data, _ = fetch_url(url, accept="application/xml,text/xml")
+    _, data, _ = fetch_url(url, accept="application/xml,text/xml", attempts=attempts, timeout=timeout)
     root = ET.fromstring(data)
     return [el.text.strip() for el in root.findall(".//versioning/versions/version") if el.text]
 
@@ -1465,17 +1467,42 @@ def run(args: argparse.Namespace) -> int:
 
     fetched_at = utc_now()
 
-    # 1. Discover Maven versions concurrently
-    print("Querying Google Maven & Maven Central metadata...", flush=True)
+    # 1. Discover Maven versions concurrently (Google Maven + Maven Central + JetBrains Compose Dev)
+    print("Querying Google Maven, Maven Central & JetBrains Compose Dev metadata...", flush=True)
     artifacts_info: dict[str, dict[str, Any]] = {}
     errors: list[dict[str, str]] = []
+
+    # Probe JetBrains Compose Dev once upfront so unreachable TLS/firewalls don't stall every coordinate
+    jb_dev_reachable = False
+    jb_dev_probe_err: str | None = None
+    try:
+        fetch_maven_versions(JETBRAINS_DEV, "org.jetbrains.compose.material3", "material3", attempts=1, timeout=10.0)
+        jb_dev_reachable = True
+    except Exception as err:
+        jb_dev_probe_err = f"{type(err).__name__}: {err}"
 
     def query_one(item: tuple[str, str, str, str, str]) -> tuple[str, dict[str, Any] | None, str | None]:
         key, repo_base, gid, aid, role = item
         repo_label = "google" if "google.com" in repo_base else "maven-central"
         try:
-            vers = fetch_maven_versions(repo_base, gid, aid)
-            summary = summarize_versions(vers)
+            central_vers = fetch_maven_versions(repo_base, gid, aid)
+            merged_vers = list(central_vers)
+            active_repo_base = repo_base
+            dev_only_latest: str | None = None
+
+            if repo_base == MAVEN_CENTRAL and jb_dev_reachable:
+                try:
+                    dev_vers = fetch_maven_versions(JETBRAINS_DEV, gid, aid, attempts=2, timeout=15.0)
+                    central_set = set(central_vers)
+                    merged_vers = sorted(central_set | set(dev_vers), key=parse_version)
+                    if merged_vers and merged_vers[-1] not in central_set:
+                        active_repo_base = JETBRAINS_DEV
+                        repo_label = "jetbrains-dev"
+                        dev_only_latest = merged_vers[-1]
+                except Exception:
+                    pass
+
+            summary = summarize_versions(merged_vers)
             summary.update({
                 "key": key,
                 "coordinate": f"{gid}:{aid}",
@@ -1483,7 +1510,8 @@ def run(args: argparse.Namespace) -> int:
                 "artifact_id": aid,
                 "ecosystem": "jetbrains" if gid.startswith("org.jetbrains") else "androidx",
                 "repo": repo_label,
-                "repo_base": repo_base,
+                "repo_base": active_repo_base,
+                "jetbrains_dev_latest": dev_only_latest,
                 "role": role,
             })
             return key, summary, None
@@ -1498,13 +1526,13 @@ def run(args: argparse.Namespace) -> int:
             elif err:
                 errors.append({"artifact": key, "error": err})
 
-    # Optional JetBrains Compose Dev repo probe for material3 (non-fatal)
-    jb_dev_latest: str | None = None
-    try:
-        dev_vers = fetch_maven_versions(JETBRAINS_DEV, "org.jetbrains.compose.material3", "material3")
-        jb_dev_latest = summarize_versions(dev_vers).get("latest_any")
-    except Exception:
-        jb_dev_latest = None
+    jb_dev_latest = (artifacts_info.get("cmp-material3") or {}).get("jetbrains_dev_latest")
+    if not jb_dev_latest and jb_dev_reachable:
+        try:
+            dev_vers = fetch_maven_versions(JETBRAINS_DEV, "org.jetbrains.compose.material3", "material3", attempts=1, timeout=10.0)
+            jb_dev_latest = summarize_versions(dev_vers).get("latest_any")
+        except Exception:
+            jb_dev_latest = None
 
     # Parse BOMs
     boms: dict[str, Any] = {}
@@ -1534,6 +1562,8 @@ def run(args: argparse.Namespace) -> int:
             "maven_central": MAVEN_CENTRAL,
             "jetbrains_compose_dev": JETBRAINS_DEV,
         },
+        "jetbrains_dev_reachable": jb_dev_reachable,
+        "jetbrains_dev_probe_error": jb_dev_probe_err,
         "jetbrains_dev_material3_latest": jb_dev_latest,
         "artifacts": {
             v["coordinate"]: {kk: vv for kk, vv in v.items() if kk != "repo_base"}
@@ -1961,6 +1991,7 @@ def run(args: argparse.Namespace) -> int:
             "cmp_material3": (artifacts_info.get("cmp-material3") or {}).get("latest_any") or "",
             "cmp_adaptive": (artifacts_info.get("cmp-adaptive") or {}).get("latest_any") or "",
             "cmp_navigation3_ui": (artifacts_info.get("cmp-navigation3-ui") or {}).get("latest_any") or "",
+            "cmp_skiko_awt": (artifacts_info.get("cmp-skiko-awt") or {}).get("latest_any") or "",
         },
         "sections": section_counts,
         "notes": f"JDK javap bytecode verification across {len(jar_paths)} JARs/AARs; {len(flat_symbols)} symbols indexed ({len(watchlist_out)} watchlist items).",

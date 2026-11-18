@@ -33,7 +33,7 @@ All nine source adapters under `sources/<id>/refresh.py` run standalone or via `
 | [`google-design`](sources/google-design/README.md) | `design.google/library/*` articles + Material Color Utilities HCT / `DynamicScheme` specs | 97 pages | Sitemap + Next.js `__NEXT_DATA__` + `ETag`/`Last-Modified` |
 | [`compose-android`](sources/compose-android/README.md) | Jetpack Compose, Navigation 3, Android Mobile & Large-Screen UI design guidelines | 443 pages | Sitemap / URL discovery + `ETag`/`Last-Modified` |
 | [`compose-multiplatform`](sources/compose-multiplatform/README.md) | Compose Multiplatform guides (adaptive, navigation, lifecycle, iOS, Desktop JVM, AOT) + Dokka indexes | 399 pages | TOC / sitemap + `ETag`/`Last-Modified` |
-| [`compose-maven-api`](sources/compose-maven-api/README.md) | Google Maven & JetBrains Compose Maven version tracking + OpenJDK `javap` bytecode inspection | 11 pages, 31 Maven coordinates, 1,628 API symbols (`manifests/api/`) | `maven-metadata.xml` + `.module` + cached JAR/AAR `javap` diff |
+| [`compose-maven-api`](sources/compose-maven-api/README.md) | Google Maven & JetBrains Compose Maven version tracking + OpenJDK `javap` bytecode inspection | 11 pages, 33 Maven coordinates, 1,628 API symbols (`manifests/api/`) | `maven-metadata.xml` + `.module` + cached JAR/AAR `javap` diff |
 | [`apple-hig`](sources/apple-hig/README.md) | Apple Human Interface Guidelines across iOS, iPadOS, macOS, visionOS, watchOS, tvOS | 173 pages | DocC JSON index + `ETag`/`Last-Modified` |
 | [`windows-fluent`](sources/windows-fluent/README.md) | Microsoft Learn Windows App Design Guidelines + Fluent 2 design system | 370 manifest entries | TOC JSON + `ETag`/`Last-Modified` |
 | [`linux-hig`](sources/linux-hig/README.md) | GNOME Human Interface Guidelines (`developer.gnome.org/hig`) + KDE HIG (`develop.kde.org/hig`) | 78 pages | Crawl/index + `ETag`/`Last-Modified` |
@@ -123,11 +123,19 @@ Add `--json` to query and status commands for structured machine-readable output
 
 | Command | Purpose |
 | --- | --- |
-| `uv run rtx component <name>` | Unified view combining M3E tokens, Compose API signatures & opt-ins, adaptive notes, and Apple/Windows/Linux HIG guidance |
-| `uv run rtx api <query> [--target common\|android\|desktop\|ios] [--diff]` | Query bytecode-verified AndroidX vs. JetBrains CMP signatures, `@Experimental*` opt-ins, and Maven versions (`--diff` highlights deltas) |
-| `uv run rtx token <query> [--category <cat>]` | Query M3 Expressive color roles, 10-step `Shapes`, `*Emphasized` typography, and `MotionScheme` spring constants |
+| `uv run rtx component <names...>` | Unified view for one or more components combining M3E tokens, Compose APIs & opt-ins, adaptive notes, and Apple/Windows/Linux HIG guidance |
+| `uv run rtx api <queries...> [--target common\|android\|desktop\|ios] [--diff]` | Batch-query bytecode-verified AndroidX vs. JetBrains CMP signatures, `@Experimental*` opt-ins, and Maven versions (`--diff` highlights deltas) |
+| `uv run rtx token <queries...> [--category <cat>]` | Batch-query M3 Expressive color roles, 10-step `Shapes`, `*Emphasized` typography, and `MotionScheme` spring constants |
 | `uv run rtx copy <topic>` | Query Material UX writing, AP Style mechanics, platform writing guides, and CJK UI copy rules |
 | `uv run rtx search "<query>" [--layer knowledge\|mirror\|api\|tokens] [--source <id>] [--limit N]` | Fast BM25 FTS5 search returning exact file paths, line numbers, source URLs, and snippets |
+
+Batch examples:
+
+```bash
+uv run rtx api ButtonGroup FloatingToolbar MaterialShapes --target common
+uv run rtx component FloatingToolbar ButtonGroup SplitButtonLayout
+uv run rtx token MotionScheme largeIncreased displayLargeEmphasized
+```
 
 ### Maintenance, Diffing & Integrity
 
