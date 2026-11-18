@@ -1,0 +1,574 @@
+{
+  "source_id": "linux-hig",
+  "name": "GNOME & KDE Human Interface Guidelines",
+  "base_url": "https://developer.gnome.org/hig/",
+  "upstream_urls": [
+    "https://developer.gnome.org/hig/",
+    "https://develop.kde.org/hig/"
+  ],
+  "fetched_at": "2026-11-18T06:48:24Z",
+  "version": "2026-11-18T06:48:24Z",
+  "page_count": 78,
+  "markdown_count": 78,
+  "page_error_count": 0,
+  "page_skipped_count": 0,
+  "cache_hits": 78,
+  "assets_skipped": true,
+  "asset_count": 0,
+  "robots_checked": [
+    "https://develop.kde.org",
+    "https://developer.gnome.org"
+  ],
+  "sections": [
+    "GNOME HIG",
+    "KDE HIG"
+  ],
+  "pages": [
+    {
+      "title": "Guidelines",
+      "section": "GNOME HIG / Overview",
+      "url": "https://developer.gnome.org/hig/guidelines.html",
+      "relpath": "gnome/guidelines.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessibility",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/accessibility.html",
+      "relpath": "gnome/guidelines/accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "Scaling Adaptiveness",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/adaptive.html",
+      "relpath": "gnome/guidelines/adaptive.md",
+      "status": "ok"
+    },
+    {
+      "title": "App Icons",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/app-icons.html",
+      "relpath": "gnome/guidelines/app-icons.md",
+      "status": "ok"
+    },
+    {
+      "title": "App Naming",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/app-naming.html",
+      "relpath": "gnome/guidelines/app-naming.md",
+      "status": "ok"
+    },
+    {
+      "title": "Keyboard",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/keyboard.html",
+      "relpath": "gnome/guidelines/keyboard.md",
+      "status": "ok"
+    },
+    {
+      "title": "Navigation",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/navigation.html",
+      "relpath": "gnome/guidelines/navigation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pointer Touch",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/pointer-touch.html",
+      "relpath": "gnome/guidelines/pointer-touch.md",
+      "status": "ok"
+    },
+    {
+      "title": "Typography",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/typography.html",
+      "relpath": "gnome/guidelines/typography.md",
+      "status": "ok"
+    },
+    {
+      "title": "UI Icons",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/ui-icons.html",
+      "relpath": "gnome/guidelines/ui-icons.md",
+      "status": "ok"
+    },
+    {
+      "title": "UI Styling",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/ui-styling.html",
+      "relpath": "gnome/guidelines/ui-styling.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing Style",
+      "section": "GNOME HIG / Guidelines",
+      "url": "https://developer.gnome.org/hig/guidelines/writing-style.html",
+      "relpath": "gnome/guidelines/writing-style.md",
+      "status": "ok"
+    },
+    {
+      "title": "GNOME Human Interface Guidelines",
+      "section": "GNOME HIG / Overview",
+      "url": "https://developer.gnome.org/hig/",
+      "relpath": "gnome/index.md",
+      "status": "ok"
+    },
+    {
+      "title": "Patterns",
+      "section": "GNOME HIG / Overview",
+      "url": "https://developer.gnome.org/hig/patterns.html",
+      "relpath": "gnome/patterns.md",
+      "status": "ok"
+    },
+    {
+      "title": "Containers",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers.html",
+      "relpath": "gnome/patterns/containers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Boxed Lists",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/boxed-lists.html",
+      "relpath": "gnome/patterns/containers/boxed-lists.md",
+      "status": "ok"
+    },
+    {
+      "title": "Grid Views",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/grid-views.html",
+      "relpath": "gnome/patterns/containers/grid-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Header Bars",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/header-bars.html",
+      "relpath": "gnome/patterns/containers/header-bars.md",
+      "status": "ok"
+    },
+    {
+      "title": "List Column Views",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/list-column-views.html",
+      "relpath": "gnome/patterns/containers/list-column-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Popovers",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/popovers.html",
+      "relpath": "gnome/patterns/containers/popovers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Selection Edit Modes",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/selection-mode.html",
+      "relpath": "gnome/patterns/containers/selection-mode.md",
+      "status": "ok"
+    },
+    {
+      "title": "Utility Panes",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/utility-panes.html",
+      "relpath": "gnome/patterns/containers/utility-panes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/containers/windows.html",
+      "relpath": "gnome/patterns/containers/windows.md",
+      "status": "ok"
+    },
+    {
+      "title": "Controls",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls.html",
+      "relpath": "gnome/patterns/controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Buttons",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/buttons.html",
+      "relpath": "gnome/patterns/controls/buttons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Checkboxes",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/checkboxes.html",
+      "relpath": "gnome/patterns/controls/checkboxes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Drop-Down Lists",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/drop-downs.html",
+      "relpath": "gnome/patterns/controls/drop-downs.md",
+      "status": "ok"
+    },
+    {
+      "title": "Menus",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/menus.html",
+      "relpath": "gnome/patterns/controls/menus.md",
+      "status": "ok"
+    },
+    {
+      "title": "Overlaid Controls",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/overlaid.html",
+      "relpath": "gnome/patterns/controls/overlaid.md",
+      "status": "ok"
+    },
+    {
+      "title": "Radio Buttons",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/radio-buttons.html",
+      "relpath": "gnome/patterns/controls/radio-buttons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sliders",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/sliders.html",
+      "relpath": "gnome/patterns/controls/sliders.md",
+      "status": "ok"
+    },
+    {
+      "title": "Spin Buttons",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/spin-buttons.html",
+      "relpath": "gnome/patterns/controls/spin-buttons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Switches",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/switches.html",
+      "relpath": "gnome/patterns/controls/switches.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text Fields",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/controls/text-fields.html",
+      "relpath": "gnome/patterns/controls/text-fields.md",
+      "status": "ok"
+    },
+    {
+      "title": "Feedback",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback.html",
+      "relpath": "gnome/patterns/feedback.md",
+      "status": "ok"
+    },
+    {
+      "title": "Banners",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/banners.html",
+      "relpath": "gnome/patterns/feedback/banners.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dialogs",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/dialogs.html",
+      "relpath": "gnome/patterns/feedback/dialogs.md",
+      "status": "ok"
+    },
+    {
+      "title": "Notifications",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/notifications.html",
+      "relpath": "gnome/patterns/feedback/notifications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Placeholder Pages",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/placeholders.html",
+      "relpath": "gnome/patterns/feedback/placeholders.md",
+      "status": "ok"
+    },
+    {
+      "title": "Progress Bars",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/progress-bars.html",
+      "relpath": "gnome/patterns/feedback/progress-bars.md",
+      "status": "ok"
+    },
+    {
+      "title": "Spinners",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/spinners.html",
+      "relpath": "gnome/patterns/feedback/spinners.md",
+      "status": "ok"
+    },
+    {
+      "title": "Toasts",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/toasts.html",
+      "relpath": "gnome/patterns/feedback/toasts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tooltips",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/feedback/tooltips.html",
+      "relpath": "gnome/patterns/feedback/tooltips.md",
+      "status": "ok"
+    },
+    {
+      "title": "Navigation",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/nav.html",
+      "relpath": "gnome/patterns/nav.md",
+      "status": "ok"
+    },
+    {
+      "title": "Browsing",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/nav/browsing.html",
+      "relpath": "gnome/patterns/nav/browsing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Search",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/nav/search.html",
+      "relpath": "gnome/patterns/nav/search.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sidebars",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/nav/sidebars.html",
+      "relpath": "gnome/patterns/nav/sidebars.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tabs",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/nav/tabs.html",
+      "relpath": "gnome/patterns/nav/tabs.md",
+      "status": "ok"
+    },
+    {
+      "title": "View Switchers",
+      "section": "GNOME HIG / Patterns",
+      "url": "https://developer.gnome.org/hig/patterns/nav/view-switchers.html",
+      "relpath": "gnome/patterns/nav/view-switchers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design Principles",
+      "section": "GNOME HIG / Overview",
+      "url": "https://developer.gnome.org/hig/principles.html",
+      "relpath": "gnome/principles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Reference",
+      "section": "GNOME HIG / Overview",
+      "url": "https://developer.gnome.org/hig/reference.html",
+      "relpath": "gnome/reference.md",
+      "status": "ok"
+    },
+    {
+      "title": "Backgrounds",
+      "section": "GNOME HIG / Reference",
+      "url": "https://developer.gnome.org/hig/reference/backgrounds.html",
+      "relpath": "gnome/reference/backgrounds.md",
+      "status": "ok"
+    },
+    {
+      "title": "Standard Keyboard Shortcuts",
+      "section": "GNOME HIG / Reference",
+      "url": "https://developer.gnome.org/hig/reference/keyboard.html",
+      "relpath": "gnome/reference/keyboard.md",
+      "status": "ok"
+    },
+    {
+      "title": "Palette",
+      "section": "GNOME HIG / Reference",
+      "url": "https://developer.gnome.org/hig/reference/palette.html",
+      "relpath": "gnome/reference/palette.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tools Resources",
+      "section": "GNOME HIG / Overview",
+      "url": "https://developer.gnome.org/hig/resources.html",
+      "relpath": "gnome/resources.md",
+      "status": "ok"
+    },
+    {
+      "title": "KDE Human Interface Guidelines",
+      "section": "KDE HIG / Overview",
+      "url": "https://develop.kde.org/hig/",
+      "relpath": "kde/index.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessibility and inclusiveness",
+      "section": "KDE HIG / Accessibility",
+      "url": "https://develop.kde.org/hig/accessibility/",
+      "relpath": "kde/accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "Displaying content",
+      "section": "KDE HIG / Displaying Content",
+      "url": "https://develop.kde.org/hig/displaying_content/",
+      "relpath": "kde/displaying_content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Getting input",
+      "section": "KDE HIG / Getting Input",
+      "url": "https://develop.kde.org/hig/getting_input/",
+      "relpath": "kde/getting_input.md",
+      "status": "ok"
+    },
+    {
+      "title": "Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/",
+      "relpath": "kde/icons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Colorful Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/colorful/",
+      "relpath": "kde/icons/colorful.md",
+      "status": "ok"
+    },
+    {
+      "title": "Application Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/colorful/application/",
+      "relpath": "kde/icons/colorful/application.md",
+      "status": "ok"
+    },
+    {
+      "title": "Category and Preferences Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/colorful/category_preferences/",
+      "relpath": "kde/icons/colorful/category_preferences.md",
+      "status": "ok"
+    },
+    {
+      "title": "MIME Type Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/colorful/mimetype/",
+      "relpath": "kde/icons/colorful/mimetype.md",
+      "status": "ok"
+    },
+    {
+      "title": "Places Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/colorful/places/",
+      "relpath": "kde/icons/colorful/places.md",
+      "status": "ok"
+    },
+    {
+      "title": "Icon Localization",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/localization/",
+      "relpath": "kde/icons/localization.md",
+      "status": "ok"
+    },
+    {
+      "title": "Monochromatic Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/monochrome/",
+      "relpath": "kde/icons/monochrome.md",
+      "status": "ok"
+    },
+    {
+      "title": "Action Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/monochrome/action/",
+      "relpath": "kde/icons/monochrome/action.md",
+      "status": "ok"
+    },
+    {
+      "title": "Emblem Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/monochrome/emblem/",
+      "relpath": "kde/icons/monochrome/emblem.md",
+      "status": "ok"
+    },
+    {
+      "title": "MIME Type Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/monochrome/mimetype/",
+      "relpath": "kde/icons/monochrome/mimetype.md",
+      "status": "ok"
+    },
+    {
+      "title": "Places Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/monochrome/places/",
+      "relpath": "kde/icons/monochrome/places.md",
+      "status": "ok"
+    },
+    {
+      "title": "Status Icons",
+      "section": "KDE HIG / Icons",
+      "url": "https://develop.kde.org/hig/icons/monochrome/status/",
+      "relpath": "kde/icons/monochrome/status.md",
+      "status": "ok"
+    },
+    {
+      "title": "What makes a KDE app a KDE app?",
+      "section": "KDE HIG / Kde App Design",
+      "url": "https://develop.kde.org/hig/kde_app_design/",
+      "relpath": "kde/kde_app_design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Layout and navigation",
+      "section": "KDE HIG / Layout And Nav",
+      "url": "https://develop.kde.org/hig/layout_and_nav/",
+      "relpath": "kde/layout_and_nav.md",
+      "status": "ok"
+    },
+    {
+      "title": "Powerful when needed",
+      "section": "KDE HIG / Powerful When Needed",
+      "url": "https://develop.kde.org/hig/powerful_when_needed/",
+      "relpath": "kde/powerful_when_needed.md",
+      "status": "ok"
+    },
+    {
+      "title": "Simple by default",
+      "section": "KDE HIG / Simple By Default",
+      "url": "https://develop.kde.org/hig/simple_by_default/",
+      "relpath": "kde/simple_by_default.md",
+      "status": "ok"
+    },
+    {
+      "title": "Communicating status changes",
+      "section": "KDE HIG / Status Changes",
+      "url": "https://develop.kde.org/hig/status_changes/",
+      "relpath": "kde/status_changes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text and labels",
+      "section": "KDE HIG / Text And Labels",
+      "url": "https://develop.kde.org/hig/text_and_labels/",
+      "relpath": "kde/text_and_labels.md",
+      "status": "ok"
+    }
+  ]
+}

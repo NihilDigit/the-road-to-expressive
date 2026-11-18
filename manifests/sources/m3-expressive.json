@@ -1,0 +1,25 @@
+{
+  "source_id": "m3-expressive",
+  "name": "Material Design 3 Expressive (m3.material.io)",
+  "base_url": "https://m3.material.io",
+  "fetched_at": "2026-11-18T06:52:04Z",
+  "page_count": 95,
+  "asset_count": 0,
+  "failed_count": 0,
+  "status": "ok",
+  "upstream_version": "2026-11-17_08-50-14",
+  "versions": {
+    "carbon_version": "2026-11-17_08-50-14",
+    "dsdb_version": "41.1.12",
+    "dsdb_revision_create_time": "2026-05-27T22:44:15.009106Z"
+  },
+  "sections": {
+    "blog-expressive": 6,
+    "components": 39,
+    "develop": 5,
+    "foundations": 28,
+    "overview": 1,
+    "styles": 16
+  },
+  "notes": "Mirrored all 95 M3 Carbon routes including M3 Expressive blog/feature routes, foundations, styles, components, and develop; extracted 117 flat tokens and 37 component token tables into manifests/tokens/m3-expressive-tokens.json."
+}

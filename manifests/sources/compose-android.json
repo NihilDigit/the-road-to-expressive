@@ -1,0 +1,19 @@
+{
+  "source_id": "compose-android",
+  "name": "Android Jetpack Compose, Navigation 3 & UI Design Guidelines",
+  "base_url": "https://developer.android.com",
+  "fetched_at": "2026-11-18T06:54:19Z",
+  "page_count": 443,
+  "asset_count": 0,
+  "failed_count": 0,
+  "status": "ok",
+  "upstream_version": "developer.android.com",
+  "versions": {},
+  "sections": {
+    "Jetpack Compose": 380,
+    "Navigation 3": 17,
+    "Android Mobile UI Design (HIG)": 36,
+    "Android Large-Screen Design (HIG)": 10
+  },
+  "notes": "Mirrored /develop/ui/compose/, /guide/navigation/navigation-3/, /design/ui/mobile/, /design/ui/large-screens/ (upstream 404s ignored: 6)."
+}

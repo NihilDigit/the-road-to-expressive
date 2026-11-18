@@ -1,0 +1,2620 @@
+{
+  "source_id": "windows-fluent",
+  "name": "Microsoft Fluent 2 & Windows App Design Guidelines",
+  "base_url": "https://learn.microsoft.com/en-us/windows/apps/design/",
+  "upstream_urls": [
+    "https://fluent2.microsoft.design",
+    "https://learn.microsoft.com/en-us/windows/apps/design/",
+    "https://learn.microsoft.com/en-us/windows/apps/develop/"
+  ],
+  "fetched_at": "2026-11-18T06:45:03Z",
+  "version": "2026-11-18T06:45:03Z",
+  "page_count": 370,
+  "markdown_count": 345,
+  "page_error_count": 0,
+  "page_skipped_count": 25,
+  "cache_hits": 0,
+  "assets_skipped": true,
+  "asset_count": 0,
+  "robots_checked": [
+    "https://fluent2.microsoft.design",
+    "https://learn.microsoft.com"
+  ],
+  "sections": [
+    "Fluent 2",
+    "Windows App Design",
+    "Windows App UI & Input"
+  ],
+  "pages": [
+    {
+      "title": "Accessibility",
+      "section": "Fluent 2 / Accessibility",
+      "url": "https://fluent2.microsoft.design/accessibility/",
+      "relpath": "fluent2/accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "Types of AI harm",
+      "section": "Fluent 2 / Ai Harm",
+      "url": "https://fluent2.microsoft.design/ai-harm/",
+      "relpath": "fluent2/ai-harm.md",
+      "status": "ok"
+    },
+    {
+      "title": "Web Alias Color Tokens",
+      "section": "Fluent 2 / Color Tokens",
+      "url": "https://fluent2.microsoft.design/color-tokens/",
+      "relpath": "fluent2/color-tokens.md",
+      "status": "ok"
+    },
+    {
+      "title": "Web Alias Color Tokens",
+      "section": "Fluent 2 / Color Tokens2",
+      "url": "https://fluent2.microsoft.design/color-tokens2/",
+      "relpath": "fluent2/color-tokens2.md",
+      "status": "ok"
+    },
+    {
+      "title": "Color",
+      "section": "Fluent 2 / Color",
+      "url": "https://fluent2.microsoft.design/color/",
+      "relpath": "fluent2/color.md",
+      "status": "ok"
+    },
+    {
+      "title": "Component Roadmap",
+      "section": "Fluent 2 / Component Roadmap",
+      "url": "https://fluent2.microsoft.design/component-roadmap/",
+      "relpath": "fluent2/component-roadmap.md",
+      "status": "ok"
+    },
+    {
+      "title": "Android Library Overview",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/android/",
+      "relpath": "fluent2/components/android.md",
+      "status": "ok"
+    },
+    {
+      "title": "Android Avatar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/android/core/avatar/usage/",
+      "relpath": "fluent2/components/android/core/avatar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Android Avatar group",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/android/core/avatargroup/usage/",
+      "relpath": "fluent2/components/android/core/avatargroup/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Android Button",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/android/core/button/usage/",
+      "relpath": "fluent2/components/android/core/button/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Android Progress indicator",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/android/core/progressindicator/usage/",
+      "relpath": "fluent2/components/android/core/progressindicator/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Android Shimmer",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/android/core/shimmer/usage/",
+      "relpath": "fluent2/components/android/core/shimmer/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Library Overview",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/",
+      "relpath": "fluent2/components/ios.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Activity indicator",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/activityindicator/usage/",
+      "relpath": "fluent2/components/ios/core/activityindicator/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Avatar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/avatar/usage/",
+      "relpath": "fluent2/components/ios/core/avatar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Avatar group",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/avatargroup/usage/",
+      "relpath": "fluent2/components/ios/core/avatargroup/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Button",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/button/usage/",
+      "relpath": "fluent2/components/ios/core/button/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Card nudge",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/cardnudge/usage/",
+      "relpath": "fluent2/components/ios/core/cardnudge/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Heads-up display",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/hud/usage/",
+      "relpath": "fluent2/components/ios/core/hud/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Navigationbar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/navigationbar/usage/",
+      "relpath": "fluent2/components/ios/core/navigationbar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Progressbar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/progressbar/usage/",
+      "relpath": "fluent2/components/ios/core/progressbar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Segmented control",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/segmentedcontrol/usage/",
+      "relpath": "fluent2/components/ios/core/segmentedcontrol/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Shimmer",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/shimmer/usage/",
+      "relpath": "fluent2/components/ios/core/shimmer/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Text field",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/textfield/usage/",
+      "relpath": "fluent2/components/ios/core/textfield/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "iOS Tooltip",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/ios/core/tooltip/usage/",
+      "relpath": "fluent2/components/ios/core/tooltip/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Native",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/react-native/",
+      "relpath": "fluent2/components/react-native.md",
+      "status": "skipped"
+    },
+    {
+      "title": "React Overview",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/",
+      "relpath": "fluent2/components/web/react.md",
+      "status": "ok"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatinput/attachment/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatinput/attachment/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatinput/suggestions/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatinput/suggestions/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatinput/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatinput/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatoutput/citationsandreferences/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatoutput/citationsandreferences/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatoutput/copilotmessage/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatoutput/copilotmessage/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatoutput/sensitivity/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatoutput/sensitivity/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatoutput/timestamp/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatoutput/timestamp/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatoutput/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatoutput/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/chatoutput/usermessage/usage/",
+      "relpath": "fluent2/components/web/react/ai/chatoutput/usermessage/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/copilotfre/usage/",
+      "relpath": "fluent2/components/web/react/ai/copilotfre/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/entitycards/usage/",
+      "relpath": "fluent2/components/web/react/ai/entitycards/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/ghosttext/usage/",
+      "relpath": "fluent2/components/web/react/ai/ghosttext/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/promptstarters/usage/",
+      "relpath": "fluent2/components/web/react/ai/promptstarters/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Usage",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/ai/systemmessage/usage/",
+      "relpath": "fluent2/components/web/react/ai/systemmessage/usage.md",
+      "status": "skipped"
+    },
+    {
+      "title": "React Accordion",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/accordion/usage/",
+      "relpath": "fluent2/components/web/react/core/accordion/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Avatar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/avatar/usage/",
+      "relpath": "fluent2/components/web/react/core/avatar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Avatar group",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/avatargroup/usage/",
+      "relpath": "fluent2/components/web/react/core/avatargroup/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Badge",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/badge/usage/",
+      "relpath": "fluent2/components/web/react/core/badge/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Breadcrumb",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/breadcrumb/usage/",
+      "relpath": "fluent2/components/web/react/core/breadcrumb/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Button",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/button/usage/",
+      "relpath": "fluent2/components/web/react/core/button/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Card",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/card/usage/",
+      "relpath": "fluent2/components/web/react/core/card/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Carousel",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/carousel/usage/",
+      "relpath": "fluent2/components/web/react/core/carousel/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Checkbox",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/checkbox/usage/",
+      "relpath": "fluent2/components/web/react/core/checkbox/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Combobox",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/combobox/usage/",
+      "relpath": "fluent2/components/web/react/core/combobox/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Dialog",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/dialog/usage/",
+      "relpath": "fluent2/components/web/react/core/dialog/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Divider",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/divider/usage/",
+      "relpath": "fluent2/components/web/react/core/divider/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Drawer",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/drawer/usage/",
+      "relpath": "fluent2/components/web/react/core/drawer/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Dropdown",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/dropdown/usage/",
+      "relpath": "fluent2/components/web/react/core/dropdown/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Field",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/field/usage/",
+      "relpath": "fluent2/components/web/react/core/field/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Fluent provider",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/fluentprovider/usage/",
+      "relpath": "fluent2/components/web/react/core/fluentprovider/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Icon",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/icon/usage/",
+      "relpath": "fluent2/components/web/react/core/icon/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Image",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/image/usage/",
+      "relpath": "fluent2/components/web/react/core/image/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Info label",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/infolabel/usage/",
+      "relpath": "fluent2/components/web/react/core/infolabel/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Input",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/input/usage/",
+      "relpath": "fluent2/components/web/react/core/input/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Label",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/label/usage/",
+      "relpath": "fluent2/components/web/react/core/label/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Link",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/link/usage/",
+      "relpath": "fluent2/components/web/react/core/link/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React List",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/list/usage/",
+      "relpath": "fluent2/components/web/react/core/list/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Menu",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/menu/usage/",
+      "relpath": "fluent2/components/web/react/core/menu/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Messagebar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/messagebar/usage/",
+      "relpath": "fluent2/components/web/react/core/messagebar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Nav",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/nav/usage/",
+      "relpath": "fluent2/components/web/react/core/nav/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Persona",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/persona/usage/",
+      "relpath": "fluent2/components/web/react/core/persona/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Popover",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/popover/usage/",
+      "relpath": "fluent2/components/web/react/core/popover/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Progress Bar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/progressbar/usage/",
+      "relpath": "fluent2/components/web/react/core/progressbar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Radio Group",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/radiogroup/usage/",
+      "relpath": "fluent2/components/web/react/core/radiogroup/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Rating",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/rating/usage/",
+      "relpath": "fluent2/components/web/react/core/rating/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Searchbox",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/searchbox/usage/",
+      "relpath": "fluent2/components/web/react/core/searchbox/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Select",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/select/usage/",
+      "relpath": "fluent2/components/web/react/core/select/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Skeleton",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/skeleton/usage/",
+      "relpath": "fluent2/components/web/react/core/skeleton/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Slider",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/slider/usage/",
+      "relpath": "fluent2/components/web/react/core/slider/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Spin button",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/spin/usage/",
+      "relpath": "fluent2/components/web/react/core/spin/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Spinner",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/spinner/usage/",
+      "relpath": "fluent2/components/web/react/core/spinner/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Switch",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/switch/usage/",
+      "relpath": "fluent2/components/web/react/core/switch/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Tablist",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/tablist/usage/",
+      "relpath": "fluent2/components/web/react/core/tablist/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Tag",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/tag/usage/",
+      "relpath": "fluent2/components/web/react/core/tag/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tag picker",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/tagpicker/usage/",
+      "relpath": "fluent2/components/web/react/core/tagpicker/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Text",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/text/usage/",
+      "relpath": "fluent2/components/web/react/core/text/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Textarea",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/textarea/usage/",
+      "relpath": "fluent2/components/web/react/core/textarea/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Toast",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/toast/usage/",
+      "relpath": "fluent2/components/web/react/core/toast/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Toolbar",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/toolbar/usage/",
+      "relpath": "fluent2/components/web/react/core/toolbar/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "React Tooltip",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/tooltip/usage/",
+      "relpath": "fluent2/components/web/react/core/tooltip/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tree",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/web/react/core/tree/usage/",
+      "relpath": "fluent2/components/web/react/core/tree/usage.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows Overview",
+      "section": "Fluent 2 / Components",
+      "url": "https://fluent2.microsoft.design/components/windows/",
+      "relpath": "fluent2/components/windows.md",
+      "status": "ok"
+    },
+    {
+      "title": "Content Design",
+      "section": "Fluent 2 / Content Design",
+      "url": "https://fluent2.microsoft.design/content-design/",
+      "relpath": "fluent2/content-design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Content engineering",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/",
+      "relpath": "fluent2/content-engineering.md",
+      "status": "ok"
+    },
+    {
+      "title": "Build a prompt set and assertions for an eval",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/build-a-prompt-set-and-assertions-for-an-eval/",
+      "relpath": "fluent2/content-engineering/build-a-prompt-set-and-assertions-for-an-eval.md",
+      "status": "ok"
+    },
+    {
+      "title": "Decide what to evaluate first",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/decide-what-to-evaluate-first/",
+      "relpath": "fluent2/content-engineering/decide-what-to-evaluate-first.md",
+      "status": "ok"
+    },
+    {
+      "title": "Define good output quality",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/define-good-output-quality/",
+      "relpath": "fluent2/content-engineering/define-good-output-quality.md",
+      "status": "ok"
+    },
+    {
+      "title": "Define output requirements by experience type",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/define-output-requirements-by-experience-type/",
+      "relpath": "fluent2/content-engineering/define-output-requirements-by-experience-type.md",
+      "status": "ok"
+    },
+    {
+      "title": "Define prompts for complex tasks",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/define-prompts-for-complex-tasks/",
+      "relpath": "fluent2/content-engineering/define-prompts-for-complex-tasks.md",
+      "status": "ok"
+    },
+    {
+      "title": "Define system-level behavior",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/define-system-level-behavior/",
+      "relpath": "fluent2/content-engineering/define-system-level-behavior.md",
+      "status": "ok"
+    },
+    {
+      "title": "Define task behavior patterns",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/define-task-behavior-patterns/",
+      "relpath": "fluent2/content-engineering/define-task-behavior-patterns.md",
+      "status": "ok"
+    },
+    {
+      "title": "Define tone and context behavior",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/define-tone-and-context-behavior/",
+      "relpath": "fluent2/content-engineering/define-tone-and-context-behavior.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design interaction behavior",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/design-interaction-behavior/",
+      "relpath": "fluent2/content-engineering/design-interaction-behavior.md",
+      "status": "ok"
+    },
+    {
+      "title": "Evaluating output quality",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/evaluating-output-quality/",
+      "relpath": "fluent2/content-engineering/evaluating-output-quality.md",
+      "status": "ok"
+    },
+    {
+      "title": "System prompt engineering",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/system-prompt-engineering/",
+      "relpath": "fluent2/content-engineering/system-prompt-engineering.md",
+      "status": "ok"
+    },
+    {
+      "title": "Track quality over time",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/track-quality-over-time/",
+      "relpath": "fluent2/content-engineering/track-quality-over-time.md",
+      "status": "ok"
+    },
+    {
+      "title": "Turn eval results into the right fixes",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/turn-eval-results-into-the-right-fixes/",
+      "relpath": "fluent2/content-engineering/turn-eval-results-into-the-right-fixes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Understand eval results",
+      "section": "Fluent 2 / Content Engineering",
+      "url": "https://fluent2.microsoft.design/content-engineering/understand-eval-results/",
+      "relpath": "fluent2/content-engineering/understand-eval-results.md",
+      "status": "ok"
+    },
+    {
+      "title": "Copilot Errors",
+      "section": "Fluent 2 / Copilot Errors",
+      "url": "https://fluent2.microsoft.design/copilot-errors/",
+      "relpath": "fluent2/copilot-errors.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Data Usage Sharing",
+      "section": "Fluent 2 / Data Usage Sharing",
+      "url": "https://fluent2.microsoft.design/data-usage-sharing/",
+      "relpath": "fluent2/data-usage-sharing.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Design principles",
+      "section": "Fluent 2 / Design Principles",
+      "url": "https://fluent2.microsoft.design/design-principles/",
+      "relpath": "fluent2/design-principles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design tokens",
+      "section": "Fluent 2 / Design Tokens",
+      "url": "https://fluent2.microsoft.design/design-tokens/",
+      "relpath": "fluent2/design-tokens.md",
+      "status": "ok"
+    },
+    {
+      "title": "Elevation",
+      "section": "Fluent 2 / Elevation",
+      "url": "https://fluent2.microsoft.design/elevation/",
+      "relpath": "fluent2/elevation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Entry Points",
+      "section": "Fluent 2 / Entry Points",
+      "url": "https://fluent2.microsoft.design/entry-points/",
+      "relpath": "fluent2/entry-points.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Gethelp",
+      "section": "Fluent 2 / Fluent Helpdesk",
+      "url": "https://fluent2.microsoft.design/fluent-helpdesk/gethelp/",
+      "relpath": "fluent2/fluent-helpdesk/gethelp.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Selfhelp",
+      "section": "Fluent 2 / Fluent Helpdesk",
+      "url": "https://fluent2.microsoft.design/fluent-helpdesk/selfhelp/",
+      "relpath": "fluent2/fluent-helpdesk/selfhelp.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Systemstatus",
+      "section": "Fluent 2 / Fluent Helpdesk",
+      "url": "https://fluent2.microsoft.design/fluent-helpdesk/systemstatus/",
+      "relpath": "fluent2/fluent-helpdesk/systemstatus.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Theteam",
+      "section": "Fluent 2 / Fluent Helpdesk",
+      "url": "https://fluent2.microsoft.design/fluent-helpdesk/theteam/",
+      "relpath": "fluent2/fluent-helpdesk/theteam.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Contribute",
+      "section": "Fluent 2 / Get Started",
+      "url": "https://fluent2.microsoft.design/get-started/contribute/",
+      "relpath": "fluent2/get-started/contribute.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Design",
+      "section": "Fluent 2 / Get Started",
+      "url": "https://fluent2.microsoft.design/get-started/design/",
+      "relpath": "fluent2/get-started/design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Develop",
+      "section": "Fluent 2 / Get Started",
+      "url": "https://fluent2.microsoft.design/get-started/develop/",
+      "relpath": "fluent2/get-started/develop.md",
+      "status": "ok"
+    },
+    {
+      "title": "Whats new",
+      "section": "Fluent 2 / Get Started",
+      "url": "https://fluent2.microsoft.design/get-started/whatisnew/",
+      "relpath": "fluent2/get-started/whatisnew.md",
+      "status": "ok"
+    },
+    {
+      "title": "Handoffs",
+      "section": "Fluent 2 / Handoffs",
+      "url": "https://fluent2.microsoft.design/handoffs/",
+      "relpath": "fluent2/handoffs.md",
+      "status": "ok"
+    },
+    {
+      "title": "Iconography",
+      "section": "Fluent 2 / Iconography",
+      "url": "https://fluent2.microsoft.design/iconography/",
+      "relpath": "fluent2/iconography.md",
+      "status": "ok"
+    },
+    {
+      "title": "Home",
+      "section": "Fluent 2 / Index",
+      "url": "https://fluent2.microsoft.design/",
+      "relpath": "fluent2/index.md",
+      "status": "ok"
+    },
+    {
+      "title": "Layout",
+      "section": "Fluent 2 / Layout",
+      "url": "https://fluent2.microsoft.design/layout/",
+      "relpath": "fluent2/layout.md",
+      "status": "ok"
+    },
+    {
+      "title": "Material",
+      "section": "Fluent 2 / Material",
+      "url": "https://fluent2.microsoft.design/material/",
+      "relpath": "fluent2/material.md",
+      "status": "ok"
+    },
+    {
+      "title": "Motion",
+      "section": "Fluent 2 / Motion",
+      "url": "https://fluent2.microsoft.design/motion/",
+      "relpath": "fluent2/motion.md",
+      "status": "ok"
+    },
+    {
+      "title": "Onboarding",
+      "section": "Fluent 2 / Onboarding",
+      "url": "https://fluent2.microsoft.design/onboarding/",
+      "relpath": "fluent2/onboarding.md",
+      "status": "ok"
+    },
+    {
+      "title": "Personality Principles",
+      "section": "Fluent 2 / Personality Principles",
+      "url": "https://fluent2.microsoft.design/personality-principles/",
+      "relpath": "fluent2/personality-principles.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Responsible AI",
+      "section": "Fluent 2 / Responsible Ai",
+      "url": "https://fluent2.microsoft.design/responsible-AI/",
+      "relpath": "fluent2/responsible-AI.md",
+      "status": "ok"
+    },
+    {
+      "title": "Shapes",
+      "section": "Fluent 2 / Shapes",
+      "url": "https://fluent2.microsoft.design/shapes/",
+      "relpath": "fluent2/shapes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Typography",
+      "section": "Fluent 2 / Typography",
+      "url": "https://fluent2.microsoft.design/typography/",
+      "relpath": "fluent2/typography.md",
+      "status": "ok"
+    },
+    {
+      "title": "Wait UX",
+      "section": "Fluent 2 / Wait Ux",
+      "url": "https://fluent2.microsoft.design/wait-ux/",
+      "relpath": "fluent2/wait-ux.md",
+      "status": "ok"
+    },
+    {
+      "title": "Overview",
+      "section": "Windows App Design / Overview",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/",
+      "relpath": "windows/design.md",
+      "status": "skipped"
+    },
+    {
+      "title": "Accessibility checklist",
+      "section": "Windows App UI & Input / Accessibility / Testing and verification",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/accessibility-checklist",
+      "relpath": "windows/design/accessibility/accessibility-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessibility in the Store",
+      "section": "Windows App UI & Input / Accessibility / Testing and verification",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/accessibility-in-the-store",
+      "relpath": "windows/design/accessibility/accessibility-in-the-store.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessibility overview",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/accessibility-overview",
+      "relpath": "windows/design/accessibility/accessibility-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessibility testing",
+      "section": "Windows App UI & Input / Accessibility / Testing and verification",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/accessibility-testing",
+      "relpath": "windows/design/accessibility/accessibility-testing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessible text requirements",
+      "section": "Windows App UI & Input / Accessibility / Visual accessibility",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/accessible-text-requirements",
+      "relpath": "windows/design/accessibility/accessible-text-requirements.md",
+      "status": "ok"
+    },
+    {
+      "title": "Expose basic accessibility information",
+      "section": "Windows App UI & Input / Accessibility / Screen readers and UI Automation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/basic-accessibility-information",
+      "relpath": "windows/design/accessibility/basic-accessibility-information.md",
+      "status": "ok"
+    },
+    {
+      "title": "Control patterns and interfaces",
+      "section": "Windows App UI & Input / Accessibility / Screen readers and UI Automation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/control-patterns-and-interfaces",
+      "relpath": "windows/design/accessibility/control-patterns-and-interfaces.md",
+      "status": "ok"
+    },
+    {
+      "title": "Custom automation peers",
+      "section": "Windows App UI & Input / Accessibility / Screen readers and UI Automation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/custom-automation-peers",
+      "relpath": "windows/design/accessibility/custom-automation-peers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing inclusive software in Windows",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/designing-inclusive-software",
+      "relpath": "windows/design/accessibility/designing-inclusive-software.md",
+      "status": "ok"
+    },
+    {
+      "title": "Contrast themes",
+      "section": "Windows App UI & Input / Accessibility / Visual accessibility",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/high-contrast-themes",
+      "relpath": "windows/design/accessibility/high-contrast-themes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Keyboard accessibility",
+      "section": "Windows App UI & Input / Accessibility / Keyboard accessibility",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/keyboard-accessibility",
+      "relpath": "windows/design/accessibility/keyboard-accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "Landmarks and Headings",
+      "section": "Windows App UI & Input / Accessibility / Screen readers and UI Automation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/landmarks-and-headings",
+      "relpath": "windows/design/accessibility/landmarks-and-headings.md",
+      "status": "ok"
+    },
+    {
+      "title": "Screen readers and hardware button events",
+      "section": "Windows App UI & Input / Accessibility / Screen readers and UI Automation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/accessibility/system-button-narration",
+      "relpath": "windows/design/accessibility/system-button-narration.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for app settings",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/app-settings/guidelines-for-app-settings",
+      "relpath": "windows/design/app-settings/guidelines-for-app-settings.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows app silhouettes",
+      "section": "Windows App Design / Guidelines / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/basics/app-silhouette",
+      "relpath": "windows/design/basics/app-silhouette.md",
+      "status": "ok"
+    },
+    {
+      "title": "Commanding basics",
+      "section": "Windows App Design / Guidelines / Commanding",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/basics/commanding-basics",
+      "relpath": "windows/design/basics/commanding-basics.md",
+      "status": "ok"
+    },
+    {
+      "title": "Content layout and spacing",
+      "section": "Windows App Design / Guidelines / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/basics/content-basics",
+      "relpath": "windows/design/basics/content-basics.md",
+      "status": "ok"
+    },
+    {
+      "title": "Navigation basics for Windows apps",
+      "section": "Windows App Design / Guidelines / Navigation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/basics/navigation-basics",
+      "relpath": "windows/design/basics/navigation-basics.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows app title bar",
+      "section": "Windows App Design / Guidelines / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/basics/titlebar-design",
+      "relpath": "windows/design/basics/titlebar-design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design principles",
+      "section": "Windows App Design / Design principles",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/design-principles",
+      "relpath": "windows/design/design-principles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design resources for Windows apps",
+      "section": "Windows App Design / Tools and resources",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/downloads/",
+      "relpath": "windows/design/downloads.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design your app for bidirectional text",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/globalizing/design-for-bidi-text",
+      "relpath": "windows/design/globalizing/design-for-bidi-text.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design guidelines",
+      "section": "Windows App Design / Guidelines / Overview",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/guidelines-overview",
+      "relpath": "windows/design/guidelines-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Iconography in Windows",
+      "section": "Windows App Design / Guidelines / Iconography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/iconography/",
+      "relpath": "windows/design/iconography.md",
+      "status": "ok"
+    },
+    {
+      "title": "Construct your Windows Apps Icon",
+      "section": "Windows App Design / Guidelines / Iconography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/iconography/app-icon-construction",
+      "relpath": "windows/design/iconography/app-icon-construction.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design guidelines for Windows app icons",
+      "section": "Windows App Design / Guidelines / Iconography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/iconography/app-icon-design",
+      "relpath": "windows/design/iconography/app-icon-design.md",
+      "status": "ok"
+    },
+    {
+      "title": "App icons",
+      "section": "Windows App Design / Guidelines / Iconography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/iconography/app-icons",
+      "relpath": "windows/design/iconography/app-icons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Segoe Fluent Icons font",
+      "section": "Windows App Design / Guidelines / Iconography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/iconography/segoe-fluent-icons-font",
+      "relpath": "windows/design/iconography/segoe-fluent-icons-font.md",
+      "status": "ok"
+    },
+    {
+      "title": "Segoe MDL2 Assets icons",
+      "section": "Windows App Design / Guidelines / Iconography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/iconography/segoe-ui-symbol-font",
+      "relpath": "windows/design/iconography/segoe-ui-symbol-font.md",
+      "status": "ok"
+    },
+    {
+      "title": "Create icons using Visual Studios asset generation tool",
+      "section": "Windows App Design / Guidelines / Iconography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/iconography/visual-studio-asset-generation",
+      "relpath": "windows/design/iconography/visual-studio-asset-generation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for designing external help pages",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/in-app-help/external-help",
+      "relpath": "windows/design/in-app-help/external-help.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for app help",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/in-app-help/guidelines-for-app-help",
+      "relpath": "windows/design/in-app-help/guidelines-for-app-help.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for designing in-app help.",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/in-app-help/in-app-help",
+      "relpath": "windows/design/in-app-help/in-app-help.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for designing instructional UI",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/in-app-help/instructional-ui",
+      "relpath": "windows/design/in-app-help/instructional-ui.md",
+      "status": "ok"
+    },
+    {
+      "title": "Layout overview for Windows apps",
+      "section": "Windows App Design / Guidelines / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/layout/",
+      "relpath": "windows/design/layout.md",
+      "status": "ok"
+    },
+    {
+      "title": "AttachedLayout",
+      "section": "Windows App UI & Input / User interface / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/layout/attached-layouts",
+      "relpath": "windows/design/layout/attached-layouts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tutorial: Create a custom panel",
+      "section": "Windows App UI & Input / User interface / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/layout/boxpanel-example-custom-panel",
+      "relpath": "windows/design/layout/boxpanel-example-custom-panel.md",
+      "status": "ok"
+    },
+    {
+      "title": "XAML custom panels overview",
+      "section": "Windows App UI & Input / User interface / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/layout/custom-panels-overview",
+      "relpath": "windows/design/layout/custom-panels-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Responsive design techniques",
+      "section": "Windows App Design / Guidelines / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/layout/responsive-design",
+      "relpath": "windows/design/layout/responsive-design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Screen sizes and breakpoints for responsive design",
+      "section": "Windows App Design / Guidelines / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design",
+      "relpath": "windows/design/layout/screen-sizes-and-breakpoints-for-responsive-design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Directionality and gravity - animation in Windows apps",
+      "section": "Windows App Design / Guidelines / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/motion/directionality-and-gravity",
+      "relpath": "windows/design/motion/directionality-and-gravity.md",
+      "status": "ok"
+    },
+    {
+      "title": "Timing and easing",
+      "section": "Windows App Design / Guidelines / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/motion/timing-and-easing",
+      "relpath": "windows/design/motion/timing-and-easing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Color in Windows",
+      "section": "Windows App Design / Guidelines / Color",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/color",
+      "relpath": "windows/design/signature-experiences/color.md",
+      "status": "ok"
+    },
+    {
+      "title": "Geometry in Windows 11",
+      "section": "Windows App Design / Guidelines / Geometry",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/geometry",
+      "relpath": "windows/design/signature-experiences/geometry.md",
+      "status": "ok"
+    },
+    {
+      "title": "Haptics design guidelines",
+      "section": "Windows App Design / Guidelines / Haptics",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/haptics",
+      "relpath": "windows/design/signature-experiences/haptics.md",
+      "status": "ok"
+    },
+    {
+      "title": "Layering and elevation in Windows",
+      "section": "Windows App Design / Guidelines / Elevation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/layering",
+      "relpath": "windows/design/signature-experiences/layering.md",
+      "status": "ok"
+    },
+    {
+      "title": "Materials used in Windows apps",
+      "section": "Windows App Design / Guidelines / Materials",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/materials",
+      "relpath": "windows/design/signature-experiences/materials.md",
+      "status": "ok"
+    },
+    {
+      "title": "Motion in Windows",
+      "section": "Windows App Design / Guidelines / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/motion",
+      "relpath": "windows/design/signature-experiences/motion.md",
+      "status": "ok"
+    },
+    {
+      "title": "Typography in Windows",
+      "section": "Windows App Design / Guidelines / Typography",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/signature-experiences/typography",
+      "relpath": "windows/design/signature-experiences/typography.md",
+      "status": "ok"
+    },
+    {
+      "title": "Acrylic material",
+      "section": "Windows App Design / Guidelines / Materials",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/style/acrylic",
+      "relpath": "windows/design/style/acrylic.md",
+      "status": "ok"
+    },
+    {
+      "title": "Mica material",
+      "section": "Windows App Design / Guidelines / Materials",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/style/mica",
+      "relpath": "windows/design/style/mica.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing style",
+      "section": "Windows App Design / Guidelines / Writing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/style/writing-style",
+      "relpath": "windows/design/style/writing-style.md",
+      "status": "ok"
+    },
+    {
+      "title": "Usability for Windows apps",
+      "section": "Windows App Design / Guidelines / Usability",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/usability/",
+      "relpath": "windows/design/usability.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows Widgets",
+      "section": "Windows App Design / Guidelines / Widgets",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/widgets/",
+      "relpath": "windows/design/widgets.md",
+      "status": "ok"
+    },
+    {
+      "title": "Widget design fundamentals",
+      "section": "Windows App Design / Guidelines / Widgets",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/widgets/widgets-design-fundamentals",
+      "relpath": "windows/design/widgets/widgets-design-fundamentals.md",
+      "status": "ok"
+    },
+    {
+      "title": "Widget interaction design guidance",
+      "section": "Windows App Design / Guidelines / Widgets",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/widgets/widgets-interaction-design",
+      "relpath": "windows/design/widgets/widgets-interaction-design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Integrate with the widget picker",
+      "section": "Windows App Design / Guidelines / Widgets",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/widgets/widgets-picker-integration",
+      "relpath": "windows/design/widgets/widgets-picker-integration.md",
+      "status": "ok"
+    },
+    {
+      "title": "Widget states and built-in UI components",
+      "section": "Windows App Design / Guidelines / Widgets",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/design/widgets/widgets-states-and-ui",
+      "relpath": "windows/design/widgets/widgets-states-and-ui.md",
+      "status": "ok"
+    },
+    {
+      "title": "Develop accessible Windows apps",
+      "section": "Windows App UI & Input / Accessibility / Overview",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/accessibility",
+      "relpath": "windows/develop/accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "Input and interactions",
+      "section": "Windows App UI & Input / Input and interactions / Overview",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/",
+      "relpath": "windows/develop/input.md",
+      "status": "ok"
+    },
+    {
+      "title": "Access keys design guidelines",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/access-keys",
+      "relpath": "windows/develop/input/access-keys.md",
+      "status": "ok"
+    },
+    {
+      "title": "Custom text input overview",
+      "section": "Windows App UI & Input / Input and interactions / Text input",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/custom-text-input",
+      "relpath": "windows/develop/input/custom-text-input.md",
+      "status": "ok"
+    },
+    {
+      "title": "Programmatic focus navigation with keyboard, gamepad, and accessibility tools",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/focus-navigation-programmatic",
+      "relpath": "windows/develop/input/focus-navigation-programmatic.md",
+      "status": "ok"
+    },
+    {
+      "title": "Focus navigation without a mouse",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/focus-navigation",
+      "relpath": "windows/develop/input/focus-navigation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for optical zoom and resizing",
+      "section": "Windows App UI & Input / Input and interactions / Optical zoom and resizing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/guidelines-for-optical-zoom",
+      "relpath": "windows/develop/input/guidelines-for-optical-zoom.md",
+      "status": "ok"
+    },
+    {
+      "title": "Panning",
+      "section": "Windows App UI & Input / Input and interactions / Touch",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/guidelines-for-panning",
+      "relpath": "windows/develop/input/guidelines-for-panning.md",
+      "status": "ok"
+    },
+    {
+      "title": "Rotation",
+      "section": "Windows App UI & Input / Input and interactions / Touch",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/guidelines-for-rotation",
+      "relpath": "windows/develop/input/guidelines-for-rotation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Targeting",
+      "section": "Windows App UI & Input / Input and interactions / Touch",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/guidelines-for-targeting",
+      "relpath": "windows/develop/input/guidelines-for-targeting.md",
+      "status": "ok"
+    },
+    {
+      "title": "Selecting text and images",
+      "section": "Windows App UI & Input / Input and interactions / Text input",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/guidelines-for-textselection",
+      "relpath": "windows/develop/input/guidelines-for-textselection.md",
+      "status": "ok"
+    },
+    {
+      "title": "Visual feedback",
+      "section": "Windows App UI & Input / Input and interactions / Visual feedback",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/guidelines-for-visualfeedback",
+      "relpath": "windows/develop/input/guidelines-for-visualfeedback.md",
+      "status": "ok"
+    },
+    {
+      "title": "Handle pointer input",
+      "section": "Windows App UI & Input / Input and interactions / Pointer input",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/handle-pointer-input",
+      "relpath": "windows/develop/input/handle-pointer-input.md",
+      "status": "ok"
+    },
+    {
+      "title": "Implement haptic feedback in Windows apps",
+      "section": "Windows App UI & Input / Input and interactions / Haptics",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/haptics",
+      "relpath": "windows/develop/input/haptics.md",
+      "status": "ok"
+    },
+    {
+      "title": "Identify input devices",
+      "section": "Windows App UI & Input / Input and interactions / Identify input devices",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/identify-input-devices",
+      "relpath": "windows/develop/input/identify-input-devices.md",
+      "status": "ok"
+    },
+    {
+      "title": "Input Method Editor (IME) requirements",
+      "section": "Windows App UI & Input / Input and interactions / Text input",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/input-method-editor-requirements",
+      "relpath": "windows/develop/input/input-method-editor-requirements.md",
+      "status": "ok"
+    },
+    {
+      "title": "Input Method Editors (IME)",
+      "section": "Windows App UI & Input / Input and interactions / Text input",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/input-method-editors",
+      "relpath": "windows/develop/input/input-method-editors.md",
+      "status": "ok"
+    },
+    {
+      "title": "Input primer",
+      "section": "Windows App UI & Input / Input and interactions / Input primer",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/input-primer",
+      "relpath": "windows/develop/input/input-primer.md",
+      "status": "ok"
+    },
+    {
+      "title": "Keyboard accelerators",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/keyboard-accelerators",
+      "relpath": "windows/develop/input/keyboard-accelerators.md",
+      "status": "ok"
+    },
+    {
+      "title": "Keyboard events",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/keyboard-events",
+      "relpath": "windows/develop/input/keyboard-events.md",
+      "status": "ok"
+    },
+    {
+      "title": "Keyboard interactions",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/keyboard-interactions",
+      "relpath": "windows/develop/input/keyboard-interactions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Mouse interactions",
+      "section": "Windows App UI & Input / Input and interactions / Mouse",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/mouse-interactions",
+      "relpath": "windows/develop/input/mouse-interactions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Multiple inputs design guidelines",
+      "section": "Windows App UI & Input / Input and interactions / Multiple inputs",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/multiple-input-design-guidelines",
+      "relpath": "windows/develop/input/multiple-input-design-guidelines.md",
+      "status": "ok"
+    },
+    {
+      "title": "Respond to the presence of the touch keyboard",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/respond-to-the-presence-of-the-touch-keyboard",
+      "relpath": "windows/develop/input/respond-to-the-presence-of-the-touch-keyboard.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text scaling",
+      "section": "Windows App UI & Input / Input and interactions / Text input",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/text-scaling",
+      "relpath": "windows/develop/input/text-scaling.md",
+      "status": "ok"
+    },
+    {
+      "title": "Touch interactions developer guide",
+      "section": "Windows App UI & Input / Input and interactions / Touch",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/touch-developer-guide",
+      "relpath": "windows/develop/input/touch-developer-guide.md",
+      "status": "ok"
+    },
+    {
+      "title": "Touch interactions",
+      "section": "Windows App UI & Input / Input and interactions / Touch",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/touch-interactions",
+      "relpath": "windows/develop/input/touch-interactions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Touchpad interactions",
+      "section": "Windows App UI & Input / Input and interactions / Touchpad",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/touchpad-interactions",
+      "relpath": "windows/develop/input/touchpad-interactions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use input scope to change the touch keyboard",
+      "section": "Windows App UI & Input / Input and interactions / Keyboard",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/input/use-input-scope-to-change-the-touch-keyboard",
+      "relpath": "windows/develop/input/use-input-scope-to-change-the-touch-keyboard.md",
+      "status": "ok"
+    },
+    {
+      "title": "Connected animation",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/connected-animation",
+      "relpath": "windows/develop/motion/connected-animation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Implicit transitions",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/implicit-transitions",
+      "relpath": "windows/develop/motion/implicit-transitions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Key-frame animations and easing function animations",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/key-frame-and-easing-function-animations",
+      "relpath": "windows/develop/motion/key-frame-and-easing-function-animations.md",
+      "status": "ok"
+    },
+    {
+      "title": "Motion in practice - animation in Windows apps",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/motion-in-practice",
+      "relpath": "windows/develop/motion/motion-in-practice.md",
+      "status": "ok"
+    },
+    {
+      "title": "Page transitions",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/page-transitions",
+      "relpath": "windows/develop/motion/page-transitions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use parallax to add depth and movement to your app.",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/parallax",
+      "relpath": "windows/develop/motion/parallax.md",
+      "status": "ok"
+    },
+    {
+      "title": "Storyboarded animations",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/storyboarded-animations",
+      "relpath": "windows/develop/motion/storyboarded-animations.md",
+      "status": "ok"
+    },
+    {
+      "title": "Animations overview",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/xaml-animation",
+      "relpath": "windows/develop/motion/xaml-animation.md",
+      "status": "ok"
+    },
+    {
+      "title": "XAML property animations",
+      "section": "Windows App UI & Input / User interface / Motion",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/motion/xaml-property-animations",
+      "relpath": "windows/develop/motion/xaml-property-animations.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows notifications overview",
+      "section": "Windows App UI & Input / Notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/",
+      "relpath": "windows/develop/notifications.md",
+      "status": "ok"
+    },
+    {
+      "title": "App Notifications Overview for Windows Apps",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/",
+      "relpath": "windows/develop/notifications/app-notifications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Additional App Notification Features",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-additional-features",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-additional-features.md",
+      "status": "ok"
+    },
+    {
+      "title": "App notification collections",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-collections",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-collections.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use app notifications with a console app",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-console",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-console.md",
+      "status": "ok"
+    },
+    {
+      "title": "App notification content",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-content",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Custom audio on app notifications",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-custom-audio",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-custom-audio.md",
+      "status": "ok"
+    },
+    {
+      "title": "Custom timestamps on app notifications",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-custom-timestamps",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-custom-timestamps.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use app notifications with a .NET app",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-dotnet",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-dotnet.md",
+      "status": "ok"
+    },
+    {
+      "title": "App notification headers",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-headers",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-headers.md",
+      "status": "ok"
+    },
+    {
+      "title": "App Notifications for WPF, WinForms, Console, and UWP",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-other-frameworks",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-other-frameworks.md",
+      "status": "ok"
+    },
+    {
+      "title": "App notification with pending update",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-pending-update",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-pending-update.md",
+      "status": "ok"
+    },
+    {
+      "title": "App notification progress bar and data binding",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-progress-bar",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-progress-bar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Quickstart: Send and Handle App Notifications",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-quickstart",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-quickstart.md",
+      "status": "ok"
+    },
+    {
+      "title": "Schedule an app notification",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-scheduled",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-scheduled.md",
+      "status": "ok"
+    },
+    {
+      "title": "App notification content schema",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-schema",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-schema.md",
+      "status": "ok"
+    },
+    {
+      "title": "Notifications design basics",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/app-notifications-ux-guidance",
+      "relpath": "windows/develop/notifications/app-notifications/app-notifications-ux-guidance.md",
+      "status": "ok"
+    },
+    {
+      "title": "Remove and Manage App Notifications",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/manage-app-notifications",
+      "relpath": "windows/develop/notifications/app-notifications/manage-app-notifications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Notification listener",
+      "section": "Windows App UI & Input / Notifications / App notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/app-notifications/notification-listener",
+      "relpath": "windows/develop/notifications/app-notifications/notification-listener.md",
+      "status": "ok"
+    },
+    {
+      "title": "Badge notifications for Windows apps",
+      "section": "Windows App UI & Input / Notifications / Badge notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/badges",
+      "relpath": "windows/develop/notifications/badges.md",
+      "status": "ok"
+    },
+    {
+      "title": "Choosing the right push notification channel type",
+      "section": "Windows App UI & Input / Notifications / Notification delivery methods",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/channel-types",
+      "relpath": "windows/develop/notifications/channel-types.md",
+      "status": "ok"
+    },
+    {
+      "title": "Choose a notification delivery method",
+      "section": "Windows App UI & Input / Notifications / Notification delivery methods",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/choosing-a-notification-delivery-method",
+      "relpath": "windows/develop/notifications/choosing-a-notification-delivery-method.md",
+      "status": "ok"
+    },
+    {
+      "title": "Notifications Visualizer",
+      "section": "Windows App UI & Input / Notifications / Notifications Visualizer",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/notifications-visualizer",
+      "relpath": "windows/develop/notifications/notifications-visualizer.md",
+      "status": "ok"
+    },
+    {
+      "title": "Periodic notification overview",
+      "section": "Windows App UI & Input / Notifications / Notification delivery methods",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/periodic-notification-overview",
+      "relpath": "windows/develop/notifications/periodic-notification-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Push notifications overview",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/",
+      "relpath": "windows/develop/notifications/push-notifications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Code generated by the push notification wizard",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/code-generated-by-wizard",
+      "relpath": "windows/develop/notifications/push-notifications/code-generated-by-wizard.md",
+      "status": "ok"
+    },
+    {
+      "title": "Adding WNS Traffic to the Firewall Allowlist",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/firewall-allowlist-config",
+      "relpath": "windows/develop/notifications/push-notifications/firewall-allowlist-config.md",
+      "status": "ok"
+    },
+    {
+      "title": "Quickstart Push notifications in the Windows App SDK",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/push-quickstart",
+      "relpath": "windows/develop/notifications/push-notifications/push-quickstart.md",
+      "status": "ok"
+    },
+    {
+      "title": "Push notification service request and response headers (Windows Runtime apps) (Windows)",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/push-request-response-headers",
+      "relpath": "windows/develop/notifications/push-notifications/push-request-response-headers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Quickstart: Sending a push notification (XAML)",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/quickstart-send-push-notification",
+      "relpath": "windows/develop/notifications/push-notifications/quickstart-send-push-notification.md",
+      "status": "ok"
+    },
+    {
+      "title": "Raw notification overview",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/raw-notification-overview",
+      "relpath": "windows/develop/notifications/push-notifications/raw-notification-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "How to request, create, and save a notification channel",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/request-create-save-notification-channel",
+      "relpath": "windows/develop/notifications/push-notifications/request-create-save-notification-channel.md",
+      "status": "ok"
+    },
+    {
+      "title": "Troubleshooting push notifications",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/troubleshooting",
+      "relpath": "windows/develop/notifications/push-notifications/troubleshooting.md",
+      "status": "ok"
+    },
+    {
+      "title": "WNS Notification Priorities",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/wns-notification-priorities",
+      "relpath": "windows/develop/notifications/push-notifications/wns-notification-priorities.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows Push Notification Services (WNS) overview",
+      "section": "Windows App UI & Input / Notifications / Push notifications",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/notifications/push-notifications/wns-overview",
+      "relpath": "windows/develop/notifications/push-notifications/wns-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "3-D perspective effects for XAML UI",
+      "section": "Windows App UI & Input / User interface / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/platform/xaml/3-d-perspective-effects",
+      "relpath": "windows/develop/platform/xaml/3-d-perspective-effects.md",
+      "status": "ok"
+    },
+    {
+      "title": "Transforms overview",
+      "section": "Windows App UI & Input / User interface / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/platform/xaml/transforms",
+      "relpath": "windows/develop/platform/xaml/transforms.md",
+      "status": "ok"
+    },
+    {
+      "title": "Title bar customization",
+      "section": "Windows App UI & Input / User interface / Windowing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/title-bar",
+      "relpath": "windows/develop/title-bar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Alignment, margin, and padding for layout",
+      "section": "Windows App UI & Input / User interface / Alignment, margin, and padding",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/alignment-margin-padding",
+      "relpath": "windows/develop/ui/alignment-margin-padding.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows Controls and patterns - Windows app development",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/",
+      "relpath": "windows/develop/ui/controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "AnimatedIcon",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/animated-icon",
+      "relpath": "windows/develop/ui/controls/animated-icon.md",
+      "status": "ok"
+    },
+    {
+      "title": "AnimatedVisualPlayer",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/animated-visual-player",
+      "relpath": "windows/develop/ui/controls/animated-visual-player.md",
+      "status": "ok"
+    },
+    {
+      "title": "Annotated Scrollbar",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/annotated-scrollbar",
+      "relpath": "windows/develop/ui/controls/annotated-scrollbar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for auto-suggest boxes",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/auto-suggest-box",
+      "relpath": "windows/develop/ui/controls/auto-suggest-box.md",
+      "status": "ok"
+    },
+    {
+      "title": "BreadcrumbBar",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/breadcrumbbar",
+      "relpath": "windows/develop/ui/controls/breadcrumbbar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Buttons",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/buttons",
+      "relpath": "windows/develop/ui/controls/buttons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Calendar date picker",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/calendar-date-picker",
+      "relpath": "windows/develop/ui/controls/calendar-date-picker.md",
+      "status": "ok"
+    },
+    {
+      "title": "Calendar view",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/calendar-view",
+      "relpath": "windows/develop/ui/controls/calendar-view.md",
+      "status": "ok"
+    },
+    {
+      "title": "Chart control for WinUI apps",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/chart",
+      "relpath": "windows/develop/ui/controls/chart.md",
+      "status": "ok"
+    },
+    {
+      "title": "Check boxes",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/checkbox",
+      "relpath": "windows/develop/ui/controls/checkbox.md",
+      "status": "ok"
+    },
+    {
+      "title": "Contextual commanding",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/collection-commanding",
+      "relpath": "windows/develop/ui/controls/collection-commanding.md",
+      "status": "ok"
+    },
+    {
+      "title": "Color Picker",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/color-picker",
+      "relpath": "windows/develop/ui/controls/color-picker.md",
+      "status": "ok"
+    },
+    {
+      "title": "Combo box and list box",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/combo-box",
+      "relpath": "windows/develop/ui/controls/combo-box.md",
+      "status": "ok"
+    },
+    {
+      "title": "Command bar flyout",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/command-bar-flyout",
+      "relpath": "windows/develop/ui/controls/command-bar-flyout.md",
+      "status": "ok"
+    },
+    {
+      "title": "Command bar",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/command-bar",
+      "relpath": "windows/develop/ui/controls/command-bar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Commanding in Windows apps",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/commanding",
+      "relpath": "windows/develop/ui/controls/commanding.md",
+      "status": "ok"
+    },
+    {
+      "title": "Compact sizing for controls",
+      "section": "Windows App UI & Input / User interface / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/compact-sizing",
+      "relpath": "windows/develop/ui/controls/compact-sizing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Intro to controls and events",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/controls-and-events-intro",
+      "relpath": "windows/develop/ui/controls/controls-and-events-intro.md",
+      "status": "ok"
+    },
+    {
+      "title": "Create custom media transport controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/custom-transport-controls",
+      "relpath": "windows/develop/ui/controls/custom-transport-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Data template selection",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/data-template-selector",
+      "relpath": "windows/develop/ui/controls/data-template-selector.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for date and time controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/date-and-time",
+      "relpath": "windows/develop/ui/controls/date-and-time.md",
+      "status": "ok"
+    },
+    {
+      "title": "Date picker",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/date-picker",
+      "relpath": "windows/develop/ui/controls/date-picker.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dialogs and flyouts",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/dialogs-and-flyouts/",
+      "relpath": "windows/develop/ui/controls/dialogs-and-flyouts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dialog controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/dialogs-and-flyouts/dialogs",
+      "relpath": "windows/develop/ui/controls/dialogs-and-flyouts/dialogs.md",
+      "status": "ok"
+    },
+    {
+      "title": "Flyout controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/dialogs-and-flyouts/flyouts",
+      "relpath": "windows/develop/ui/controls/dialogs-and-flyouts/flyouts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Teaching tips",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/dialogs-and-flyouts/teaching-tip",
+      "relpath": "windows/develop/ui/controls/dialogs-and-flyouts/teaching-tip.md",
+      "status": "ok"
+    },
+    {
+      "title": "Expander",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/expander",
+      "relpath": "windows/develop/ui/controls/expander.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for flip view controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/flipview",
+      "relpath": "windows/develop/ui/controls/flipview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Forms",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/forms",
+      "relpath": "windows/develop/ui/controls/forms.md",
+      "status": "ok"
+    },
+    {
+      "title": "Hyperlinks",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/hyperlinks",
+      "relpath": "windows/develop/ui/controls/hyperlinks.md",
+      "status": "ok"
+    },
+    {
+      "title": "Icons in Windows apps",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/icons",
+      "relpath": "windows/develop/ui/controls/icons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Images and image brushes",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/images-imagebrushes",
+      "relpath": "windows/develop/ui/controls/images-imagebrushes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Info badge",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/info-badge",
+      "relpath": "windows/develop/ui/controls/info-badge.md",
+      "status": "ok"
+    },
+    {
+      "title": "InfoBar",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/infobar",
+      "relpath": "windows/develop/ui/controls/infobar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Inking controls (InkCanvas and InkToolbar) for WinUI apps",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/ink-controls",
+      "relpath": "windows/develop/ui/controls/ink-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Inverted lists",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/inverted-lists",
+      "relpath": "windows/develop/ui/controls/inverted-lists.md",
+      "status": "ok"
+    },
+    {
+      "title": "Item containers and templates",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/item-containers-templates",
+      "relpath": "windows/develop/ui/controls/item-containers-templates.md",
+      "status": "ok"
+    },
+    {
+      "title": "Item templates for grid view",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/item-templates-gridview",
+      "relpath": "windows/develop/ui/controls/item-templates-gridview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Item templates for list view",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/item-templates-listview",
+      "relpath": "windows/develop/ui/controls/item-templates-listview.md",
+      "status": "ok"
+    },
+    {
+      "title": "ItemsRepeater",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/items-repeater",
+      "relpath": "windows/develop/ui/controls/items-repeater.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for items view controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/itemsview",
+      "relpath": "windows/develop/ui/controls/itemsview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Labels",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/labels",
+      "relpath": "windows/develop/ui/controls/labels.md",
+      "status": "ok"
+    },
+    {
+      "title": "List/details",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/list-details",
+      "relpath": "windows/develop/ui/controls/list-details.md",
+      "status": "ok"
+    },
+    {
+      "title": "Collections and lists",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/lists",
+      "relpath": "windows/develop/ui/controls/lists.md",
+      "status": "ok"
+    },
+    {
+      "title": "List view and grid view",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/listview-and-gridview",
+      "relpath": "windows/develop/ui/controls/listview-and-gridview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Filtering collections",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/listview-filtering",
+      "relpath": "windows/develop/ui/controls/listview-filtering.md",
+      "status": "ok"
+    },
+    {
+      "title": "Media players",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/media-playback",
+      "relpath": "windows/develop/ui/controls/media-playback.md",
+      "status": "ok"
+    },
+    {
+      "title": "Menus and context menus",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/menus-and-context-menus",
+      "relpath": "windows/develop/ui/controls/menus-and-context-menus.md",
+      "status": "ok"
+    },
+    {
+      "title": "Menu flyout and menu bar",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/menus",
+      "relpath": "windows/develop/ui/controls/menus.md",
+      "status": "ok"
+    },
+    {
+      "title": "NavigationView",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/navigationview",
+      "relpath": "windows/develop/ui/controls/navigationview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Nested UI in list items",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/nested-ui",
+      "relpath": "windows/develop/ui/controls/nested-ui.md",
+      "status": "ok"
+    },
+    {
+      "title": "Number box",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/number-box",
+      "relpath": "windows/develop/ui/controls/number-box.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for password boxes",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/password-box",
+      "relpath": "windows/develop/ui/controls/password-box.md",
+      "status": "ok"
+    },
+    {
+      "title": "Person picture control",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/person-picture",
+      "relpath": "windows/develop/ui/controls/person-picture.md",
+      "status": "ok"
+    },
+    {
+      "title": "PipsPager",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/pipspager",
+      "relpath": "windows/develop/ui/controls/pipspager.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pivot",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/pivot",
+      "relpath": "windows/develop/ui/controls/pivot.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for progress controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/progress-controls",
+      "relpath": "windows/develop/ui/controls/progress-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pull-to-refresh",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/pull-to-refresh",
+      "relpath": "windows/develop/ui/controls/pull-to-refresh.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for radio buttons",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/radio-button",
+      "relpath": "windows/develop/ui/controls/radio-button.md",
+      "status": "ok"
+    },
+    {
+      "title": "Rating Control",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/rating",
+      "relpath": "windows/develop/ui/controls/rating.md",
+      "status": "ok"
+    },
+    {
+      "title": "RichEditBox",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/rich-edit-box",
+      "relpath": "windows/develop/ui/controls/rich-edit-box.md",
+      "status": "ok"
+    },
+    {
+      "title": "RichTextBlock",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/rich-text-block",
+      "relpath": "windows/develop/ui/controls/rich-text-block.md",
+      "status": "ok"
+    },
+    {
+      "title": "Scroll viewer controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/scroll-controls",
+      "relpath": "windows/develop/ui/controls/scroll-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Selection mode",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/selection-modes",
+      "relpath": "windows/develop/ui/controls/selection-modes.md",
+      "status": "ok"
+    },
+    {
+      "title": "SelectorBar",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/selector-bar",
+      "relpath": "windows/develop/ui/controls/selector-bar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Semantic zoom",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/semantic-zoom",
+      "relpath": "windows/develop/ui/controls/semantic-zoom.md",
+      "status": "ok"
+    },
+    {
+      "title": "Draw shapes",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/shapes",
+      "relpath": "windows/develop/ui/controls/shapes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sliders",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/slider",
+      "relpath": "windows/develop/ui/controls/slider.md",
+      "status": "ok"
+    },
+    {
+      "title": "Split view",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/split-view",
+      "relpath": "windows/develop/ui/controls/split-view.md",
+      "status": "ok"
+    },
+    {
+      "title": "Swipe",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/swipe",
+      "relpath": "windows/develop/ui/controls/swipe.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tab View",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/tab-view",
+      "relpath": "windows/develop/ui/controls/tab-view.md",
+      "status": "ok"
+    },
+    {
+      "title": "TableView control for WinUI apps",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/table-view",
+      "relpath": "windows/develop/ui/controls/table-view.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text block",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/text-block",
+      "relpath": "windows/develop/ui/controls/text-block.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text box",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/text-box",
+      "relpath": "windows/develop/ui/controls/text-box.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/text-controls",
+      "relpath": "windows/develop/ui/controls/text-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Time picker",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/time-picker",
+      "relpath": "windows/develop/ui/controls/time-picker.md",
+      "status": "ok"
+    },
+    {
+      "title": "Title bar",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/title-bar",
+      "relpath": "windows/develop/ui/controls/title-bar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Guidelines for toggle switch controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/toggles",
+      "relpath": "windows/develop/ui/controls/toggles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tooltips",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/tooltips",
+      "relpath": "windows/develop/ui/controls/tooltips.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tree view",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/tree-view",
+      "relpath": "windows/develop/ui/controls/tree-view.md",
+      "status": "ok"
+    },
+    {
+      "title": "Two-pane view",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/two-pane-view",
+      "relpath": "windows/develop/ui/controls/two-pane-view.md",
+      "status": "ok"
+    },
+    {
+      "title": "WebView2 in WinUI 3",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/webview2",
+      "relpath": "windows/develop/ui/controls/webview2.md",
+      "status": "ok"
+    },
+    {
+      "title": "Display WinRT UI objects that depend on CoreWindow",
+      "section": "Windows App UI & Input / User interface / Windowing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/display-ui-objects",
+      "relpath": "windows/develop/ui/display-ui-objects.md",
+      "status": "ok"
+    },
+    {
+      "title": "In-app acrylic",
+      "section": "Windows App UI & Input / User interface / Materials",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/in-app-acrylic",
+      "relpath": "windows/develop/ui/in-app-acrylic.md",
+      "status": "ok"
+    },
+    {
+      "title": "Layout panels for Windows apps",
+      "section": "Windows App UI & Input / User interface / Layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/layout-panels",
+      "relpath": "windows/develop/ui/layout-panels.md",
+      "status": "ok"
+    },
+    {
+      "title": "Responsive layouts",
+      "section": "Windows App UI & Input / User interface / Responsive layouts",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/layouts-with-xaml",
+      "relpath": "windows/develop/ui/layouts-with-xaml.md",
+      "status": "ok"
+    },
+    {
+      "title": "Manage app windows",
+      "section": "Windows App UI & Input / User interface / Windowing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/manage-app-windows",
+      "relpath": "windows/develop/ui/manage-app-windows.md",
+      "status": "ok"
+    },
+    {
+      "title": "Materials overview",
+      "section": "Windows App UI & Input / User interface / Materials",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/materials",
+      "relpath": "windows/develop/ui/materials.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use the Window class to show secondary windows for an app",
+      "section": "Windows App UI & Input / User interface / Windowing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/multiple-windows",
+      "relpath": "windows/develop/ui/multiple-windows.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tutorial: Implement navigation between two pages",
+      "section": "Windows App UI & Input / User interface / Navigation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/navigation/navigate-between-two-pages",
+      "relpath": "windows/develop/ui/navigation/navigate-between-two-pages.md",
+      "status": "ok"
+    },
+    {
+      "title": "Navigation history and backwards navigation",
+      "section": "Windows App UI & Input / User interface / Navigation",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/navigation/navigation-history-and-backwards-navigation",
+      "relpath": "windows/develop/ui/navigation/navigation-history-and-backwards-navigation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Retrieve a window handle (HWND)",
+      "section": "Windows App UI & Input / User interface / Windowing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/retrieve-hwnd",
+      "relpath": "windows/develop/ui/retrieve-hwnd.md",
+      "status": "ok"
+    },
+    {
+      "title": "Shadows in Windows apps",
+      "section": "Windows App UI & Input / User interface / Shadows",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/shadows",
+      "relpath": "windows/develop/ui/shadows.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sound",
+      "section": "Windows App UI & Input / User interface / Sound",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/sound",
+      "relpath": "windows/develop/ui/sound.md",
+      "status": "ok"
+    },
+    {
+      "title": "System backdrops (Mica/Acrylic)",
+      "section": "Windows App UI & Input / User interface / Materials",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/system-backdrops",
+      "relpath": "windows/develop/ui/system-backdrops.md",
+      "status": "ok"
+    },
+    {
+      "title": "Theming in Windows apps",
+      "section": "Windows App UI & Input / User interface / Colors and themes",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/theming",
+      "relpath": "windows/develop/ui/theming.md",
+      "status": "ok"
+    },
+    {
+      "title": "Choose the right visual tree viewer for your Windows app",
+      "section": "Windows App UI & Input / User interface / Choose the right visual tree viewer",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/visual-tree",
+      "relpath": "windows/develop/ui/visual-tree.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windowing overview for WinUI and Windows App SDK",
+      "section": "Windows App UI & Input / User interface / Windowing",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/windowing-overview",
+      "relpath": "windows/develop/ui/windowing-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Structure a modern WinUI 3 desktop app",
+      "section": "Windows App UI & Input / User interface / App structure and layout",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/windows-app-sdk-app-structure",
+      "relpath": "windows/develop/ui/windows-app-sdk-app-structure.md",
+      "status": "ok"
+    },
+    {
+      "title": "XAML runtime design tools for WinUI 3",
+      "section": "Windows App UI & Input / User interface / XAML runtime design tools",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/ui/xaml-runtime-design-tools",
+      "relpath": "windows/develop/ui/xaml-runtime-design-tools.md",
+      "status": "ok"
+    },
+    {
+      "title": "User interface overview",
+      "section": "Windows App UI & Input / User interface / Overview",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/develop/user-interface",
+      "relpath": "windows/develop/user-interface.md",
+      "status": "ok"
+    },
+    {
+      "title": "Build XAML templated controls",
+      "section": "Windows App UI & Input / User interface / Controls",
+      "url": "https://learn.microsoft.com/en-us/windows/apps/winui/winui3/xaml-templated-controls-winui-3",
+      "relpath": "windows/winui/winui3/xaml-templated-controls-winui-3.md",
+      "status": "ok"
+    }
+  ]
+}

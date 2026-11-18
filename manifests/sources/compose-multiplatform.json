@@ -1,0 +1,21 @@
+{
+  "source_id": "compose-multiplatform",
+  "name": "Compose Multiplatform & KMP Official Documentation",
+  "base_url": "https://kotlinlang.org",
+  "fetched_at": "2026-11-18T06:50:40Z",
+  "page_count": 399,
+  "asset_count": 0,
+  "failed_count": 0,
+  "status": "ok",
+  "upstream_version": "Kotlin 2.4.21",
+  "versions": {
+    "kotlin_docs": "2.4.21",
+    "docs_build": "https://github.com/JetBrains/kotlin/releases/tag/v2.4.21"
+  },
+  "sections": {
+    "KMP Guide": 68,
+    "Compose Multiplatform": 64,
+    "Dokka API Reference": 267
+  },
+  "notes": "Mirrored via HelpTOC.json + Dokka /api/compose-multiplatform/ sitemap in 38.9s. Pruned 0 stale pages."
+}

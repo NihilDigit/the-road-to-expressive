@@ -1,0 +1,1237 @@
+{
+  "source_id": "apple-hig",
+  "name": "Apple Human Interface Guidelines",
+  "base_url": "https://developer.apple.com",
+  "upstream_urls": [
+    "https://developer.apple.com/tutorials/data/index/design--human-interface-guidelines",
+    "https://developer.apple.com/design/human-interface-guidelines"
+  ],
+  "fetched_at": "2026-11-18T06:58:28Z",
+  "version": "Thu, 17 Sep 2026 03:10:16 GMT",
+  "page_count": 173,
+  "markdown_count": 173,
+  "page_error_count": 0,
+  "cache_hits": 173,
+  "assets_skipped": true,
+  "asset_count": 0,
+  "robots_checked": [
+    "https://developer.apple.com"
+  ],
+  "sections": [
+    "Human Interface Guidelines",
+    "Overview"
+  ],
+  "pages": [
+    {
+      "title": "Human Interface Guidelines",
+      "section": "Overview",
+      "url": "https://developer.apple.com/design/human-interface-guidelines",
+      "relpath": "index.md",
+      "status": "ok"
+    },
+    {
+      "title": "Getting started",
+      "section": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/getting-started",
+      "relpath": "getting-started.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design principles",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/design-principles",
+      "relpath": "design-principles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for iOS",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-ios",
+      "relpath": "designing-for-ios.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for iPadOS",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-ipados",
+      "relpath": "designing-for-ipados.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for macOS",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-macos",
+      "relpath": "designing-for-macos.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for tvOS",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-tvos",
+      "relpath": "designing-for-tvos.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for visionOS",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-visionos",
+      "relpath": "designing-for-visionos.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for watchOS",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-watchos",
+      "relpath": "designing-for-watchos.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for games",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-games",
+      "relpath": "designing-for-games.md",
+      "status": "ok"
+    },
+    {
+      "title": "Designing for iPhone Duo",
+      "section": "Human Interface Guidelines / Getting started",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/designing-for-iphone-duo",
+      "relpath": "designing-for-iphone-duo.md",
+      "status": "ok"
+    },
+    {
+      "title": "Foundations",
+      "section": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/foundations",
+      "relpath": "foundations.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessibility",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+      "relpath": "accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "App icons",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/app-icons",
+      "relpath": "app-icons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Branding",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/branding",
+      "relpath": "branding.md",
+      "status": "ok"
+    },
+    {
+      "title": "Color",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/color",
+      "relpath": "color.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dark Mode",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/dark-mode",
+      "relpath": "dark-mode.md",
+      "status": "ok"
+    },
+    {
+      "title": "Icons",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/icons",
+      "relpath": "icons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Images",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/images",
+      "relpath": "images.md",
+      "status": "ok"
+    },
+    {
+      "title": "Immersive experiences",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/immersive-experiences",
+      "relpath": "immersive-experiences.md",
+      "status": "ok"
+    },
+    {
+      "title": "Inclusion",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/inclusion",
+      "relpath": "inclusion.md",
+      "status": "ok"
+    },
+    {
+      "title": "Layout",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/layout",
+      "relpath": "layout.md",
+      "status": "ok"
+    },
+    {
+      "title": "Materials",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/materials",
+      "relpath": "materials.md",
+      "status": "ok"
+    },
+    {
+      "title": "Motion",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/motion",
+      "relpath": "motion.md",
+      "status": "ok"
+    },
+    {
+      "title": "Privacy",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/privacy",
+      "relpath": "privacy.md",
+      "status": "ok"
+    },
+    {
+      "title": "Right to left",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/right-to-left",
+      "relpath": "right-to-left.md",
+      "status": "ok"
+    },
+    {
+      "title": "SF Symbols",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/sf-symbols",
+      "relpath": "sf-symbols.md",
+      "status": "ok"
+    },
+    {
+      "title": "Spatial layout",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/spatial-layout",
+      "relpath": "spatial-layout.md",
+      "status": "ok"
+    },
+    {
+      "title": "Typography",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/typography",
+      "relpath": "typography.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing",
+      "section": "Human Interface Guidelines / Foundations",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/writing",
+      "relpath": "writing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Patterns",
+      "section": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/patterns",
+      "relpath": "patterns.md",
+      "status": "ok"
+    },
+    {
+      "title": "Charting data",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/charting-data",
+      "relpath": "charting-data.md",
+      "status": "ok"
+    },
+    {
+      "title": "Collaboration and sharing",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/collaboration-and-sharing",
+      "relpath": "collaboration-and-sharing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Drag and drop",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/drag-and-drop",
+      "relpath": "drag-and-drop.md",
+      "status": "ok"
+    },
+    {
+      "title": "Entering data",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/entering-data",
+      "relpath": "entering-data.md",
+      "status": "ok"
+    },
+    {
+      "title": "Feedback",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/feedback",
+      "relpath": "feedback.md",
+      "status": "ok"
+    },
+    {
+      "title": "File management",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/file-management",
+      "relpath": "file-management.md",
+      "status": "ok"
+    },
+    {
+      "title": "Going full screen",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/going-full-screen",
+      "relpath": "going-full-screen.md",
+      "status": "ok"
+    },
+    {
+      "title": "Launching",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/launching",
+      "relpath": "launching.md",
+      "status": "ok"
+    },
+    {
+      "title": "Live-viewing apps",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/live-viewing-apps",
+      "relpath": "live-viewing-apps.md",
+      "status": "ok"
+    },
+    {
+      "title": "Loading",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/loading",
+      "relpath": "loading.md",
+      "status": "ok"
+    },
+    {
+      "title": "Managing accounts",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/managing-accounts",
+      "relpath": "managing-accounts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Managing notifications",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/managing-notifications",
+      "relpath": "managing-notifications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Modality",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/modality",
+      "relpath": "modality.md",
+      "status": "ok"
+    },
+    {
+      "title": "Multitasking",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/multitasking",
+      "relpath": "multitasking.md",
+      "status": "ok"
+    },
+    {
+      "title": "Offering help",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/offering-help",
+      "relpath": "offering-help.md",
+      "status": "ok"
+    },
+    {
+      "title": "Onboarding",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/onboarding",
+      "relpath": "onboarding.md",
+      "status": "ok"
+    },
+    {
+      "title": "Playing audio",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/playing-audio",
+      "relpath": "playing-audio.md",
+      "status": "ok"
+    },
+    {
+      "title": "Playing haptics",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/playing-haptics",
+      "relpath": "playing-haptics.md",
+      "status": "ok"
+    },
+    {
+      "title": "Playing video",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/playing-video",
+      "relpath": "playing-video.md",
+      "status": "ok"
+    },
+    {
+      "title": "Printing",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/printing",
+      "relpath": "printing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Ratings and reviews",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/ratings-and-reviews",
+      "relpath": "ratings-and-reviews.md",
+      "status": "ok"
+    },
+    {
+      "title": "Searching",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/searching",
+      "relpath": "searching.md",
+      "status": "ok"
+    },
+    {
+      "title": "Settings",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/settings",
+      "relpath": "settings.md",
+      "status": "ok"
+    },
+    {
+      "title": "Undo and redo",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/undo-and-redo",
+      "relpath": "undo-and-redo.md",
+      "status": "ok"
+    },
+    {
+      "title": "Workouts",
+      "section": "Human Interface Guidelines / Patterns",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/workouts",
+      "relpath": "workouts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Components",
+      "section": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/components",
+      "relpath": "components.md",
+      "status": "ok"
+    },
+    {
+      "title": "Content",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/content",
+      "relpath": "content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Charts",
+      "section": "Human Interface Guidelines / Components / Content",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/charts",
+      "relpath": "charts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Image views",
+      "section": "Human Interface Guidelines / Components / Content",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/image-views",
+      "relpath": "image-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text views",
+      "section": "Human Interface Guidelines / Components / Content",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/text-views",
+      "relpath": "text-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Web views",
+      "section": "Human Interface Guidelines / Components / Content",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/web-views",
+      "relpath": "web-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Layout and organization",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/layout-and-organization",
+      "relpath": "layout-and-organization.md",
+      "status": "ok"
+    },
+    {
+      "title": "Boxes",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/boxes",
+      "relpath": "boxes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Collections",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/collections",
+      "relpath": "collections.md",
+      "status": "ok"
+    },
+    {
+      "title": "Column views",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/column-views",
+      "relpath": "column-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Disclosure controls",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/disclosure-controls",
+      "relpath": "disclosure-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Labels",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/labels",
+      "relpath": "labels.md",
+      "status": "ok"
+    },
+    {
+      "title": "Lists and tables",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/lists-and-tables",
+      "relpath": "lists-and-tables.md",
+      "status": "ok"
+    },
+    {
+      "title": "Lockups",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/lockups",
+      "relpath": "lockups.md",
+      "status": "ok"
+    },
+    {
+      "title": "Outline views",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/outline-views",
+      "relpath": "outline-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Split views",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/split-views",
+      "relpath": "split-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tab views",
+      "section": "Human Interface Guidelines / Components / Layout and organization",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/tab-views",
+      "relpath": "tab-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Menus and actions",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/menus-and-actions",
+      "relpath": "menus-and-actions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Activity views",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/activity-views",
+      "relpath": "activity-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Buttons",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/buttons",
+      "relpath": "buttons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Context menus",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/context-menus",
+      "relpath": "context-menus.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dock menus",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/dock-menus",
+      "relpath": "dock-menus.md",
+      "status": "ok"
+    },
+    {
+      "title": "Edit menus",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/edit-menus",
+      "relpath": "edit-menus.md",
+      "status": "ok"
+    },
+    {
+      "title": "Home Screen quick actions",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/home-screen-quick-actions",
+      "relpath": "home-screen-quick-actions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Menus",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/menus",
+      "relpath": "menus.md",
+      "status": "ok"
+    },
+    {
+      "title": "Ornaments",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/ornaments",
+      "relpath": "ornaments.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pop-up buttons",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/pop-up-buttons",
+      "relpath": "pop-up-buttons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pull-down buttons",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/pull-down-buttons",
+      "relpath": "pull-down-buttons.md",
+      "status": "ok"
+    },
+    {
+      "title": "The menu bar",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/the-menu-bar",
+      "relpath": "the-menu-bar.md",
+      "status": "ok"
+    },
+    {
+      "title": "Toolbars",
+      "section": "Human Interface Guidelines / Components / Menus and actions",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/toolbars",
+      "relpath": "toolbars.md",
+      "status": "ok"
+    },
+    {
+      "title": "Navigation and search",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/navigation-and-search",
+      "relpath": "navigation-and-search.md",
+      "status": "ok"
+    },
+    {
+      "title": "Path controls",
+      "section": "Human Interface Guidelines / Components / Navigation and search",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/path-controls",
+      "relpath": "path-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Search fields",
+      "section": "Human Interface Guidelines / Components / Navigation and search",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/search-fields",
+      "relpath": "search-fields.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sidebars",
+      "section": "Human Interface Guidelines / Components / Navigation and search",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/sidebars",
+      "relpath": "sidebars.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tab bars",
+      "section": "Human Interface Guidelines / Components / Navigation and search",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/tab-bars",
+      "relpath": "tab-bars.md",
+      "status": "ok"
+    },
+    {
+      "title": "Token fields",
+      "section": "Human Interface Guidelines / Components / Navigation and search",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/token-fields",
+      "relpath": "token-fields.md",
+      "status": "ok"
+    },
+    {
+      "title": "Presentation",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/presentation",
+      "relpath": "presentation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Action sheets",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/action-sheets",
+      "relpath": "action-sheets.md",
+      "status": "ok"
+    },
+    {
+      "title": "Alerts",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/alerts",
+      "relpath": "alerts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Page controls",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/page-controls",
+      "relpath": "page-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Panels",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/panels",
+      "relpath": "panels.md",
+      "status": "ok"
+    },
+    {
+      "title": "Popovers",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/popovers",
+      "relpath": "popovers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Scroll views",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/scroll-views",
+      "relpath": "scroll-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sheets",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/sheets",
+      "relpath": "sheets.md",
+      "status": "ok"
+    },
+    {
+      "title": "Windows",
+      "section": "Human Interface Guidelines / Components / Presentation",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/windows",
+      "relpath": "windows.md",
+      "status": "ok"
+    },
+    {
+      "title": "Selection and input",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/selection-and-input",
+      "relpath": "selection-and-input.md",
+      "status": "ok"
+    },
+    {
+      "title": "Color wells",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/color-wells",
+      "relpath": "color-wells.md",
+      "status": "ok"
+    },
+    {
+      "title": "Combo boxes",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/combo-boxes",
+      "relpath": "combo-boxes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Digit entry views",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/digit-entry-views",
+      "relpath": "digit-entry-views.md",
+      "status": "ok"
+    },
+    {
+      "title": "Image wells",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/image-wells",
+      "relpath": "image-wells.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pickers",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/pickers",
+      "relpath": "pickers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Segmented controls",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/segmented-controls",
+      "relpath": "segmented-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sliders",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/sliders",
+      "relpath": "sliders.md",
+      "status": "ok"
+    },
+    {
+      "title": "Steppers",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/steppers",
+      "relpath": "steppers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text fields",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/text-fields",
+      "relpath": "text-fields.md",
+      "status": "ok"
+    },
+    {
+      "title": "Toggles",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/toggles",
+      "relpath": "toggles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Virtual keyboards",
+      "section": "Human Interface Guidelines / Components / Selection and input",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/virtual-keyboards",
+      "relpath": "virtual-keyboards.md",
+      "status": "ok"
+    },
+    {
+      "title": "Status",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/status",
+      "relpath": "status.md",
+      "status": "ok"
+    },
+    {
+      "title": "Activity rings",
+      "section": "Human Interface Guidelines / Components / Status",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/activity-rings",
+      "relpath": "activity-rings.md",
+      "status": "ok"
+    },
+    {
+      "title": "Gauges",
+      "section": "Human Interface Guidelines / Components / Status",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/gauges",
+      "relpath": "gauges.md",
+      "status": "ok"
+    },
+    {
+      "title": "Progress indicators",
+      "section": "Human Interface Guidelines / Components / Status",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/progress-indicators",
+      "relpath": "progress-indicators.md",
+      "status": "ok"
+    },
+    {
+      "title": "Rating indicators",
+      "section": "Human Interface Guidelines / Components / Status",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/rating-indicators",
+      "relpath": "rating-indicators.md",
+      "status": "ok"
+    },
+    {
+      "title": "System experiences",
+      "section": "Human Interface Guidelines / Components",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/system-experiences",
+      "relpath": "system-experiences.md",
+      "status": "ok"
+    },
+    {
+      "title": "App Shortcuts",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/app-shortcuts",
+      "relpath": "app-shortcuts.md",
+      "status": "ok"
+    },
+    {
+      "title": "Complications",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/complications",
+      "relpath": "complications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Controls",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/controls",
+      "relpath": "controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Live Activities",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/live-activities",
+      "relpath": "live-activities.md",
+      "status": "ok"
+    },
+    {
+      "title": "Notifications",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/notifications",
+      "relpath": "notifications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Snippets",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/snippets",
+      "relpath": "snippets.md",
+      "status": "ok"
+    },
+    {
+      "title": "Status bars",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/status-bars",
+      "relpath": "status-bars.md",
+      "status": "ok"
+    },
+    {
+      "title": "Top Shelf",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/top-shelf",
+      "relpath": "top-shelf.md",
+      "status": "ok"
+    },
+    {
+      "title": "Watch faces",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/watch-faces",
+      "relpath": "watch-faces.md",
+      "status": "ok"
+    },
+    {
+      "title": "Widgets",
+      "section": "Human Interface Guidelines / Components / System experiences",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/widgets",
+      "relpath": "widgets.md",
+      "status": "ok"
+    },
+    {
+      "title": "Inputs",
+      "section": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/inputs",
+      "relpath": "inputs.md",
+      "status": "ok"
+    },
+    {
+      "title": "Action button",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/action-button",
+      "relpath": "action-button.md",
+      "status": "ok"
+    },
+    {
+      "title": "Apple Pencil and Scribble",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/apple-pencil-and-scribble",
+      "relpath": "apple-pencil-and-scribble.md",
+      "status": "ok"
+    },
+    {
+      "title": "Camera Control",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/camera-control",
+      "relpath": "camera-control.md",
+      "status": "ok"
+    },
+    {
+      "title": "Digital Crown",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/digital-crown",
+      "relpath": "digital-crown.md",
+      "status": "ok"
+    },
+    {
+      "title": "Eyes",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/eyes",
+      "relpath": "eyes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Focus and selection",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/focus-and-selection",
+      "relpath": "focus-and-selection.md",
+      "status": "ok"
+    },
+    {
+      "title": "Game controls",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/game-controls",
+      "relpath": "game-controls.md",
+      "status": "ok"
+    },
+    {
+      "title": "Gestures",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/gestures",
+      "relpath": "gestures.md",
+      "status": "ok"
+    },
+    {
+      "title": "Gyroscope and accelerometer",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/gyro-and-accelerometer",
+      "relpath": "gyro-and-accelerometer.md",
+      "status": "ok"
+    },
+    {
+      "title": "Keyboards",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/keyboards",
+      "relpath": "keyboards.md",
+      "status": "ok"
+    },
+    {
+      "title": "Nearby interactions",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/nearby-interactions",
+      "relpath": "nearby-interactions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pointing devices",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/pointing-devices",
+      "relpath": "pointing-devices.md",
+      "status": "ok"
+    },
+    {
+      "title": "Remotes",
+      "section": "Human Interface Guidelines / Inputs",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/remotes",
+      "relpath": "remotes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Technologies",
+      "section": "Human Interface Guidelines",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/technologies",
+      "relpath": "technologies.md",
+      "status": "ok"
+    },
+    {
+      "title": "AirPlay",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/airplay",
+      "relpath": "airplay.md",
+      "status": "ok"
+    },
+    {
+      "title": "Always On",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/always-on",
+      "relpath": "always-on.md",
+      "status": "ok"
+    },
+    {
+      "title": "App Clips",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/app-clips",
+      "relpath": "app-clips.md",
+      "status": "ok"
+    },
+    {
+      "title": "Apple In-App Purchase",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/apple-in-app-purchase",
+      "relpath": "apple-in-app-purchase.md",
+      "status": "ok"
+    },
+    {
+      "title": "Apple Pay",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/apple-pay",
+      "relpath": "apple-pay.md",
+      "status": "ok"
+    },
+    {
+      "title": "Augmented reality",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/augmented-reality",
+      "relpath": "augmented-reality.md",
+      "status": "ok"
+    },
+    {
+      "title": "CareKit",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/carekit",
+      "relpath": "carekit.md",
+      "status": "ok"
+    },
+    {
+      "title": "CarPlay",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/carplay",
+      "relpath": "carplay.md",
+      "status": "ok"
+    },
+    {
+      "title": "Game Center",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/game-center",
+      "relpath": "game-center.md",
+      "status": "ok"
+    },
+    {
+      "title": "Generative AI",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/generative-ai",
+      "relpath": "generative-ai.md",
+      "status": "ok"
+    },
+    {
+      "title": "HealthKit",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/healthkit",
+      "relpath": "healthkit.md",
+      "status": "ok"
+    },
+    {
+      "title": "HomeKit",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/homekit",
+      "relpath": "homekit.md",
+      "status": "ok"
+    },
+    {
+      "title": "iCloud",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/icloud",
+      "relpath": "icloud.md",
+      "status": "ok"
+    },
+    {
+      "title": "ID Verifier",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/id-verifier",
+      "relpath": "id-verifier.md",
+      "status": "ok"
+    },
+    {
+      "title": "iMessage apps and stickers",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/imessage-apps-and-stickers",
+      "relpath": "imessage-apps-and-stickers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Live Photos",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/live-photos",
+      "relpath": "live-photos.md",
+      "status": "ok"
+    },
+    {
+      "title": "Mac Catalyst",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/mac-catalyst",
+      "relpath": "mac-catalyst.md",
+      "status": "ok"
+    },
+    {
+      "title": "Machine learning",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/machine-learning",
+      "relpath": "machine-learning.md",
+      "status": "ok"
+    },
+    {
+      "title": "Maps",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/maps",
+      "relpath": "maps.md",
+      "status": "ok"
+    },
+    {
+      "title": "NFC",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/nfc",
+      "relpath": "nfc.md",
+      "status": "ok"
+    },
+    {
+      "title": "Photo editing",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/photo-editing",
+      "relpath": "photo-editing.md",
+      "status": "ok"
+    },
+    {
+      "title": "ResearchKit",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/researchkit",
+      "relpath": "researchkit.md",
+      "status": "ok"
+    },
+    {
+      "title": "SharePlay",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/shareplay",
+      "relpath": "shareplay.md",
+      "status": "ok"
+    },
+    {
+      "title": "ShazamKit",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/shazamkit",
+      "relpath": "shazamkit.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sign in with Apple",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple",
+      "relpath": "sign-in-with-apple.md",
+      "status": "ok"
+    },
+    {
+      "title": "Siri",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/siri",
+      "relpath": "siri.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tap to Pay on iPhone",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/tap-to-pay-on-iphone",
+      "relpath": "tap-to-pay-on-iphone.md",
+      "status": "ok"
+    },
+    {
+      "title": "VoiceOver",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/voiceover",
+      "relpath": "voiceover.md",
+      "status": "ok"
+    },
+    {
+      "title": "Wallet",
+      "section": "Human Interface Guidelines / Technologies",
+      "url": "https://developer.apple.com/design/human-interface-guidelines/wallet",
+      "relpath": "wallet.md",
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,1482 @@
+{
+  "source_id": "writing-style",
+  "name": "UI Copywriting, UX Writing & AP Style Guides",
+  "base_url": "https://developers.google.com/style/",
+  "upstream_urls": [
+    "https://developers.google.com/style/",
+    "https://learn.microsoft.com/en-us/style-guide/",
+    "https://en.wikipedia.org/wiki/AP_Stylebook",
+    "https://raw.githubusercontent.com/18F/content-guide/18f-pages/",
+    "https://styleguide.mailchimp.com/sitemap.xml",
+    "https://digital.gov/guides/plain-language/"
+  ],
+  "fetched_at": "2026-11-18T06:54:31Z",
+  "version": "2026-11-18T06:54:31Z",
+  "page_count": 206,
+  "markdown_count": 206,
+  "page_error_count": 0,
+  "page_skipped_count": 0,
+  "cache_hits": 116,
+  "assets_skipped": true,
+  "asset_count": 0,
+  "robots_checked": [
+    "https://developers.google.com",
+    "https://digital.gov",
+    "https://en.wikipedia.org",
+    "https://learn.microsoft.com",
+    "https://raw.githubusercontent.com",
+    "https://styleguide.mailchimp.com"
+  ],
+  "sections": [
+    "18F Content Guide (AP-based UI/Web Style)",
+    "AP Style Reference",
+    "Google Developer Style Guide",
+    "Mailchimp Content Style Guide",
+    "Microsoft Writing Style Guide",
+    "Plain Language & UX Clarity"
+  ],
+  "pages": [
+    {
+      "title": "Address the user",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-approach/address-the-user.md",
+      "relpath": "18f-content-guide/our-approach/address-the-user.md",
+      "status": "ok"
+    },
+    {
+      "title": "Be concise",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-approach/be-concise.md",
+      "relpath": "18f-content-guide/our-approach/be-concise.md",
+      "status": "ok"
+    },
+    {
+      "title": "Make content web-friendly",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-approach/make-content-web-friendly.md",
+      "relpath": "18f-content-guide/our-approach/make-content-web-friendly.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use plain language",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-approach/plain-language.md",
+      "relpath": "18f-content-guide/our-approach/plain-language.md",
+      "status": "ok"
+    },
+    {
+      "title": "Structure the content",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-approach/structure-the-content.md",
+      "relpath": "18f-content-guide/our-approach/structure-the-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Abbreviations and acronyms",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/abbreviations-and-acronyms.md",
+      "relpath": "18f-content-guide/our-style/abbreviations-and-acronyms.md",
+      "status": "ok"
+    },
+    {
+      "title": "Active voice",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/active-voice.md",
+      "relpath": "18f-content-guide/our-style/active-voice.md",
+      "status": "ok"
+    },
+    {
+      "title": "Capitalization",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/capitalization.md",
+      "relpath": "18f-content-guide/our-style/capitalization.md",
+      "status": "ok"
+    },
+    {
+      "title": "Inclusive language",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/inclusive-language.md",
+      "relpath": "18f-content-guide/our-style/inclusive-language.md",
+      "status": "ok"
+    },
+    {
+      "title": "Names",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/names.md",
+      "relpath": "18f-content-guide/our-style/names.md",
+      "status": "ok"
+    },
+    {
+      "title": "Numbers, percentages, and dates",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/numbers-and-percentages.md",
+      "relpath": "18f-content-guide/our-style/numbers-and-percentages.md",
+      "status": "ok"
+    },
+    {
+      "title": "Punctuation",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/punctuation.md",
+      "relpath": "18f-content-guide/our-style/punctuation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Specific words and phrases",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/specific-words-and-phrases.md",
+      "relpath": "18f-content-guide/our-style/specific-words-and-phrases.md",
+      "status": "ok"
+    },
+    {
+      "title": "Style guides",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/style-guides.md",
+      "relpath": "18f-content-guide/our-style/style-guides.md",
+      "status": "ok"
+    },
+    {
+      "title": "Technical and interface writing",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/technical-and-interface-writing.md",
+      "relpath": "18f-content-guide/our-style/technical-and-interface-writing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Trademarks and brands",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/trademarks-and-brands.md",
+      "relpath": "18f-content-guide/our-style/trademarks-and-brands.md",
+      "status": "ok"
+    },
+    {
+      "title": "URLs and filenames",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/urls-and-filenames.md",
+      "relpath": "18f-content-guide/our-style/urls-and-filenames.md",
+      "status": "ok"
+    },
+    {
+      "title": "Voice and tone",
+      "section": "18F Content Guide (AP-based UI/Web Style)",
+      "url": "https://raw.githubusercontent.com/18F/content-guide/18f-pages/_pages/our-style/voice-and-tone.md",
+      "relpath": "18f-content-guide/our-style/voice-and-tone.md",
+      "status": "ok"
+    },
+    {
+      "title": "AP Stylebook",
+      "section": "AP Style Reference",
+      "url": "https://en.wikipedia.org/wiki/AP_Stylebook",
+      "relpath": "ap-style/ap-stylebook-overview.md",
+      "status": "ok"
+    },
+    {
+      "title": "Abbreviations",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/abbreviations",
+      "relpath": "google-style/abbreviations.md",
+      "status": "ok"
+    },
+    {
+      "title": "Write accessible documentation",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/accessibility",
+      "relpath": "google-style/accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "Anthropomorphism",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/anthropomorphism",
+      "relpath": "google-style/anthropomorphism.md",
+      "status": "ok"
+    },
+    {
+      "title": "API reference code comments",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/api-reference-comments",
+      "relpath": "google-style/api-reference-comments.md",
+      "status": "ok"
+    },
+    {
+      "title": "Articles (a, an, the)",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/articles",
+      "relpath": "google-style/articles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Capitalization",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/capitalization",
+      "relpath": "google-style/capitalization.md",
+      "status": "ok"
+    },
+    {
+      "title": "Code in text",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/code-in-text",
+      "relpath": "google-style/code-in-text.md",
+      "status": "ok"
+    },
+    {
+      "title": "Code samples",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/code-samples",
+      "relpath": "google-style/code-samples.md",
+      "status": "ok"
+    },
+    {
+      "title": "Document command-line syntax",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/code-syntax",
+      "relpath": "google-style/code-syntax.md",
+      "status": "ok"
+    },
+    {
+      "title": "Colons",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/colons",
+      "relpath": "google-style/colons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Commas",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/commas",
+      "relpath": "google-style/commas.md",
+      "status": "ok"
+    },
+    {
+      "title": "Contractions",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/contractions",
+      "relpath": "google-style/contractions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Cross-references and linking",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/cross-references",
+      "relpath": "google-style/cross-references.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dashes",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/dashes",
+      "relpath": "google-style/dashes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dates and times",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/dates-times",
+      "relpath": "google-style/dates-times.md",
+      "status": "ok"
+    },
+    {
+      "title": "Ellipses",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/ellipses",
+      "relpath": "google-style/ellipses.md",
+      "status": "ok"
+    },
+    {
+      "title": "Example domains and names",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/examples",
+      "relpath": "google-style/examples.md",
+      "status": "ok"
+    },
+    {
+      "title": "Avoid excessive claims",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/excessive-claims",
+      "relpath": "google-style/excessive-claims.md",
+      "status": "ok"
+    },
+    {
+      "title": "Filenames and file types",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/filenames",
+      "relpath": "google-style/filenames.md",
+      "status": "ok"
+    },
+    {
+      "title": "Footnotes",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/footnotes",
+      "relpath": "google-style/footnotes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Format examples",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/format-examples",
+      "relpath": "google-style/format-examples.md",
+      "status": "ok"
+    },
+    {
+      "title": "Future features",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/future",
+      "relpath": "google-style/future.md",
+      "status": "ok"
+    },
+    {
+      "title": "Make headings into link targets",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/headings-targets",
+      "relpath": "google-style/headings-targets.md",
+      "status": "ok"
+    },
+    {
+      "title": "Headings and titles",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/headings",
+      "relpath": "google-style/headings.md",
+      "status": "ok"
+    },
+    {
+      "title": "Highlights",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/highlights",
+      "relpath": "google-style/highlights.md",
+      "status": "ok"
+    },
+    {
+      "title": "HTML formatting",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/html-formatting",
+      "relpath": "google-style/html-formatting.md",
+      "status": "ok"
+    },
+    {
+      "title": "Hyphens",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/hyphens",
+      "relpath": "google-style/hyphens.md",
+      "status": "ok"
+    },
+    {
+      "title": "Diagrams, figures, and other images",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/images",
+      "relpath": "google-style/images.md",
+      "status": "ok"
+    },
+    {
+      "title": "Write inclusive documentation",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/inclusive-documentation",
+      "relpath": "google-style/inclusive-documentation.md",
+      "status": "ok"
+    },
+    {
+      "title": "About this guide",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style",
+      "relpath": "google-style/index.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use italics to discuss terms",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/italics-terms",
+      "relpath": "google-style/italics-terms.md",
+      "status": "ok"
+    },
+    {
+      "title": "Jargon",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/jargon",
+      "relpath": "google-style/jargon.md",
+      "status": "ok"
+    },
+    {
+      "title": "Lists",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/lists",
+      "relpath": "google-style/lists.md",
+      "status": "ok"
+    },
+    {
+      "title": "Markdown versus HTML",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/markdown",
+      "relpath": "google-style/markdown.md",
+      "status": "ok"
+    },
+    {
+      "title": "Mathematical notation",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/mathematical-notation",
+      "relpath": "google-style/mathematical-notation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Notes, cautions, warnings, and other notices",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/notices",
+      "relpath": "google-style/notices.md",
+      "status": "ok"
+    },
+    {
+      "title": "Numbers",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/numbers",
+      "relpath": "google-style/numbers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Third-party content",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/other-sources",
+      "relpath": "google-style/other-sources.md",
+      "status": "ok"
+    },
+    {
+      "title": "Paragraph structure",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/paragraph-structure",
+      "relpath": "google-style/paragraph-structure.md",
+      "status": "ok"
+    },
+    {
+      "title": "Parentheses",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/parentheses",
+      "relpath": "google-style/parentheses.md",
+      "status": "ok"
+    },
+    {
+      "title": "Periods and other end punctuation",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/periods",
+      "relpath": "google-style/periods.md",
+      "status": "ok"
+    },
+    {
+      "title": "Second person and first person",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/person",
+      "relpath": "google-style/person.md",
+      "status": "ok"
+    },
+    {
+      "title": "Philosophy of this style guide",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/philosophy",
+      "relpath": "google-style/philosophy.md",
+      "status": "ok"
+    },
+    {
+      "title": "Format phone numbers in text",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/phone-numbers",
+      "relpath": "google-style/phone-numbers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Format placeholders",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/placeholders",
+      "relpath": "google-style/placeholders.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pluralization",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/pluralization",
+      "relpath": "google-style/pluralization.md",
+      "status": "ok"
+    },
+    {
+      "title": "Possessives",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/possessives",
+      "relpath": "google-style/possessives.md",
+      "status": "ok"
+    },
+    {
+      "title": "Prepositions",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/prepositions",
+      "relpath": "google-style/prepositions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Prescriptive documentation",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/prescriptive-documentation",
+      "relpath": "google-style/prescriptive-documentation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Procedures",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/procedures",
+      "relpath": "google-style/procedures.md",
+      "status": "ok"
+    },
+    {
+      "title": "Product names",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/product-names",
+      "relpath": "google-style/product-names.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pronouns",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/pronouns",
+      "relpath": "google-style/pronouns.md",
+      "status": "ok"
+    },
+    {
+      "title": "Quotation marks",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/quotation-marks",
+      "relpath": "google-style/quotation-marks.md",
+      "status": "ok"
+    },
+    {
+      "title": "Verb forms in reference documentation",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/reference-verbs",
+      "relpath": "google-style/reference-verbs.md",
+      "status": "ok"
+    },
+    {
+      "title": "HTML and semantic tagging",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/semantic-tagging",
+      "relpath": "google-style/semantic-tagging.md",
+      "status": "ok"
+    },
+    {
+      "title": "Semicolons",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/semicolons",
+      "relpath": "google-style/semicolons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sentence structure",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/sentence-structure",
+      "relpath": "google-style/sentence-structure.md",
+      "status": "ok"
+    },
+    {
+      "title": "Slashes",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/slashes",
+      "relpath": "google-style/slashes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Word list",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/spelling",
+      "relpath": "google-style/spelling.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tables",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/tables",
+      "relpath": "google-style/tables.md",
+      "status": "ok"
+    },
+    {
+      "title": "Present tense",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/tense",
+      "relpath": "google-style/tense.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text-formatting summary",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/text-formatting",
+      "relpath": "google-style/text-formatting.md",
+      "status": "ok"
+    },
+    {
+      "title": "Timeless documentation",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/timeless-documentation",
+      "relpath": "google-style/timeless-documentation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Voice and tone",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/tone",
+      "relpath": "google-style/tone.md",
+      "status": "ok"
+    },
+    {
+      "title": "Trademarks",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/trademarks",
+      "relpath": "google-style/trademarks.md",
+      "status": "ok"
+    },
+    {
+      "title": "Write for a global audience",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/translation",
+      "relpath": "google-style/translation.md",
+      "status": "ok"
+    },
+    {
+      "title": "UI elements and interaction",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/ui-elements",
+      "relpath": "google-style/ui-elements.md",
+      "status": "ok"
+    },
+    {
+      "title": "Units of measurement",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/units-of-measure",
+      "relpath": "google-style/units-of-measure.md",
+      "status": "ok"
+    },
+    {
+      "title": "Active voice",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/voice",
+      "relpath": "google-style/voice.md",
+      "status": "ok"
+    },
+    {
+      "title": "Whats new",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/whats-new",
+      "relpath": "google-style/whats-new.md",
+      "status": "ok"
+    },
+    {
+      "title": "Word list",
+      "section": "Google Developer Style Guide",
+      "url": "https://developers.google.com/style/word-list",
+      "relpath": "google-style/word-list.md",
+      "status": "ok"
+    },
+    {
+      "title": "Copyright and Trademarks",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/copyright-and-trademarks/",
+      "relpath": "mailchimp/copyright-and-trademarks.md",
+      "status": "ok"
+    },
+    {
+      "title": "Creating Structured Content",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/creating-structured-content/",
+      "relpath": "mailchimp/creating-structured-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Further Reading",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/further-reading/",
+      "relpath": "mailchimp/further-reading.md",
+      "status": "ok"
+    },
+    {
+      "title": "Grammar and Mechanics",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/grammar-and-mechanics/",
+      "relpath": "mailchimp/grammar-and-mechanics.md",
+      "status": "ok"
+    },
+    {
+      "title": "Welcome to the Mailchimp Content Style Guide",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/",
+      "relpath": "mailchimp/index.md",
+      "status": "ok"
+    },
+    {
+      "title": "TL;DR",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/tldr/",
+      "relpath": "mailchimp/tldr.md",
+      "status": "ok"
+    },
+    {
+      "title": "Voice and Tone",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/voice-and-tone/",
+      "relpath": "mailchimp/voice-and-tone.md",
+      "status": "ok"
+    },
+    {
+      "title": "Web Elements",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/web-elements/",
+      "relpath": "mailchimp/web-elements.md",
+      "status": "ok"
+    },
+    {
+      "title": "Word List",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/word-list/",
+      "relpath": "mailchimp/word-list.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing about Mailchimp",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-about-mailchimp/",
+      "relpath": "mailchimp/writing-about-mailchimp.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing About People",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-about-people/",
+      "relpath": "mailchimp/writing-about-people.md",
+      "status": "ok"
+    },
+    {
+      "title": "How to Write Educational Content",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-educational-content/",
+      "relpath": "mailchimp/writing-educational-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing Email Newsletters",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-email-newsletters/",
+      "relpath": "mailchimp/writing-email-newsletters.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing for Accessibility",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-for-accessibility/",
+      "relpath": "mailchimp/writing-for-accessibility.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing for Social Media",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-for-social-media/",
+      "relpath": "mailchimp/writing-for-social-media.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing for Translation",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-for-translation/",
+      "relpath": "mailchimp/writing-for-translation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing Legal Content",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-legal-content/",
+      "relpath": "mailchimp/writing-legal-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing Goals and Principles",
+      "section": "Mailchimp Content Style Guide",
+      "url": "https://styleguide.mailchimp.com/writing-principles/",
+      "relpath": "mailchimp/writing-principles.md",
+      "status": "ok"
+    },
+    {
+      "title": "button",
+      "section": "Microsoft Writing Style Guide / A–Z word list and term collections",
+      "url": "https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/b/button",
+      "relpath": "microsoft-style/a-z-word-list-term-collections/b/button.md",
+      "status": "ok"
+    },
+    {
+      "title": "click",
+      "section": "Microsoft Writing Style Guide / A–Z word list and term collections",
+      "url": "https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/c/click",
+      "relpath": "microsoft-style/a-z-word-list-term-collections/c/click.md",
+      "status": "ok"
+    },
+    {
+      "title": "percent, percent sign (%), percentage",
+      "section": "Microsoft Writing Style Guide / A–Z word list and term collections",
+      "url": "https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/p/percent-percentage",
+      "relpath": "microsoft-style/a-z-word-list-term-collections/p/percent-percentage.md",
+      "status": "ok"
+    },
+    {
+      "title": "select",
+      "section": "Microsoft Writing Style Guide / A–Z word list and term collections",
+      "url": "https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/s/select",
+      "relpath": "microsoft-style/a-z-word-list-term-collections/s/select.md",
+      "status": "ok"
+    },
+    {
+      "title": "toggle",
+      "section": "Microsoft Writing Style Guide / A–Z word list and term collections",
+      "url": "https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/t/toggle",
+      "relpath": "microsoft-style/a-z-word-list-term-collections/t/toggle.md",
+      "status": "ok"
+    },
+    {
+      "title": "Accessibility Guidelines and Requirements",
+      "section": "Microsoft Writing Style Guide / Accessibility guidelines and requirements",
+      "url": "https://learn.microsoft.com/en-us/style-guide/accessibility/accessibility-guidelines-requirements",
+      "relpath": "microsoft-style/accessibility/accessibility-guidelines-requirements.md",
+      "status": "ok"
+    },
+    {
+      "title": "Alternative text (alt text)",
+      "section": "Microsoft Writing Style Guide / Accessibility guidelines and requirements",
+      "url": "https://learn.microsoft.com/en-us/style-guide/accessibility/alternative-text",
+      "relpath": "microsoft-style/accessibility/alternative-text.md",
+      "status": "ok"
+    },
+    {
+      "title": "Colors and Patterns in Text, Graphics, and Design",
+      "section": "Microsoft Writing Style Guide / Accessibility guidelines and requirements",
+      "url": "https://learn.microsoft.com/en-us/style-guide/accessibility/colors-patterns-text-graphics-design",
+      "relpath": "microsoft-style/accessibility/colors-patterns-text-graphics-design.md",
+      "status": "ok"
+    },
+    {
+      "title": "Graphics, Design, and Media",
+      "section": "Microsoft Writing Style Guide / Accessibility guidelines and requirements",
+      "url": "https://learn.microsoft.com/en-us/style-guide/accessibility/graphics-design-media",
+      "relpath": "microsoft-style/accessibility/graphics-design-media.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing for All Abilities",
+      "section": "Microsoft Writing Style Guide / Accessibility guidelines and requirements",
+      "url": "https://learn.microsoft.com/en-us/style-guide/accessibility/writing-all-abilities",
+      "relpath": "microsoft-style/accessibility/writing-all-abilities.md",
+      "status": "ok"
+    },
+    {
+      "title": "Acronyms",
+      "section": "Microsoft Writing Style Guide / Acronyms",
+      "url": "https://learn.microsoft.com/en-us/style-guide/acronyms",
+      "relpath": "microsoft-style/acronyms.md",
+      "status": "ok"
+    },
+    {
+      "title": "Bias-free communication",
+      "section": "Microsoft Writing Style Guide / Bias-free communication",
+      "url": "https://learn.microsoft.com/en-us/style-guide/bias-free-communication",
+      "relpath": "microsoft-style/bias-free-communication.md",
+      "status": "ok"
+    },
+    {
+      "title": "Microsofts brand voice; above all, simple and human",
+      "section": "Microsoft Writing Style Guide / Microsoft's brand voice: above all, simple and human",
+      "url": "https://learn.microsoft.com/en-us/style-guide/brand-voice-above-all-simple-human",
+      "relpath": "microsoft-style/brand-voice-above-all-simple-human.md",
+      "status": "ok"
+    },
+    {
+      "title": "Capitalization",
+      "section": "Microsoft Writing Style Guide / Capitalization",
+      "url": "https://learn.microsoft.com/en-us/style-guide/capitalization",
+      "relpath": "microsoft-style/capitalization.md",
+      "status": "ok"
+    },
+    {
+      "title": "Chatbots and virtual agents",
+      "section": "Microsoft Writing Style Guide / Chatbots and virtual agents",
+      "url": "https://learn.microsoft.com/en-us/style-guide/chatbots-virtual-agents/",
+      "relpath": "microsoft-style/chatbots-virtual-agents.md",
+      "status": "ok"
+    },
+    {
+      "title": "Care and feeding of the bot",
+      "section": "Microsoft Writing Style Guide / Chatbots and virtual agents",
+      "url": "https://learn.microsoft.com/en-us/style-guide/chatbots-virtual-agents/care-feeding-bot",
+      "relpath": "microsoft-style/chatbots-virtual-agents/care-feeding-bot.md",
+      "status": "ok"
+    },
+    {
+      "title": "Structural and technical considerations",
+      "section": "Microsoft Writing Style Guide / Chatbots and virtual agents",
+      "url": "https://learn.microsoft.com/en-us/style-guide/chatbots-virtual-agents/structural-technical-considerations",
+      "relpath": "microsoft-style/chatbots-virtual-agents/structural-technical-considerations.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing for bots",
+      "section": "Microsoft Writing Style Guide / Chatbots and virtual agents",
+      "url": "https://learn.microsoft.com/en-us/style-guide/chatbots-virtual-agents/writing-bots",
+      "relpath": "microsoft-style/chatbots-virtual-agents/writing-bots.md",
+      "status": "ok"
+    },
+    {
+      "title": "Checklists",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/",
+      "relpath": "microsoft-style/checklists.md",
+      "status": "ok"
+    },
+    {
+      "title": "Acronyms checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/acronyms-checklist",
+      "relpath": "microsoft-style/checklists/acronyms-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Capitalization checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/capitalization-checklist",
+      "relpath": "microsoft-style/checklists/capitalization-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Grammar and parts of speech checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/grammar-and-parts-of-speech-checklist",
+      "relpath": "microsoft-style/checklists/grammar-and-parts-of-speech-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Numbers checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/numbers-checklist",
+      "relpath": "microsoft-style/checklists/numbers-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Procedures and instructions checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/procedures-and-instructions-checklist",
+      "relpath": "microsoft-style/checklists/procedures-and-instructions-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Punctuation checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/punctuation-checklist",
+      "relpath": "microsoft-style/checklists/punctuation-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Responsive content checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/responsive-content-checklist",
+      "relpath": "microsoft-style/checklists/responsive-content-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text-formatting checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/text-formatting-checklist",
+      "relpath": "microsoft-style/checklists/text-formatting-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Word choice checklist",
+      "section": "Microsoft Writing Style Guide / Checklists",
+      "url": "https://learn.microsoft.com/en-us/style-guide/checklists/word-choice-checklist",
+      "relpath": "microsoft-style/checklists/word-choice-checklist.md",
+      "status": "ok"
+    },
+    {
+      "title": "Content planning",
+      "section": "Microsoft Writing Style Guide / Content planning",
+      "url": "https://learn.microsoft.com/en-us/style-guide/content-planning",
+      "relpath": "microsoft-style/content-planning.md",
+      "status": "ok"
+    },
+    {
+      "title": "Design planning",
+      "section": "Microsoft Writing Style Guide / Design planning",
+      "url": "https://learn.microsoft.com/en-us/style-guide/design-planning",
+      "relpath": "microsoft-style/design-planning.md",
+      "status": "ok"
+    },
+    {
+      "title": "Developer content",
+      "section": "Microsoft Writing Style Guide / Developer content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/developer-content/",
+      "relpath": "microsoft-style/developer-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Code examples",
+      "section": "Microsoft Writing Style Guide / Developer content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/developer-content/code-examples",
+      "relpath": "microsoft-style/developer-content/code-examples.md",
+      "status": "ok"
+    },
+    {
+      "title": "Formatting developer text elements",
+      "section": "Microsoft Writing Style Guide / Developer content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/developer-content/formatting-developer-text-elements",
+      "relpath": "microsoft-style/developer-content/formatting-developer-text-elements.md",
+      "status": "ok"
+    },
+    {
+      "title": "Reference documentation",
+      "section": "Microsoft Writing Style Guide / Developer content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/developer-content/reference-documentation",
+      "relpath": "microsoft-style/developer-content/reference-documentation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Final publishing review",
+      "section": "Microsoft Writing Style Guide / Final publishing review",
+      "url": "https://learn.microsoft.com/en-us/style-guide/final-publishing-review",
+      "relpath": "microsoft-style/final-publishing-review.md",
+      "status": "ok"
+    },
+    {
+      "title": "Global communications",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/",
+      "relpath": "microsoft-style/global-communications.md",
+      "status": "ok"
+    },
+    {
+      "title": "Art",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/art",
+      "relpath": "microsoft-style/global-communications/art.md",
+      "status": "ok"
+    },
+    {
+      "title": "Currency",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/currency",
+      "relpath": "microsoft-style/global-communications/currency.md",
+      "status": "ok"
+    },
+    {
+      "title": "Examples and scenarios",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/examples-scenarios",
+      "relpath": "microsoft-style/global-communications/examples-scenarios.md",
+      "status": "ok"
+    },
+    {
+      "title": "Names and contact information",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/names-contact-information",
+      "relpath": "microsoft-style/global-communications/names-contact-information.md",
+      "status": "ok"
+    },
+    {
+      "title": "Time and place",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/time-place",
+      "relpath": "microsoft-style/global-communications/time-place.md",
+      "status": "ok"
+    },
+    {
+      "title": "Web, software, and HTML considerations",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/web-software-html-considerations",
+      "relpath": "microsoft-style/global-communications/web-software-html-considerations.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing tips",
+      "section": "Microsoft Writing Style Guide / Global communications",
+      "url": "https://learn.microsoft.com/en-us/style-guide/global-communications/writing-tips",
+      "relpath": "microsoft-style/global-communications/writing-tips.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dangling and misplaced modifiers",
+      "section": "Microsoft Writing Style Guide / Grammar and parts of speech",
+      "url": "https://learn.microsoft.com/en-us/style-guide/grammar/dangling-misplaced-modifiers",
+      "relpath": "microsoft-style/grammar/dangling-misplaced-modifiers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Grammar and parts of speech",
+      "section": "Microsoft Writing Style Guide / Grammar and parts of speech",
+      "url": "https://learn.microsoft.com/en-us/style-guide/grammar/grammar-and-parts-of-speech",
+      "relpath": "microsoft-style/grammar/grammar-and-parts-of-speech.md",
+      "status": "ok"
+    },
+    {
+      "title": "Words ending in -ing",
+      "section": "Microsoft Writing Style Guide / Grammar and parts of speech",
+      "url": "https://learn.microsoft.com/en-us/style-guide/grammar/ing-words",
+      "relpath": "microsoft-style/grammar/ing-words.md",
+      "status": "ok"
+    },
+    {
+      "title": "Nouns and pronouns",
+      "section": "Microsoft Writing Style Guide / Grammar and parts of speech",
+      "url": "https://learn.microsoft.com/en-us/style-guide/grammar/nouns-pronouns",
+      "relpath": "microsoft-style/grammar/nouns-pronouns.md",
+      "status": "ok"
+    },
+    {
+      "title": "Person",
+      "section": "Microsoft Writing Style Guide / Grammar and parts of speech",
+      "url": "https://learn.microsoft.com/en-us/style-guide/grammar/person",
+      "relpath": "microsoft-style/grammar/person.md",
+      "status": "ok"
+    },
+    {
+      "title": "Prepositions",
+      "section": "Microsoft Writing Style Guide / Grammar and parts of speech",
+      "url": "https://learn.microsoft.com/en-us/style-guide/grammar/prepositions",
+      "relpath": "microsoft-style/grammar/prepositions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Verbs",
+      "section": "Microsoft Writing Style Guide / Grammar and parts of speech",
+      "url": "https://learn.microsoft.com/en-us/style-guide/grammar/verbs",
+      "relpath": "microsoft-style/grammar/verbs.md",
+      "status": "ok"
+    },
+    {
+      "title": "Militaristic language",
+      "section": "Microsoft Writing Style Guide / Bias-free communication",
+      "url": "https://learn.microsoft.com/en-us/style-guide/militaristic-language",
+      "relpath": "microsoft-style/militaristic-language.md",
+      "status": "ok"
+    },
+    {
+      "title": "Numbers",
+      "section": "Microsoft Writing Style Guide / Numbers",
+      "url": "https://learn.microsoft.com/en-us/style-guide/numbers",
+      "relpath": "microsoft-style/numbers.md",
+      "status": "ok"
+    },
+    {
+      "title": "Procedures and instructions",
+      "section": "Microsoft Writing Style Guide / Procedures and instructions",
+      "url": "https://learn.microsoft.com/en-us/style-guide/procedures-instructions/",
+      "relpath": "microsoft-style/procedures-instructions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Describing alternative input methods",
+      "section": "Microsoft Writing Style Guide / Procedures and instructions",
+      "url": "https://learn.microsoft.com/en-us/style-guide/procedures-instructions/describing-alternative-input-methods",
+      "relpath": "microsoft-style/procedures-instructions/describing-alternative-input-methods.md",
+      "status": "ok"
+    },
+    {
+      "title": "Describing interactions with the UI",
+      "section": "Microsoft Writing Style Guide / Procedures and instructions",
+      "url": "https://learn.microsoft.com/en-us/style-guide/procedures-instructions/describing-interactions-with-ui",
+      "relpath": "microsoft-style/procedures-instructions/describing-interactions-with-ui.md",
+      "status": "ok"
+    },
+    {
+      "title": "Formatting text in instructions",
+      "section": "Microsoft Writing Style Guide / Procedures and instructions",
+      "url": "https://learn.microsoft.com/en-us/style-guide/procedures-instructions/formatting-text-in-instructions",
+      "relpath": "microsoft-style/procedures-instructions/formatting-text-in-instructions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Writing step-by-step instructions",
+      "section": "Microsoft Writing Style Guide / Procedures and instructions",
+      "url": "https://learn.microsoft.com/en-us/style-guide/procedures-instructions/writing-step-by-step-instructions",
+      "relpath": "microsoft-style/procedures-instructions/writing-step-by-step-instructions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Punctuation",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/",
+      "relpath": "microsoft-style/punctuation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Apostrophes",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/apostrophes",
+      "relpath": "microsoft-style/punctuation/apostrophes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Colons",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/colons",
+      "relpath": "microsoft-style/punctuation/colons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Commas",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/commas",
+      "relpath": "microsoft-style/punctuation/commas.md",
+      "status": "ok"
+    },
+    {
+      "title": "Em dashes, en dashes, hyphens, and minus signs",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/dashes-hyphens/",
+      "relpath": "microsoft-style/punctuation/dashes-hyphens.md",
+      "status": "ok"
+    },
+    {
+      "title": "Hyphens",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/dashes-hyphens/hyphens",
+      "relpath": "microsoft-style/punctuation/dashes-hyphens/hyphens.md",
+      "status": "ok"
+    },
+    {
+      "title": "Ellipses",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/ellipses",
+      "relpath": "microsoft-style/punctuation/ellipses.md",
+      "status": "ok"
+    },
+    {
+      "title": "Exclamation points",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/exclamation-points",
+      "relpath": "microsoft-style/punctuation/exclamation-points.md",
+      "status": "ok"
+    },
+    {
+      "title": "Formatting punctuation",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/formatting-punctuation",
+      "relpath": "microsoft-style/punctuation/formatting-punctuation.md",
+      "status": "ok"
+    },
+    {
+      "title": "Periods",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/periods",
+      "relpath": "microsoft-style/punctuation/periods.md",
+      "status": "ok"
+    },
+    {
+      "title": "Question marks",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/question-marks",
+      "relpath": "microsoft-style/punctuation/question-marks.md",
+      "status": "ok"
+    },
+    {
+      "title": "Quotation marks",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/quotation-marks",
+      "relpath": "microsoft-style/punctuation/quotation-marks.md",
+      "status": "ok"
+    },
+    {
+      "title": "Semicolons",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/semicolons",
+      "relpath": "microsoft-style/punctuation/semicolons.md",
+      "status": "ok"
+    },
+    {
+      "title": "Slashes",
+      "section": "Microsoft Writing Style Guide / Punctuation",
+      "url": "https://learn.microsoft.com/en-us/style-guide/punctuation/slashes",
+      "relpath": "microsoft-style/punctuation/slashes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Responsive content",
+      "section": "Microsoft Writing Style Guide / Responsive content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/responsive-content",
+      "relpath": "microsoft-style/responsive-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Scannable content",
+      "section": "Microsoft Writing Style Guide / Scannable content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/scannable-content/",
+      "relpath": "microsoft-style/scannable-content.md",
+      "status": "ok"
+    },
+    {
+      "title": "Headings",
+      "section": "Microsoft Writing Style Guide / Scannable content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/scannable-content/headings",
+      "relpath": "microsoft-style/scannable-content/headings.md",
+      "status": "ok"
+    },
+    {
+      "title": "Lists",
+      "section": "Microsoft Writing Style Guide / Scannable content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/scannable-content/lists",
+      "relpath": "microsoft-style/scannable-content/lists.md",
+      "status": "ok"
+    },
+    {
+      "title": "Pull quotes",
+      "section": "Microsoft Writing Style Guide / Scannable content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/scannable-content/pull-quotes",
+      "relpath": "microsoft-style/scannable-content/pull-quotes.md",
+      "status": "ok"
+    },
+    {
+      "title": "Sidebars",
+      "section": "Microsoft Writing Style Guide / Scannable content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/scannable-content/sidebars",
+      "relpath": "microsoft-style/scannable-content/sidebars.md",
+      "status": "ok"
+    },
+    {
+      "title": "Tables",
+      "section": "Microsoft Writing Style Guide / Scannable content",
+      "url": "https://learn.microsoft.com/en-us/style-guide/scannable-content/tables",
+      "relpath": "microsoft-style/scannable-content/tables.md",
+      "status": "ok"
+    },
+    {
+      "title": "Search and writing",
+      "section": "Microsoft Writing Style Guide / Search and writing",
+      "url": "https://learn.microsoft.com/en-us/style-guide/search-writing",
+      "relpath": "microsoft-style/search-writing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Text formatting",
+      "section": "Microsoft Writing Style Guide / Text formatting",
+      "url": "https://learn.microsoft.com/en-us/style-guide/text-formatting/",
+      "relpath": "microsoft-style/text-formatting.md",
+      "status": "ok"
+    },
+    {
+      "title": "Formatting common text elements",
+      "section": "Microsoft Writing Style Guide / Text formatting",
+      "url": "https://learn.microsoft.com/en-us/style-guide/text-formatting/formatting-common-text-elements",
+      "relpath": "microsoft-style/text-formatting/formatting-common-text-elements.md",
+      "status": "ok"
+    },
+    {
+      "title": "Formatting titles",
+      "section": "Microsoft Writing Style Guide / Text formatting",
+      "url": "https://learn.microsoft.com/en-us/style-guide/text-formatting/formatting-titles",
+      "relpath": "microsoft-style/text-formatting/formatting-titles.md",
+      "status": "ok"
+    },
+    {
+      "title": "Using type",
+      "section": "Microsoft Writing Style Guide / Text formatting",
+      "url": "https://learn.microsoft.com/en-us/style-guide/text-formatting/using-type/",
+      "relpath": "microsoft-style/text-formatting/using-type.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dont compress line spacing",
+      "section": "Microsoft Writing Style Guide / Text formatting",
+      "url": "https://learn.microsoft.com/en-us/style-guide/text-formatting/using-type/dont-compress-line-spacing",
+      "relpath": "microsoft-style/text-formatting/using-type/dont-compress-line-spacing.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use left alignment",
+      "section": "Microsoft Writing Style Guide / Text formatting",
+      "url": "https://learn.microsoft.com/en-us/style-guide/text-formatting/using-type/use-left-alignment",
+      "relpath": "microsoft-style/text-formatting/using-type/use-left-alignment.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use sentence-style capitalization",
+      "section": "Microsoft Writing Style Guide / Text formatting",
+      "url": "https://learn.microsoft.com/en-us/style-guide/text-formatting/using-type/use-sentence-style-capitalization",
+      "relpath": "microsoft-style/text-formatting/using-type/use-sentence-style-capitalization.md",
+      "status": "ok"
+    },
+    {
+      "title": "Top 10 tips for Microsoft style and voice",
+      "section": "Microsoft Writing Style Guide / Top 10 tips for Microsoft style and voice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/top-10-tips-style-voice",
+      "relpath": "microsoft-style/top-10-tips-style-voice.md",
+      "status": "ok"
+    },
+    {
+      "title": "URLs and web addresses",
+      "section": "Microsoft Writing Style Guide / URLs and web addresses",
+      "url": "https://learn.microsoft.com/en-us/style-guide/urls-web-addresses",
+      "relpath": "microsoft-style/urls-web-addresses.md",
+      "status": "ok"
+    },
+    {
+      "title": "Welcome - Microsoft Writing Style Guide",
+      "section": "Microsoft Writing Style Guide / Microsoft Writing Style Guide",
+      "url": "https://learn.microsoft.com/en-us/style-guide/welcome/",
+      "relpath": "microsoft-style/welcome.md",
+      "status": "ok"
+    },
+    {
+      "title": "Whats new?",
+      "section": "Microsoft Writing Style Guide / Microsoft Writing Style Guide",
+      "url": "https://learn.microsoft.com/en-us/style-guide/welcome/whats-new",
+      "relpath": "microsoft-style/welcome/whats-new.md",
+      "status": "ok"
+    },
+    {
+      "title": "Word choice",
+      "section": "Microsoft Writing Style Guide / Word choice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/word-choice/",
+      "relpath": "microsoft-style/word-choice.md",
+      "status": "ok"
+    },
+    {
+      "title": "Avoid jargon",
+      "section": "Microsoft Writing Style Guide / Word choice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/word-choice/avoid-jargon",
+      "relpath": "microsoft-style/word-choice/avoid-jargon.md",
+      "status": "ok"
+    },
+    {
+      "title": "Dont use common words in new ways",
+      "section": "Microsoft Writing Style Guide / Word choice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/word-choice/dont-use-common-words-in-new-ways",
+      "relpath": "microsoft-style/word-choice/dont-use-common-words-in-new-ways.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use contractions",
+      "section": "Microsoft Writing Style Guide / Word choice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/word-choice/use-contractions",
+      "relpath": "microsoft-style/word-choice/use-contractions.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use simple words, concise sentences",
+      "section": "Microsoft Writing Style Guide / Word choice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/word-choice/use-simple-words-concise-sentences",
+      "relpath": "microsoft-style/word-choice/use-simple-words-concise-sentences.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use technical terms carefully",
+      "section": "Microsoft Writing Style Guide / Word choice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/word-choice/use-technical-terms-carefully",
+      "relpath": "microsoft-style/word-choice/use-technical-terms-carefully.md",
+      "status": "ok"
+    },
+    {
+      "title": "Use US spelling and avoid non-English words",
+      "section": "Microsoft Writing Style Guide / Word choice",
+      "url": "https://learn.microsoft.com/en-us/style-guide/word-choice/use-us-spelling-avoid-non-english-words",
+      "relpath": "microsoft-style/word-choice/use-us-spelling-avoid-non-english-words.md",
+      "status": "ok"
+    },
+    {
+      "title": "Plain language guide series | Digital.gov",
+      "section": "Plain Language & UX Clarity",
+      "url": "https://digital.gov/guides/plain-language/",
+      "relpath": "plain-language/digital-gov-plain-language.md",
+      "status": "ok"
+    }
+  ]
+}
