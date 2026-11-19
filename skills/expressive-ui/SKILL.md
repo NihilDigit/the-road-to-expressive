@@ -1,109 +1,170 @@
 ---
 name: expressive-ui
-description: Query the local Road to Expressive corpus via `uv run rtx` for Material 3 Expressive tokens, Compose Multiplatform vs AndroidX alpha/beta API parity, Gradle Compose BOM / CMP dual-target version unification, Skiko / native GPU surface interop (`Direct3DRenderer`, `FrameDriver`, D3D11/Metal), ProGuard / JDK AOT rules, adaptive layouts, multi-input patterns, cross-platform HIG (Apple/Windows/GNOME/KDE), and UX writing / AP Style rules. Use whenever designing, reviewing, upgrading, or implementing Compose UI, Gradle Compose dependencies, desktop/iOS runtime interop, adaptive layouts, design tokens, or UI copy.
+description: Query the local Road to Expressive corpus via bare `rtx` commands (`rtx spec`, `rtx component`, `rtx api`, `rtx source`, `rtx token`, `rtx copy`, `rtx search`) for Material 3 Expressive official design specs & tokens, upstream Compose Multiplatform / AndroidX / Skiko Kotlin source & default parameters, Gradle Compose BOM / CMP dual-target version unification, Skiko native GPU surface interop (`Direct3DRenderer`, `FrameDriver`, D3D11/Metal), ProGuard / JDK AOT rules, adaptive layouts, multi-input patterns, cross-platform HIG (Apple/Windows/GNOME/KDE), and UX writing / AP Style rules. Use whenever designing, reviewing, upgrading, or implementing Compose UI, Gradle Compose dependencies, desktop/iOS runtime interop, adaptive layouts, design tokens, or UI copy.
 ---
 
 # Expressive UI Corpus Skill (`rtx`)
 
-Use this skill to ground UI architecture, Material 3 Expressive tokens, Compose Multiplatform APIs, platform HIG decisions, and UI copywriting in verified local manifests, bytecode signatures, and mirrored official documentation.
+Use this skill to ground every UI design decision, Material 3 Expressive component choice, Compose Multiplatform API call, Skiko/desktop interop detail, platform HIG tradeoff, and UI string in live local upstream mirrors, cached Maven `*-sources.jar` Kotlin implementations, bytecode parity manifests, and verified design tokens.
 
-## When to Use
+> **CLI Invocation**: `rtx` is installed globally on `PATH` (via `uv tool install --editable . --force`) and resolves the corpus automatically from any workspace directory. Run bare `rtx ...` commands directly!
+> *(Fallback if `rtx` is not globally installed on `PATH`: `uv run --project <path-to-the-road-to-expressive> rtx ...`)*
 
-- Implementing or updating Material 3 Expressive components (`SplitButton`, `ButtonGroup`, `FloatingToolbar`, `VerticalFloatingToolbar`, `FlexibleTopAppBar`, `WideNavigationRail`, `ShortNavigationBar`, `LoadingIndicator`, `LinearWavyProgressIndicator`, `MotionScheme`).
-- Checking whether an experimental M3E or Navigation 3 API exists in JetBrains Compose Multiplatform (`org.jetbrains.compose.material3`) vs AndroidX (`androidx.compose.material3`) before writing code.
-- Aligning Gradle Compose BOM / CMP dual-target dependency versions, upgrading Skiko / native GPU surface interop (`Direct3DRenderer`, `FrameDriver`, D3D11/Metal), or updating ProGuard / JDK AOT keep rules.
-- Designing adaptive layouts (`WindowSizeClass` width & height, canonical List-Detail / Supporting Pane / Feed, `ListDetailSceneStrategy`) or multi-input support (touch, mouse hover/right-click, keyboard shortcuts, stylus).
-- Reconciling Material 3 Expressive with Apple HIG, Microsoft Windows/Fluent 2, GNOME HIG, or KDE HIG.
-- Writing or auditing UI microcopy, labels, error states, confirmations, numerals, dates, or CJK text.
+---
 
-## Core Query Workflow
+## Mandatory Design-First Gate (3-Step Top-Down Pre-Design Reading Funnel)
 
-Run commands from the corpus repository root using `uv run rtx`, or from **any external project directory** using `--project` or `--directory`:
+**Before proposing a UI plan, choosing a widget, or custom-drawing ANY UI component**, you MUST walk this 3-step funnel using live upstream specs from `.corpus/`:
+
+### Step 1 — Screen Skeleton & Canonical Layouts (`rtx spec`)
+
+Before picking any component, read the official layout, breakpoint, scaffold, and canonical multi-pane structure:
 
 ```bash
-# From inside the-road-to-expressive:
-uv run rtx status
-
-# From any other repository (cross-repo invocation):
-uv run --project <path-to-the-road-to-expressive> rtx status
-# or:
-uv run --directory <path-to-the-road-to-expressive> rtx status
+rtx spec "canonical layouts"
+rtx spec "desktop scaffold breakpoints"
 ```
 
-Add `--json` to any query subcommand when structured output is easier to parse.
+This pulls noise-stripped upstream sections directly from `m3-expressive` (`foundations/layout/canonical-examples.md` [List-Detail, Supporting Pane, Feed], `scaffold.md`, `breakpoints.md`, `desktop.md`), `compose-android` (`across-form-factors.md`), and `apple-hig` (`layout.md`).
 
-### 1. Check Corpus Freshness & Tracked Versions
+### Step 2 — Cross-Component Emphasis & Task Patterns (`rtx spec`)
+
+Before committing to a component class, read the **cross-component comparison & pattern pages** so you pick the right visual weight, modality, and single canonical entry point:
 
 ```bash
-uv run rtx status
+# Action emphasis ladder (FAB vs Filled vs Tonal vs Outlined vs lightweight Text/IconButton):
+rtx spec "button emphasis"
+
+# Selection & filtering (Checkbox vs Switch vs Radio vs Chip vs ToggleButton vs Menu):
+rtx spec "selection filtering"
+
+# Modality & transient feedback (Snackbar vs Sheet vs Dialog — NEVER custom-draw fake Toasts!):
+rtx spec "transient feedback snackbar dialog"
+
+# Mutually exclusive navigation chrome & single canonical entry point:
+rtx spec "navigation bar rail toolbar duplicate"
+
+# Search entry points & docked vs full-screen focused search:
+rtx spec "search bar docked fullscreen"
+
+# Domain patterns (Media / Settings / Inputs & Drag-and-Drop / Loading):
+rtx spec "video player fullscreen immersive"
+rtx spec "settings page organization"
+rtx spec "inputs gestures drag drop"
+rtx spec "loading progress"
 ```
 
-If `.corpus/index.db` is missing or stale after pulling updates, rebuild or sync:
+Key design guardrails verified from upstream specs:
+- **Never custom-draw a fake Toast overlay** when standard `Snackbar` / `SnackbarHost` exists.
+- **Check emphasis weight** before using heavy `ButtonGroup` / filled pills where lightweight text/icon/chip controls fit better.
+- **Verify single canonical entry points**: never show `NavigationRail` and `ShortNavigationBar` simultaneously or paint duplicate visible buttons for the same action on one screen.
+
+### Step 3 — Specific Component Variants & Official Do/Don'ts (`rtx component`)
+
+Once you have candidate components, read their **lossless official M3 Expressive dossier** (`Overview & Variants`, `Usage`, `Official Do & Don't Rules`, `Adaptive Design & Placement`, `Behavior`), **Desktop & Mobile HIG counterparts**, **key tokens**, and **Kotlin signatures with default parameters** in one batch call:
 
 ```bash
-uv run rtx index
-# Optional live refresh from upstream docs & Maven:
-uv run rtx sync --all --no-assets --workers 10
+rtx component SearchBar Carousel Tabs Snackbar NavigationRail
+rtx component FloatingToolbar ButtonGroup SplitButtonLayout
 ```
 
-### 2. Inspect One or Multiple Components in a Batch
+---
 
-Start with `rtx component` for a unified view combining M3E tokens, bytecode-verified Compose APIs, adaptive layout rules, and Apple/Windows/Linux HIG notes (pass multiple names in one call to avoid repeated shell invocations):
+## CRITICAL: Swarm & Subagent Propagation Rule
+
+> **Subagents and Swarm workers start with a blank context and will NOT load `expressive-ui` on their own when handed a concrete file list.**
+>
+> Whenever you (as a Coordinator or Parent Agent) spawn **ANY** worker or subagent that designs, audits, or implements UI, layouts, navigation, player controls, settings, design tokens, or Skiko/Compose code, you **MUST** include this exact instruction in its `brief`:
+>
+> ```text
+> Load the expressive-ui skill first and run rtx spec / rtx component / rtx source before writing UI code.
+> ```
+
+---
+
+## Zero `javap` Needed: Inspect Exact Kotlin Defaults & Upstream Source (`rtx api` + `rtx source`)
+
+Never manually glob `.gradle/caches` with `javap` or guess experimental annotations, default parameter values, or internal Compose/Skiko behavior from memory!
+
+### 1. Check Parity, Opt-Ins & Kotlin Default Parameters (`rtx api`)
 
 ```bash
-uv run rtx component SplitButton
-uv run rtx component FloatingToolbar ButtonGroup SplitButtonLayout
-```
+# Check latest alpha/beta/rc/stable Maven versions and AndroidX vs CMP parity deltas
+rtx api material3 --diff
 
-### 3. Verify Maven Versions & AndroidX vs CMP API Parity
-
-Never guess Compose experimental annotations or parameter lists from memory — query one or multiple symbols in a single batch:
-
-```bash
-# Check latest alpha/beta/rc/stable versions and parity deltas
-uv run rtx api material3 --diff
-uv run rtx api ButtonGroup FloatingToolbar MaterialShapes --target common
-uv run rtx api ListDetailSceneStrategy --target desktop
+# Batch-query symbols with Kotlin default parameter expressions + @OptIn status
+rtx api HorizontalMultiBrowseCarousel WideNavigationRail ButtonGroup --target common
+rtx api ListDetailSceneStrategy --target desktop
 ```
 
 Key checks before writing Kotlin/Compose code:
+- Inspect the `kotlin:` declaration lines for exact **default parameter expressions** (e.g., `flingBehavior = CarouselDefaults.singleAdvanceFlingBehavior(state = state)`).
 - Confirm whether the symbol requires `@OptIn(ExperimentalMaterial3ExpressiveApi::class)` or `@OptIn(ExperimentalMaterial3Api::class)`.
-- Compare `androidx_signature` vs `cmp_signature` to avoid desktop/iOS compilation failures.
+- Compare `androidx:` vs `cmp:` signatures to prevent desktop/iOS compilation failures.
 
-### 4. Query M3 Expressive Tokens
+### 2. Read Exact Upstream Kotlin KDoc & Implementation (`rtx source`)
 
-```bash
-uv run rtx token MotionScheme largeIncreased
-uv run rtx token largeIncreased --category shape
-uv run rtx token Emphasized --category typography
-uv run rtx token surfaceContainer --category color
-```
-
-### 5. Search Knowledge Handbooks, Runtime Interop & Official Mirrors
-
-Prefer curated `knowledge/` handbooks first (including Gradle BOM unification, Skiko `Direct3DRenderer` / `FrameDriver` GPU interop, and ProGuard / JDK AOT rules), then drill into `.corpus/` mirror pages for exact upstream wording:
+`rtx source` opens the locally cached Maven `*-sources.jar` archives (`material3`, `foundation`, `ui`, `adaptive`, `navigation3`, `skiko`) directly and prints exact line-numbered KDoc + Kotlin/Java implementation:
 
 ```bash
-uv run rtx search "Direct3DRenderer FrameDriver" --layer knowledge
-uv run rtx search "compose-bom dual-target ProGuard AOT" --layer knowledge
-uv run rtx search "WindowSizeClass compact height landscape" --layer knowledge
-uv run rtx search "ContextMenuArea long press" --layer knowledge
-uv run rtx search "Navigation 3 NavDisplay backstack" --layer mirror --source compose-android
-uv run rtx search "window title bar snap layouts" --layer mirror --source windows-fluent
+rtx source HorizontalMultiBrowseCarousel
+rtx source TabRowDefaults.PrimaryIndicator
+rtx source WideNavigationRailItem
+rtx source SkiaLayer --artifact skiko
+rtx source SearchBar DockedSearchBar --limit 3 --context-lines 2
 ```
 
-### 6. Query UX Writing & AP Style Rules
+Use `--artifact <filter>` (e.g., `cmp-material3`, `androidx-material3`, `foundation`, `ui`, `navigation3`, `skiko`), `--max-lines N`, or `--json` when needed.
+
+---
+
+## Tokens, Knowledge Handbooks, Runtime Interop & UX Copy
+
+### Query M3 Expressive Design Tokens (`rtx token`)
 
 ```bash
-uv run rtx copy "sentence case title case"
-uv run rtx copy "error message recovery"
-uv run rtx copy "numerals dates tabular"
-uv run rtx copy "destructive button confirmation"
+rtx token MotionScheme largeIncreased displayLargeEmphasized
+rtx token largeIncreased --category shape
+rtx token Emphasized --category typography
+rtx token surfaceContainer --category color
 ```
 
-## Verification Checklist
+### Search Curated Engineering Handbooks & Mirrors (`rtx search`)
 
-After applying guidance or updating corpus knowledge:
-1. Run `uv run rtx doctor` to confirm zero broken links, zero lines `> 4000` chars, and healthy FTS5 indexes.
-2. Verify all Compose API calls against `manifests/api/material3-expressive-surface.json` and `manifests/api/compose-versions.json`.
-3. Verify all token names against `manifests/tokens/m3-expressive-tokens.json`.
+Prefer curated `knowledge/` handbooks for Gradle BOM unification, Skiko `Direct3DRenderer` / `FrameDriver` native GPU interop, ProGuard / JDK AOT rules, and multi-input engineering:
+
+```bash
+rtx search "Direct3DRenderer FrameDriver" --layer knowledge
+rtx search "compose-bom dual-target ProGuard AOT" --layer knowledge
+rtx search "WindowSizeClass compact height landscape" --layer knowledge
+rtx search "ContextMenuArea long press" --layer knowledge
+rtx search "Navigation 3 NavDisplay backstack" --layer mirror --source compose-android
+```
+
+### Query UX Writing & AP Style Rules (`rtx copy`)
+
+```bash
+rtx copy "sentence case title case"
+rtx copy "error message recovery"
+rtx copy "numerals dates tabular"
+rtx copy "destructive button confirmation"
+```
+
+---
+
+## Corpus Freshness & Verification
+
+Check corpus status and tracked Maven versions at any time:
+
+```bash
+rtx status
+```
+
+If `.corpus/index.db` or `source-index.json` needs rebuilding or refreshing:
+
+```bash
+rtx index
+rtx doctor
+```
+
+Add `--json` to any query subcommand when structured output is easier to parse.

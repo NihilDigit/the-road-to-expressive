@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import threading
+import zipfile
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
@@ -15,7 +16,18 @@ from rtx.diff import analyze_impact, capture_snapshot, diff_snapshots, save_snap
 from rtx.http import ConditionalHttpClient
 from rtx.index import build_index
 from rtx.models import PageMetadata, SourceManifest, format_page_frontmatter, parse_page_frontmatter, wrap_long_lines
-from rtx.query import get_status, query_api, query_component, query_copy, query_tokens, run_doctor, search_corpus
+from rtx.query import (
+    clean_spec_markdown,
+    get_status,
+    query_api,
+    query_component,
+    query_copy,
+    query_source,
+    query_spec,
+    query_tokens,
+    run_doctor,
+    search_corpus,
+)
 
 
 def _write_skill(root: Path) -> None:
@@ -502,4 +514,396 @@ def test_batch_api_component_and_token_queries(
     assert tok_json["queries"] == ["largeIncreased", "MotionScheme"]
     assert len(tok_json["results"]) == 2
     assert tok_json["results"][0]["tokens"][0]["value"] == "20dp"
+
+
+def _seed_spec_and_sources(root: Path) -> RepoPaths:
+    paths = _seed_repo(root)
+
+    # Rich M3 component pages with noise (images, video, Implementation Status, XR) + real Do/Don't captions
+    comp_dir = root / ".corpus" / "m3-expressive" / "pages" / "components"
+    comp_dir.mkdir(parents=True, exist_ok=True)
+    search_meta = PageMetadata(
+        source_id="m3-expressive",
+        url="https://m3.material.io/components/search",
+        title="Search",
+        section="components",
+        fetched_at="2026-11-19T00:00:00Z",
+        last_modified="2026-11-19",
+        sha256="search123",
+    )
+    (comp_dir / "search.md").write_text(
+        format_page_frontmatter(search_meta)
+        + "# Search\n\n"
+        + "![Search](https://firebasestorage.googleapis.com/v0/b/design-spec/o/search.png?alt=media)\n\n"
+        + "## Overview\n\n"
+        + "- Use search for navigating a product with queries\n"
+        + "[Video](https://firebasestorage.googleapis.com/v0/b/design-spec/o/search.mp4?alt=media)\n\n"
+        + "_When inputting text, search suggestions appear below the search bar_\n\n"
+        + "## Usage\n\n"
+        + "Search helps people find information quickly.\n\n"
+        + "### Different ways to search\n\n"
+        + "- Search bar: Use to search contents in a specific view\n"
+        + "- Search app bar: Use when search is the primary global function\n\n"
+        + "_Use a maximum of two trailing icons_\n\n"
+        + "_Don't place duplicate search controls on the same screen_\n\n"
+        + "## Adaptive design\n\n"
+        + "- **Docked layout**: Best for medium and expanded windows\n"
+        + "- **Full-screen layout**: Default for compact breakpoints\n\n"
+        + "## Behavior\n\n"
+        + "The back icon releases focus and dismisses suggestions.\n\n"
+        + "## XR\n\n"
+        + "## Variants\n\n"
+        + "Spatial XR search orbiter should never leak into default mobile/desktop dossiers.\n\n"
+        + "## Accessibility\n\n"
+        + "Screen readers must announce autocomplete results.\n\n"
+        + "### Implementation Status: Search\n\n"
+        + "| Platform / Library | Type | Status | Reference |\n"
+        + "| --- | --- | --- | --- |\n"
+        + "| Flutter | FLUTTER_IMPLEMENTATION | AVAILABLE | https://api.flutter.dev |\n"
+        + "| Web | LIT_IMPLEMENTATION | UNAVAILABLE | |\n\n"
+        + "## Component Design Tokens\n\n"
+        + "| Token Set | Token | Context | Value | Resolved |\n"
+        + "| --- | --- | --- | --- | --- |\n"
+        + "| Search - Bar | `md.comp.search-bar.container.height` | default | `56dp` | `56dp` |\n",
+        encoding="utf-8",
+    )
+
+    snackbar_meta = PageMetadata(
+        source_id="m3-expressive",
+        url="https://m3.material.io/components/snackbar",
+        title="Snackbar",
+        section="components",
+        fetched_at="2026-11-19T00:00:00Z",
+        last_modified="2026-11-19",
+        sha256="snack123",
+    )
+    (comp_dir / "snackbar.md").write_text(
+        format_page_frontmatter(snackbar_meta)
+        + "# Snackbar\n\n"
+        + "![Snackbar](https://firebasestorage.googleapis.com/v0/b/design-spec/o/snackbar.png?alt=media)\n\n"
+        + "## Overview\n\n"
+        + "- Snackbars provide brief transient feedback at the bottom of the UI\n\n"
+        + "## Usage\n\n"
+        + "Snackbars communicate low-priority transient messages without blocking user interaction.\n\n"
+        + "| Component | Priority | User action |\n"
+        + "| --- | --- | --- |\n"
+        + "| Snackbar | Low priority | Optional: disappears automatically |\n"
+        + "| Dialog | High priority | Required: blocks app usage |\n\n"
+        + "_Avoid placing snackbars in front of navigation components_\n\n"
+        + "_Don't use a filled or elevated button in a snackbar_\n",
+        encoding="utf-8",
+    )
+
+    # Matching Apple HIG page with watchOS noise that must be stripped
+    apple_dir = root / ".corpus" / "apple-hig" / "pages"
+    apple_dir.mkdir(parents=True, exist_ok=True)
+    apple_meta = PageMetadata(
+        source_id="apple-hig",
+        url="https://developer.apple.com/design/human-interface-guidelines/search-fields",
+        title="Search fields",
+        section="Components",
+        fetched_at="2026-11-19T00:00:00Z",
+        last_modified="2026-11-19",
+        sha256="apple123",
+    )
+    (apple_dir / "search-fields.md").write_text(
+        format_page_frontmatter(apple_meta)
+        + "# Search fields\n\n"
+        + "![Apple Search](https://developer.apple.com/images/search.png)\n\n"
+        + "A search field lets people search a collection of content.\n\n"
+        + "## Best practices\n\n"
+        + "**Use placeholder text to clarify scope.** Start filtering immediately as someone types.\n\n"
+        + "## Platform considerations\n\n"
+        + "*No additional considerations for visionOS*.\n\n"
+        + "### macOS\n\n"
+        + "Place the search field in the trailing toolbar area.\n\n"
+        + "### watchOS\n\n"
+        + "Digital Crown watchOS dictation guidance should not leak.\n",
+        encoding="utf-8",
+    )
+
+    # Synthetic Maven *-sources.jar + source-index.json
+    sources_dir = root / ".corpus" / "compose-maven-api" / "sources"
+    sources_dir.mkdir(parents=True, exist_ok=True)
+    carousel_kt = "\n".join(
+        [
+            "package androidx.compose.material3.carousel",
+            "",
+            "/**",
+            " * Multi-browse carousel displaying large, medium, and small items.",
+            " */",
+            "@Composable",
+            "fun HorizontalMultiBrowseCarousel(",
+            "    state: CarouselState,",
+            "    preferredItemWidth: Dp,",
+            "    modifier: Modifier = Modifier,",
+            "    flingBehavior: TargetedFlingBehavior = CarouselDefaults.singleAdvanceFlingBehavior(state = state),",
+            "    content: @Composable CarouselItemScope.(itemIndex: Int) -> Unit,",
+            ") {",
+            "    // Carousel body",
+            "    Carousel(state = state, modifier = modifier, flingBehavior = flingBehavior, content = content)",
+            "}",
+            "",
+            "object TabRowDefaults {",
+            "    /**",
+            "     * Primary indicator aligned to tab content width.",
+            "     */",
+            "    @Composable",
+            "    fun PrimaryIndicator(",
+            "        modifier: Modifier = Modifier,",
+            "        width: Dp = 24.dp,",
+            "    ) {",
+            "        Spacer(modifier)",
+            "    }",
+            "}",
+        ]
+    )
+    jar_name = "cmp-material3-1.13.0-rc01-sources.jar"
+    entry_path = "commonMain/androidx/compose/material3/carousel/Carousel.kt"
+    with zipfile.ZipFile(sources_dir / jar_name, "w") as zf:
+        zf.writestr(entry_path, carousel_kt)
+
+    source_index = {
+        "schema_version": 1,
+        "generated_at": "2026-11-19T00:00:00Z",
+        "sources_dir": ".corpus/compose-maven-api/sources",
+        "jar_count": 1,
+        "symbol_count": 2,
+        "jars": {jar_name: {"jar_name": jar_name, "artifact_key": "cmp-material3", "version": "1.13.0-rc01"}},
+        "symbols": [
+            {
+                "name": "HorizontalMultiBrowseCarousel",
+                "owner": "",
+                "qualified_name": "HorizontalMultiBrowseCarousel",
+                "fq_package": "androidx.compose.material3.carousel",
+                "kind": "composable",
+                "visibility": "public",
+                "is_composable": True,
+                "annotations": ["Composable"],
+                "jar_name": jar_name,
+                "artifact_key": "cmp-material3",
+                "coordinate": "org.jetbrains.compose.material3:material3",
+                "version": "1.13.0-rc01",
+                "platform": "common",
+                "entry_path": entry_path,
+                "kdoc_start_line": 3,
+                "start_line": 6,
+                "end_line": 16,
+                "has_defaults": True,
+                "kotlin_signature": (
+                    "@Composable\n"
+                    "fun HorizontalMultiBrowseCarousel(\n"
+                    "    state: CarouselState,\n"
+                    "    preferredItemWidth: Dp,\n"
+                    "    modifier: Modifier = Modifier,\n"
+                    "    flingBehavior: TargetedFlingBehavior = CarouselDefaults.singleAdvanceFlingBehavior(state = state),\n"
+                    "    content: @Composable CarouselItemScope.(itemIndex: Int) -> Unit,\n"
+                    ")"
+                ),
+                "kdoc": "Multi-browse carousel displaying large, medium, and small items.",
+            },
+            {
+                "name": "PrimaryIndicator",
+                "owner": "TabRowDefaults",
+                "qualified_name": "TabRowDefaults.PrimaryIndicator",
+                "fq_package": "androidx.compose.material3.carousel",
+                "kind": "composable",
+                "visibility": "public",
+                "is_composable": True,
+                "annotations": ["Composable"],
+                "jar_name": jar_name,
+                "artifact_key": "cmp-material3",
+                "coordinate": "org.jetbrains.compose.material3:material3",
+                "version": "1.13.0-rc01",
+                "platform": "common",
+                "entry_path": entry_path,
+                "kdoc_start_line": 19,
+                "start_line": 22,
+                "end_line": 28,
+                "has_defaults": True,
+                "kotlin_signature": "@Composable\nfun PrimaryIndicator(\n    modifier: Modifier = Modifier,\n    width: Dp = 24.dp,\n)",
+                "kdoc": "Primary indicator aligned to tab content width.",
+            },
+        ],
+    }
+    (root / ".corpus" / "compose-maven-api" / "source-index.json").write_text(
+        json.dumps(source_index, indent=2), encoding="utf-8"
+    )
+
+    # Add HorizontalMultiBrowseCarousel to API manifest (without defaults in javap sig)
+    surf_path = root / "manifests" / "api" / "material3-expressive-surface.json"
+    surf = json.loads(surf_path.read_text(encoding="utf-8"))
+    surf["symbols"].append(
+        {
+            "name": "HorizontalMultiBrowseCarousel",
+            "package": "androidx.compose.material3.carousel",
+            "kind": "composable",
+            "signature": "@Composable fun HorizontalMultiBrowseCarousel(state: CarouselState, preferredItemWidth: Dp, modifier: Modifier, flingBehavior: TargetedFlingBehavior)",
+            "annotations": [],
+            "artifact": "org.jetbrains.compose.material3:material3",
+            "version": "1.13.0-rc01",
+            "targets": ["common", "android", "desktop"],
+            "androidx_signature": "@Composable fun HorizontalMultiBrowseCarousel(state: CarouselState, preferredItemWidth: Dp, modifier: Modifier, flingBehavior: TargetedFlingBehavior)",
+            "cmp_signature": "@Composable fun HorizontalMultiBrowseCarousel(state: CarouselState, preferredItemWidth: Dp, modifier: Modifier, flingBehavior: TargetedFlingBehavior)",
+            "parity_status": "identical",
+        }
+    )
+    surf_path.write_text(json.dumps(surf, indent=2), encoding="utf-8")
+
+    return paths
+
+
+def test_component_dossier_noise_free_and_spec_and_source(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+) -> None:
+    paths = _seed_spec_and_sources(tmp_path)
+    monkeypatch.setenv("RTX_ROOT", str(tmp_path))
+
+    stats = build_index(paths)
+    assert stats.kotlin_sources == 2
+
+    # 1. clean_spec_markdown strips images/videos (including URLs with parens `(1)` and nested alt brackets `[No role]`),
+    #    Flutter tables, and watchOS/XR while keeping italic captions
+    cleaned = clean_spec_markdown(
+        "![Img [No role]](https://firebasestorage.googleapis.com/x%20(1).png?alt=media)\n"
+        "[Video](https://firebasestorage.googleapis.com/demo%20(1).mp4?alt=media)\n"
+        "_Don't duplicate buttons_\n\n### watchOS\nWatch text\n\n### macOS\nDesktop text\n"
+    )
+    assert "firebasestorage" not in cleaned
+    assert "alt=media" not in cleaned
+    assert ".mp4)" not in cleaned
+    assert "_Don't duplicate buttons_" in cleaned
+    assert "Watch text" not in cleaned
+    assert "Desktop text" in cleaned
+
+    # 2. Lossless `rtx component SearchBar` resolves `components/search.md` + `apple-hig/search-fields.md` cleanly
+    comp = query_component(paths, "SearchBar")
+    assert comp["m3_dossier"]
+    dossier = comp["m3_dossier"][0]
+    assert dossier["path"].endswith("components/search.md")
+    assert "Docked layout" in dossier["adaptive_and_placement"]
+    assert any("Don't place duplicate search controls" in r for r in dossier["do_dont_rules"])
+    assert "firebasestorage" not in json.dumps(comp)
+    assert "FLUTTER_IMPLEMENTATION" not in json.dumps(comp)
+    assert "Spatial XR search orbiter" not in json.dumps(comp)
+    assert comp["hig_counterparts"]
+    assert "trailing toolbar area" in comp["hig_counterparts"][0]["summary"]
+    assert "Digital Crown" not in comp["hig_counterparts"][0]["summary"]
+
+    assert main(["component", "SearchBar", "Snackbar"]) == 0
+    comp_out = capsys.readouterr().out
+    assert "=== Component: SearchBar ===" in comp_out
+    assert "[M3 Expressive Official Spec: Search]" in comp_out
+    assert "-- Official Do & Don't Rules --" in comp_out
+    assert "firebasestorage" not in comp_out
+    assert "FLUTTER_IMPLEMENTATION" not in comp_out
+    assert "Digital Crown" not in comp_out
+
+    # 3. `rtx spec` returns complete coherent sections with comparison tables & captions
+    spec = query_spec(paths, "transient feedback snackbar dialog", limit=3)
+    assert spec["sections"]
+    top_body = spec["sections"][0]["content"]
+    assert "Low priority" in top_body
+    assert "_Avoid placing snackbars in front of navigation components_" in top_body
+    assert "firebasestorage" not in top_body
+
+    assert main(["spec", "transient feedback snackbar dialog", "--limit", "2"]) == 0
+    spec_out = capsys.readouterr().out
+    assert "[m3-expressive] Snackbar > Usage" in spec_out
+    assert "firebasestorage" not in spec_out
+
+    # Batch quoted `rtx spec`
+    assert main(["spec", "transient feedback snackbar", "search bar docked", "--json"]) == 0
+    spec_batch = json.loads(capsys.readouterr().out)
+    assert len(spec_batch["results"]) == 2
+
+    # 4. `rtx api` enriches symbols with Kotlin default parameters from `kotlin_sources`
+    api = query_api(paths, "HorizontalMultiBrowseCarousel")
+    assert api["symbols"]
+    kt_sigs = api["symbols"][0]["kotlin_signatures"]
+    assert any("CarouselDefaults.singleAdvanceFlingBehavior" in s for s in kt_sigs)
+
+    assert main(["api", "HorizontalMultiBrowseCarousel"]) == 0
+    api_out = capsys.readouterr().out
+    assert "CarouselDefaults.singleAdvanceFlingBehavior" in api_out
+
+    # 5. `rtx source` reads exact KDoc + Kotlin source body with line numbers from cached `*-sources.jar`
+    src = query_source(paths, "HorizontalMultiBrowseCarousel")
+    assert src["matches"]
+    m0 = src["matches"][0]
+    assert m0["has_defaults"] is True
+    assert "CarouselDefaults.singleAdvanceFlingBehavior" in m0["source_code"]
+    assert "Multi-browse carousel" in m0["source_code"]
+
+    src_q = query_source(paths, "TabRowDefaults.PrimaryIndicator", artifact="cmp-material3")
+    assert src_q["matches"]
+    assert "width: Dp = 24.dp" in src_q["matches"][0]["source_code"]
+
+    assert main(["source", "HorizontalMultiBrowseCarousel", "TabRowDefaults.PrimaryIndicator", "--context-lines", "1"]) == 0
+    src_out = capsys.readouterr().out
+    assert "HorizontalMultiBrowseCarousel" in src_out
+    assert "TabRowDefaults.PrimaryIndicator" in src_out
+    assert "CarouselDefaults.singleAdvanceFlingBehavior" in src_out
+    assert "width: Dp = 24.dp" in src_out
+
+    # 6. `rtx component` excludes `internal` declarations and surfaces prefixed public composables
+    si_path = tmp_path / ".corpus" / "compose-maven-api" / "source-index.json"
+    si_data = json.loads(si_path.read_text(encoding="utf-8"))
+    si_data["symbols"].extend(
+        [
+            {
+                "name": "SearchBarImpl",
+                "owner": "",
+                "qualified_name": "SearchBarImpl",
+                "fq_package": "androidx.compose.material3",
+                "kind": "composable",
+                "visibility": "internal",
+                "is_composable": True,
+                "annotations": ["Composable"],
+                "jar_name": "cmp-material3-1.13.0-rc01-sources.jar",
+                "artifact_key": "cmp-material3",
+                "coordinate": "org.jetbrains.compose.material3:material3",
+                "version": "1.13.0-rc01",
+                "platform": "common",
+                "entry_path": "commonMain/androidx/compose/material3/SearchBar.kt",
+                "kdoc_start_line": 1,
+                "start_line": 1,
+                "end_line": 5,
+                "has_defaults": True,
+                "kotlin_signature": "@Composable\ninternal fun SearchBarImpl(modifier: Modifier = Modifier)",
+                "kdoc": "",
+            },
+            {
+                "name": "DockedSearchBar",
+                "owner": "",
+                "qualified_name": "DockedSearchBar",
+                "fq_package": "androidx.compose.material3",
+                "kind": "composable",
+                "visibility": "public",
+                "is_composable": True,
+                "annotations": ["Composable"],
+                "jar_name": "cmp-material3-1.13.0-rc01-sources.jar",
+                "artifact_key": "cmp-material3",
+                "coordinate": "org.jetbrains.compose.material3:material3",
+                "version": "1.13.0-rc01",
+                "platform": "common",
+                "entry_path": "commonMain/androidx/compose/material3/SearchBar.kt",
+                "kdoc_start_line": 10,
+                "start_line": 10,
+                "end_line": 15,
+                "has_defaults": True,
+                "kotlin_signature": "@Composable\nfun DockedSearchBar(modifier: Modifier = Modifier)",
+                "kdoc": "Docked search bar.",
+            },
+        ]
+    )
+    si_path.write_text(json.dumps(si_data, indent=2), encoding="utf-8")
+    build_index(paths)
+
+    comp_search = query_component(paths, "SearchBar")
+    api_names = [s["name"] for s in comp_search["compose_apis"]]
+    assert "DockedSearchBar" in api_names
+    assert "SearchBarImpl" not in api_names
+    assert all("internal fun " not in s for sym in comp_search["compose_apis"] for s in sym.get("kotlin_signatures", []))
+
 

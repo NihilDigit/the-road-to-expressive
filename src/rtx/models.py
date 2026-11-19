@@ -254,6 +254,33 @@ class ApiSymbol:
     cmp_signature: str = ""
     parity_status: str = ""
     doc: str = ""
+    kotlin_defaults_signature: str = ""
+
+
+@dataclass(slots=True)
+class KotlinSourceSymbol:
+    """Indexed Kotlin/Java declaration from Maven `*-sources.jar`."""
+
+    name: str
+    owner: str = ""
+    qualified_name: str = ""
+    fq_package: str = ""
+    kind: str = "fun"
+    visibility: str = "public"
+    is_composable: bool = False
+    annotations: list[str] = field(default_factory=list)
+    jar_name: str = ""
+    artifact_key: str = ""
+    coordinate: str = ""
+    version: str = ""
+    platform: str = ""
+    entry_path: str = ""
+    kdoc_start_line: int = 0
+    start_line: int = 1
+    end_line: int = 1
+    has_defaults: bool = False
+    kotlin_signature: str = ""
+    kdoc: str = ""
 
 
 @dataclass(slots=True)

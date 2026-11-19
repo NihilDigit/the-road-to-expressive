@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Live Maven artifact discovery, javap bytecode API surface extraction,
-AndroidX vs JetBrains Compose Multiplatform parity diffing, and AndroidX
-release notes mirroring.
+upstream *-sources.jar Kotlin/Java declaration indexing, AndroidX vs JetBrains
+Compose Multiplatform parity diffing, and AndroidX release notes mirroring.
 
 Outputs:
   - manifests/api/compose-versions.json
   - manifests/api/material3-expressive-surface.json
   - manifests/sources/compose-maven-api.json
   - .corpus/compose-maven-api/jars/*
+  - .corpus/compose-maven-api/sources/*-sources.jar
+  - .corpus/compose-maven-api/source-index.json
   - .corpus/compose-maven-api/pages/**/*.md (including INDEX.md & releases/)
   - .corpus/compose-maven-api/manifest.json
 """
@@ -100,6 +102,32 @@ PAIRED_BYTECODE_MODULES: list[dict[str, str]] = [
 EXTRA_BYTECODE_MODULES: list[dict[str, str]] = [
     {"module": "navigation3-runtime", "key": "androidx-navigation3-runtime", "platform": "android"},
 ]
+
+# Upstream *-sources.jar targets for Kotlin/Java declaration & default-parameter indexing
+SOURCE_JAR_TARGETS: list[dict[str, str]] = [
+    {"key": "androidx-material3", "target": "android", "platform": "android"},
+    {"key": "androidx-material3-nav-suite", "target": "android", "platform": "android"},
+    {"key": "androidx-adaptive", "target": "android", "platform": "android"},
+    {"key": "androidx-adaptive-layout", "target": "android", "platform": "android"},
+    {"key": "androidx-adaptive-navigation", "target": "android", "platform": "android"},
+    {"key": "androidx-adaptive-navigation3", "target": "android", "platform": "android"},
+    {"key": "androidx-foundation", "target": "android", "platform": "android"},
+    {"key": "androidx-ui", "target": "android", "platform": "android"},
+    {"key": "androidx-navigation3-ui", "target": "android", "platform": "android"},
+    {"key": "androidx-navigation3-runtime", "target": "android", "platform": "android"},
+    {"key": "cmp-material3", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-material3-nav-suite", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-adaptive", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-adaptive-layout", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-adaptive-navigation", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-adaptive-navigation3", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-foundation", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-ui", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-navigation3-ui", "target": "desktop", "platform": "desktop"},
+    {"key": "cmp-skiko-awt", "target": "awt", "platform": "desktop"},
+]
+
+MAX_SURFACE_JSON_BYTES = 5 * 1024 * 1024
 
 RELEASE_NOTE_PATHS: list[tuple[str, str]] = [
     ("compose-material3", "/jetpack/androidx/releases/compose-material3"),
@@ -568,6 +596,1570 @@ def ensure_jar_on_disk(
 def io_bytes(data: bytes):
     import io
     return io.BytesIO(data)
+
+
+# ---------------------------------------------------------------------------
+# Upstream *-sources.jar Downloader & Pure-Python Kotlin/Java Source Indexer
+# ---------------------------------------------------------------------------
+
+def resolve_artifact_sources_url(
+    repo_base: str,
+    group_id: str,
+    artifact_id: str,
+    version: str,
+    target: str,
+) -> str:
+    """Resolve the official Maven *-sources.jar URL via Gradle .module metadata.
+    target is 'android', 'desktop', or 'awt'.
+    """
+    base_dir = f"{repo_base}/{maven_path(group_id, artifact_id)}/{version}"
+    mod_url = f"{base_dir}/{artifact_id}-{version}.module"
+
+    preferred_variants: dict[str, list[str]] = {
+        "android": [
+            "androidSourcesElements-published",
+            "androidxSourcesElements",
+            "metadataSourcesElements",
+        ],
+        "desktop": [
+            "desktopSourcesElements-published",
+            "jvmSourcesElements-published",
+            "metadataSourcesElements",
+        ],
+        "awt": [
+            "awtSourcesElements-published",
+            "jvmSourcesElements-published",
+            "sourcesElements",
+        ],
+    }
+    wants = preferred_variants.get(target, ["sourcesElements", "metadataSourcesElements"])
+
+    def _pick_sources_file(files: list[dict[str, Any]], parent_url: str) -> str | None:
+        candidates: list[str] = []
+        for fobj in files:
+            fname = fobj.get("url") or fobj.get("name") or ""
+            if fname.endswith("-sources.jar") and "-samples-" not in fname:
+                candidates.append(urllib.parse.urljoin(parent_url, fname))
+        return candidates[0] if candidates else None
+
+    try:
+        _, data, _ = fetch_url(mod_url, accept="application/json")
+        mod = json.loads(data.decode("utf-8"))
+        variants = mod.get("variants", [])
+        by_name = {v.get("name", ""): v for v in variants}
+
+        for want in wants:
+            v = by_name.get(want)
+            if not v:
+                continue
+            avail = (v.get("available-at") or {}).get("url")
+            if avail:
+                sub_url = urllib.parse.urljoin(mod_url, avail)
+                _, sdata, _ = fetch_url(sub_url, accept="application/json")
+                smod = json.loads(sdata.decode("utf-8"))
+                for sv in smod.get("variants", []):
+                    if sv.get("name") == want and sv.get("files"):
+                        picked = _pick_sources_file(sv["files"], sub_url)
+                        if picked:
+                            return picked
+                for sv in smod.get("variants", []):
+                    if "source" in sv.get("name", "").lower() and sv.get("files"):
+                        picked = _pick_sources_file(sv["files"], sub_url)
+                        if picked:
+                            return picked
+            elif v.get("files"):
+                picked = _pick_sources_file(v["files"], mod_url)
+                if picked:
+                    return picked
+
+        # Generic scan of any source variant in .module
+        for v in variants:
+            if "source" in v.get("name", "").lower() and v.get("files"):
+                picked = _pick_sources_file(v["files"], mod_url)
+                if picked:
+                    return picked
+    except Exception:
+        pass
+
+    # Direct fallback URLs
+    fallback_candidates = [
+        f"{base_dir}/{artifact_id}-{version}-sources.jar",
+    ]
+    if target in {"desktop", "android"}:
+        fallback_candidates.append(
+            f"{repo_base}/{maven_path(group_id, f'{artifact_id}-{target}')}/{version}/{artifact_id}-{target}-{version}-sources.jar"
+        )
+    return fallback_candidates[0]
+
+
+def ensure_source_jar_on_disk(
+    sources_dir: Path,
+    cache_meta: dict[str, Any],
+    artifact_key: str,
+    repo_base: str,
+    group_id: str,
+    artifact_id: str,
+    version: str,
+    target: str,
+    *,
+    refresh: bool = False,
+) -> tuple[Path, dict[str, Any], str]:
+    """Download/cache *-sources.jar into sources_dir.
+    Fast-path skips all HTTP requests when the same version is already cached on disk.
+    """
+    jar_name = f"{artifact_key}-{version}-sources.jar"
+    jar_path = sources_dir / jar_name
+    prev = cache_meta.get(artifact_key) or {}
+
+    if (
+        not refresh
+        and jar_path.exists()
+        and prev.get("version") == version
+        and prev.get("repo_base") == repo_base
+        and prev.get("jar_name") == jar_name
+        and prev.get("sha256")
+    ):
+        return jar_path, prev, "cached"
+
+    url = resolve_artifact_sources_url(repo_base, group_id, artifact_id, version, target)
+    validators = prev if (prev.get("url") == url and not refresh) else {}
+    status_code, data, hdrs = fetch_url(
+        url,
+        etag=validators.get("etag"),
+        last_modified=validators.get("last_modified"),
+        timeout=60.0,
+    )
+    if status_code == 304 and jar_path.exists():
+        meta = dict(prev)
+        meta["version"] = version
+        meta["repo_base"] = repo_base
+        meta["jar_name"] = jar_name
+        return jar_path, meta, "unchanged"
+
+    # Remove superseded version jar for the same artifact_key
+    old_jar_name = prev.get("jar_name")
+    if old_jar_name and old_jar_name != jar_name:
+        old_path = sources_dir / old_jar_name
+        try:
+            if old_path.exists():
+                old_path.unlink()
+        except OSError:
+            pass
+
+    write_bytes(jar_path, data)
+    meta = {
+        "artifact_key": artifact_key,
+        "coordinate": f"{group_id}:{artifact_id}",
+        "version": version,
+        "repo_base": repo_base,
+        "jar_name": jar_name,
+        "url": url,
+        "etag": hdrs.get("etag"),
+        "last_modified": hdrs.get("last-modified"),
+        "sha256": sha256_bytes(data),
+        "bytes": len(data),
+    }
+    return jar_path, meta, "downloaded"
+
+
+# ---------------------------------------------------------------------------
+# Pure-Python Kotlin & Java Lexer + Declaration Parser
+# ---------------------------------------------------------------------------
+
+KT_MODIFIERS = frozenset({
+    "public", "internal", "private", "protected",
+    "expect", "actual", "inline", "noinline", "crossinline",
+    "suspend", "operator", "infix", "tailrec", "external",
+    "override", "open", "final", "abstract", "sealed",
+    "data", "value", "enum", "annotation", "companion",
+    "inner", "const", "lateinit", "vararg",
+})
+
+KT_DECL_KEYWORDS = frozenset({"fun", "class", "interface", "object", "val", "var", "typealias"})
+
+KT_CONTINUATION_END_TOKENS = frozenset({
+    "=", "+", "-", "*", "/", "%", "&&", "||", "?:", ".", "?.", ",", "->", ":", "?", "(", "[", "{",
+})
+
+KT_CONTINUATION_START_TOKENS = frozenset({
+    ".", "?.", "?:", "&&", "||", "+", "-", "*", "/", "else", "catch", "finally", "where",
+})
+
+JAVA_MODIFIERS = frozenset({
+    "public", "protected", "private", "abstract", "static", "final",
+    "synchronized", "native", "strictfp", "transient", "volatile",
+    "default", "sealed", "non-sealed",
+})
+
+
+def clean_kdoc(raw: str, max_chars: int = 1200) -> str:
+    """Strip KDoc/Javadoc comment delimiters and leading asterisks."""
+    text = raw.strip()
+    if text.startswith("/**"):
+        text = text[3:]
+    if text.endswith("*/"):
+        text = text[:-2]
+    lines: list[str] = []
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith("*"):
+            s = s[1:]
+            if s.startswith(" "):
+                s = s[1:]
+        lines.append(s.rstrip())
+    cleaned = "\n".join(lines).strip()
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
+    if len(cleaned) > max_chars:
+        cleaned = cleaned[: max_chars - 3].rstrip() + "..."
+    return cleaned
+
+
+def clean_kotlin_signature(raw: str, max_chars: int = 2400) -> str:
+    """Dedent a sliced Kotlin/Java declaration header while preserving default expressions."""
+    lines = raw.splitlines()
+    while lines and not lines[0].strip():
+        lines.pop(0)
+    while lines and not lines[-1].strip():
+        lines.pop()
+    if not lines:
+        return ""
+    indents = [len(ln) - len(ln.lstrip(" \t")) for ln in lines if ln.strip()]
+    min_indent = min(indents) if indents else 0
+    cleaned = [
+        ln[min_indent:].rstrip() if len(ln) >= min_indent else ln.rstrip()
+        for ln in lines
+    ]
+    out = "\n".join(cleaned).strip()
+    if len(out) > max_chars:
+        out = out[: max_chars - 3].rstrip() + "..."
+    return out
+
+
+def compact_signature(sig: str, max_chars: int = 420) -> str:
+    """Collapse a multi-line Kotlin signature to a single line for compact manifests."""
+    one = re.sub(r"\s+", " ", sig).strip()
+    one = re.sub(r"\(\s+", "(", one)
+    one = re.sub(r"\s+\)", ")", one)
+    one = re.sub(r"\s+,", ",", one)
+    if len(one) > max_chars:
+        one = one[: max_chars - 3].rstrip() + "..."
+    return one
+
+
+def _line_indent(lines: list[str], line_no: int) -> int:
+    if 1 <= line_no <= len(lines):
+        ln = lines[line_no - 1]
+        return len(ln) - len(ln.lstrip(" \t"))
+    return 0
+
+
+def tokenize_kotlin(source: str) -> list[tuple[str, str, int, int, int]]:
+    """Lex Kotlin source into (kind, value, line, start_off, end_off) tuples.
+    Handles nested /* /* */ */ block comments, KDoc /** ... */, line comments,
+    normal & triple-quoted strings with ${...} interpolation, char literals,
+    and backticked identifiers so braces/parens inside strings/comments never leak.
+    """
+    tokens: list[tuple[str, str, int, int, int]] = []
+    n = len(source)
+    i = 0
+    line = 1
+    # Stack of active string / interpolation modes:
+    # ('NORM_STR', 0) | ('RAW_STR', 0) | ('INTERP', brace_depth)
+    str_stack: list[list[Any]] = []
+
+    while i < n:
+        ch = source[i]
+
+        # Inside a string literal (not inside ${...})
+        if str_stack and str_stack[-1][0] in {"NORM_STR", "RAW_STR"}:
+            mode = str_stack[-1][0]
+            if mode == "NORM_STR":
+                if ch == "\\" and i + 1 < n:
+                    if source[i + 1] == "\n":
+                        line += 1
+                    i += 2
+                    continue
+                if ch == '"':
+                    str_stack.pop()
+                    i += 1
+                    if not str_stack:
+                        tokens.append(("OTHER", '""', line, i - 1, i))
+                    continue
+                if ch == "$" and i + 1 < n and source[i + 1] == "{":
+                    str_stack.append(["INTERP", 0])
+                    i += 2
+                    continue
+                if ch == "\n":
+                    line += 1
+                    # Unterminated normal string safety
+                    str_stack.pop()
+                i += 1
+                continue
+            else:  # RAW_STR
+                if source[i : i + 3] == '"""':
+                    i += 3
+                    while i < n and source[i] == '"':
+                        i += 1
+                    str_stack.pop()
+                    if not str_stack:
+                        tokens.append(("OTHER", '"""', line, i - 3, i))
+                    continue
+                if ch == "$" and i + 1 < n and source[i + 1] == "{":
+                    str_stack.append(["INTERP", 0])
+                    i += 2
+                    continue
+                if ch == "\n":
+                    line += 1
+                i += 1
+                continue
+
+        # Whitespace
+        if ch in " \t\r":
+            i += 1
+            continue
+        if ch == "\n":
+            if not str_stack:
+                tokens.append(("NEWLINE", "\n", line, i, i + 1))
+            line += 1
+            i += 1
+            continue
+
+        # Line comment //
+        if ch == "/" and i + 1 < n and source[i + 1] == "/":
+            nl = source.find("\n", i + 2)
+            i = n if nl == -1 else nl
+            continue
+
+        # Block comment /* ... */ or KDoc /** ... */ (supports Kotlin nesting)
+        if ch == "/" and i + 1 < n and source[i + 1] == "*":
+            start = i
+            start_line = line
+            is_kdoc = (
+                i + 2 < n
+                and source[i + 2] == "*"
+                and not (i + 3 < n and source[i + 3] == "/")
+                and not (i + 3 < n and source[i + 3] == "*")
+            )
+            i += 2
+            depth = 1
+            while i < n and depth > 0:
+                if source[i] == "\n":
+                    line += 1
+                    i += 1
+                elif source[i] == "/" and i + 1 < n and source[i + 1] == "*":
+                    depth += 1
+                    i += 2
+                elif source[i] == "*" and i + 1 < n and source[i + 1] == "/":
+                    depth -= 1
+                    i += 2
+                else:
+                    i += 1
+            if is_kdoc and not str_stack:
+                tokens.append(("KDOC", source[start:i], start_line, start, i))
+            continue
+
+        # Raw string """..."""
+        if source[i : i + 3] == '"""':
+            str_stack.append(["RAW_STR", 0])
+            i += 3
+            continue
+
+        # Normal string "..."
+        if ch == '"':
+            str_stack.append(["NORM_STR", 0])
+            i += 1
+            continue
+
+        # Char literal '...'
+        if ch == "'":
+            start = i
+            i += 1
+            if i < n and source[i] == "\\":
+                i += 2
+            while i < n and source[i] != "'" and source[i] != "\n":
+                i += 1
+            if i < n and source[i] == "'":
+                i += 1
+            if not str_stack:
+                tokens.append(("OTHER", source[start:i], line, start, i))
+            continue
+
+        # Inside ${...} string interpolation: track nested braces only, emit nothing
+        if str_stack and str_stack[-1][0] == "INTERP":
+            if ch == "{":
+                str_stack[-1][1] += 1
+            elif ch == "}":
+                if str_stack[-1][1] == 0:
+                    str_stack.pop()
+                else:
+                    str_stack[-1][1] -= 1
+            i += 1
+            continue
+
+        # Backticked identifier
+        if ch == "`":
+            start = i
+            end = source.find("`", i + 1)
+            nl = source.find("\n", i + 1)
+            if end != -1 and (nl == -1 or end < nl):
+                i = end + 1
+                tokens.append(("IDENT", source[start:i], line, start, i))
+            else:
+                i += 1
+            continue
+
+        # Identifier / keyword
+        if ch.isalpha() or ch == "_":
+            start = i
+            i += 1
+            while i < n and (source[i].isalnum() or source[i] == "_"):
+                i += 1
+            tokens.append(("IDENT", source[start:i], line, start, i))
+            continue
+
+        # Numbers
+        if ch.isdigit():
+            start = i
+            i += 1
+            while i < n and (source[i].isalnum() or source[i] == "_"):
+                i += 1
+            tokens.append(("OTHER", source[start:i], line, start, i))
+            continue
+
+        # Two-char operators useful for expression continuation & lambdas
+        two = source[i : i + 2]
+        if two in {"==", "!=", "<=", ">=", "->", "::", "?.", "?:", "&&", "||", "+=", "-=", "*=", "/="}:
+            tokens.append(("OP", two, line, i, i + 2))
+            i += 2
+            continue
+
+        # Single-char structural symbols
+        if ch in "{}()[]<>:=@;,.?":
+            tokens.append(("SYM", ch, line, i, i + 1))
+            i += 1
+            continue
+
+        tokens.append(("OP", ch, line, i, i + 1))
+        i += 1
+
+    return tokens
+
+
+def _skip_balanced(
+    tokens: list[tuple[str, str, int, int, int]],
+    idx: int,
+    open_ch: str,
+    close_ch: str,
+) -> int:
+    """Given tokens[idx] == ('SYM', open_ch, ...), return index AFTER matching close_ch."""
+    n = len(tokens)
+    depth = 0
+    while idx < n:
+        k, v = tokens[idx][0], tokens[idx][1]
+        if k == "SYM":
+            if v == open_ch:
+                depth += 1
+            elif v == close_ch:
+                depth -= 1
+                if depth == 0:
+                    return idx + 1
+        idx += 1
+    return idx
+
+
+def _skip_ws_newlines(tokens: list[tuple[str, str, int, int, int]], idx: int) -> int:
+    n = len(tokens)
+    while idx < n and tokens[idx][0] in {"NEWLINE", "KDOC"}:
+        idx += 1
+    return idx
+
+
+def _skip_expr_body(
+    tokens: list[tuple[str, str, int, int, int]],
+    idx: int,
+    decl_indent: int,
+    lines: list[str],
+) -> tuple[int, int]:
+    """Advance past a Kotlin `= expr` body starting right after `=`.
+    Returns (next_idx, end_line).
+    """
+    n = len(tokens)
+    p_depth = 0
+    b_depth = 0
+    c_depth = 0
+    last_line = tokens[idx - 1][2] if idx > 0 else 1
+    prev_val = "="
+
+    while idx < n:
+        kind, val, ln, _, _ = tokens[idx]
+        if kind == "NEWLINE":
+            if p_depth == 0 and b_depth == 0 and c_depth == 0:
+                # Peek next non-newline token
+                nxt = idx + 1
+                while nxt < n and tokens[nxt][0] == "NEWLINE":
+                    nxt += 1
+                if nxt >= n:
+                    return nxt, last_line
+                nk, nv, nln, _, _ = tokens[nxt]
+                if nk == "KDOC":
+                    return nxt, last_line
+                if nk == "SYM" and nv in {"}", ";"}:
+                    return nxt, last_line
+                if nk == "SYM" and nv == "@":
+                    return nxt, last_line
+                next_indent = _line_indent(lines, nln)
+                continues = (
+                    prev_val in KT_CONTINUATION_END_TOKENS
+                    or nv in KT_CONTINUATION_START_TOKENS
+                    or (next_indent > decl_indent and nv not in KT_DECL_KEYWORDS and nv not in KT_MODIFIERS)
+                )
+                if not continues:
+                    return nxt, last_line
+            idx += 1
+            continue
+
+        if kind == "SYM":
+            if val == "(":
+                p_depth += 1
+            elif val == ")":
+                if p_depth == 0:
+                    return idx, last_line
+                p_depth -= 1
+            elif val == "[":
+                b_depth += 1
+            elif val == "]":
+                if b_depth == 0:
+                    return idx, last_line
+                b_depth -= 1
+            elif val == "{":
+                c_depth += 1
+            elif val == "}":
+                if c_depth == 0:
+                    return idx, last_line
+                c_depth -= 1
+            elif val == ";" and p_depth == 0 and b_depth == 0 and c_depth == 0:
+                return idx + 1, ln
+
+        last_line = ln
+        prev_val = val
+        idx += 1
+
+    return idx, last_line
+
+
+def parse_kotlin_source(source: str) -> list[dict[str, Any]]:
+    """Parse public & internal Kotlin declarations with exact line ranges,
+    full Kotlin signatures (including default parameter expressions), and KDoc.
+    """
+    tokens = tokenize_kotlin(source)
+    lines = source.splitlines()
+    n = len(tokens)
+    fq_package = ""
+    results: list[dict[str, Any]] = []
+
+    # Stack of active type scopes:
+    # (owner_name, record_or_none) — pushed on `{` of class/interface/object/companion
+    scope_stack: list[tuple[str, dict[str, Any] | None]] = []
+
+    pending_kdoc: tuple[str, int, int] | None = None
+    # Each ann: (simple_name, start_off, start_line, end_off)
+    pending_anns: list[tuple[str, int, int, int]] = []
+    # Each mod: (word, start_off, start_line)
+    pending_mods: list[tuple[str, int, int]] = []
+
+    def reset_pending() -> None:
+        nonlocal pending_kdoc, pending_anns, pending_mods
+        pending_kdoc = None
+        pending_anns = []
+        pending_mods = []
+
+    def current_owner() -> str:
+        return scope_stack[-1][0] if scope_stack else ""
+
+    def sig_start_offset_and_line(kw_off: int, kw_line: int) -> tuple[int, int]:
+        # start_line includes first attached annotation or modifier or keyword
+        first_line = kw_line
+        if pending_anns:
+            first_line = pending_anns[0][2]
+        elif pending_mods:
+            first_line = pending_mods[0][2]
+
+        # For kotlin_signature, skip leading @Suppress / @OptIn noise only if verbose,
+        # keep @Composable, @Experimental*, @Deprecated, @Immutable, @Stable, etc.
+        sig_off = kw_off
+        if pending_mods:
+            sig_off = pending_mods[0][1]
+        for aname, aoff, _, _ in pending_anns:
+            if aname != "Suppress":
+                sig_off = min(sig_off, aoff)
+                break
+        return sig_off, first_line
+
+    idx = 0
+    while idx < n:
+        kind, val, ln, soff, eoff = tokens[idx]
+
+        if kind == "NEWLINE":
+            idx += 1
+            continue
+
+        if kind == "KDOC":
+            # Only overwrite pending_kdoc if we haven't already started collecting modifiers
+            if not pending_mods:
+                pending_kdoc = (clean_kdoc(val), ln, ln + val.count("\n"))
+            idx += 1
+            continue
+
+        # Closing brace of enclosing type scope
+        if kind == "SYM" and val == "}":
+            reset_pending()
+            if scope_stack:
+                _, rec = scope_stack.pop()
+                if rec is not None:
+                    rec["end_line"] = ln
+            idx += 1
+            continue
+
+        # Package statement
+        if kind == "IDENT" and val == "package" and not scope_stack:
+            reset_pending()
+            idx += 1
+            parts: list[str] = []
+            while idx < n and tokens[idx][0] != "NEWLINE" and tokens[idx][1] != ";":
+                if tokens[idx][0] == "IDENT":
+                    parts.append(tokens[idx][1].strip("`"))
+                idx += 1
+            fq_package = ".".join(parts)
+            continue
+
+        # Import statement
+        if kind == "IDENT" and val == "import" and not scope_stack:
+            reset_pending()
+            idx += 1
+            while idx < n and tokens[idx][0] != "NEWLINE" and tokens[idx][1] != ";":
+                idx += 1
+            continue
+
+        # Annotation @...
+        if kind == "SYM" and val == "@":
+            ann_start_off = soff
+            ann_start_line = ln
+            idx += 1
+            # Check use-site target (e.g. @file:, @get:, @set:, @param:, @field:)
+            is_file_ann = False
+            if idx + 1 < n and tokens[idx][0] == "IDENT" and tokens[idx + 1][1] == ":":
+                target_word = tokens[idx][1]
+                if target_word == "file":
+                    is_file_ann = True
+                idx += 2
+            # Optional bracketed multi-annotation @[...]
+            if idx < n and tokens[idx][1] == "[":
+                idx = _skip_balanced(tokens, idx, "[", "]")
+                if is_file_ann:
+                    reset_pending()
+                continue
+            # Annotation qualified name
+            ann_parts: list[str] = []
+            while idx < n and tokens[idx][0] == "IDENT":
+                ann_parts.append(tokens[idx][1].strip("`"))
+                idx += 1
+                if idx < n and tokens[idx][1] == ".":
+                    idx += 1
+                else:
+                    break
+            # Optional type args <...>
+            if idx < n and tokens[idx][1] == "<":
+                idx = _skip_balanced(tokens, idx, "<", ">")
+            # Optional value args (...)
+            if idx < n and tokens[idx][1] == "(":
+                idx = _skip_balanced(tokens, idx, "(", ")")
+            ann_end_off = tokens[idx - 1][4] if idx > 0 else eoff
+            if is_file_ann:
+                reset_pending()
+            elif ann_parts:
+                pending_anns.append((ann_parts[-1], ann_start_off, ann_start_line, ann_end_off))
+            continue
+
+        # Modifiers
+        if kind == "IDENT" and val in KT_MODIFIERS:
+            pending_mods.append((val, soff, ln))
+            idx += 1
+            continue
+
+        # `fun interface` -> treat `fun` as modifier before `interface`
+        if kind == "IDENT" and val == "fun":
+            nxt = _skip_ws_newlines(tokens, idx + 1)
+            if nxt < n and tokens[nxt][0] == "IDENT" and tokens[nxt][1] == "interface":
+                pending_mods.append(("fun", soff, ln))
+                idx = nxt
+                continue
+
+        # ------------------------------------------------------------------
+        # Function declaration: fun ...
+        # ------------------------------------------------------------------
+        if kind == "IDENT" and val == "fun":
+            mod_words = {m[0] for m in pending_mods}
+            is_hidden = "private" in mod_words or "protected" in mod_words
+            sig_start_off, start_line = sig_start_offset_and_line(soff, ln)
+            decl_indent = _line_indent(lines, start_line)
+            kdoc_text = pending_kdoc[0] if pending_kdoc else ""
+            kdoc_start_line = pending_kdoc[1] if pending_kdoc else start_line
+            ann_names = list(dict.fromkeys(a[0] for a in pending_anns))
+            reset_pending()
+
+            idx += 1
+            idx = _skip_ws_newlines(tokens, idx)
+
+            # Optional generic type parameters <...>
+            if idx < n and tokens[idx][1] == "<":
+                idx = _skip_balanced(tokens, idx, "<", ">")
+                idx = _skip_ws_newlines(tokens, idx)
+
+            # Optional function-type receiver (e.g. `(() -> Unit).foo(...)`)
+            if idx < n and tokens[idx][1] == "(":
+                idx = _skip_balanced(tokens, idx, "(", ")")
+                idx = _skip_ws_newlines(tokens, idx)
+                if idx < n and tokens[idx][1] == "?":
+                    idx += 1
+                    idx = _skip_ws_newlines(tokens, idx)
+                if idx < n and tokens[idx][1] == ".":
+                    idx += 1
+                    idx = _skip_ws_newlines(tokens, idx)
+
+            # Scan receiver + function name until `(` at angle_depth == 0
+            func_name = ""
+            angle_depth = 0
+            while idx < n:
+                tk, tv = tokens[idx][0], tokens[idx][1]
+                if tk == "SYM" and tv == "<":
+                    angle_depth += 1
+                elif tk == "SYM" and tv == ">":
+                    angle_depth = max(0, angle_depth - 1)
+                elif tk == "SYM" and tv == "(" and angle_depth == 0:
+                    break
+                elif tk == "SYM" and tv in {"{", "}", "="} and angle_depth == 0:
+                    break
+                elif tk == "IDENT" and angle_depth == 0:
+                    func_name = tv.strip("`")
+                idx += 1
+
+            if not func_name or idx >= n or tokens[idx][1] != "(":
+                continue
+
+            # Parameter list (...)
+            params_open_idx = idx
+            params_close_idx = _skip_balanced(tokens, idx, "(", ")")
+            # Check for default parameter `=` at top level inside (...)
+            has_defaults = False
+            p_d = 0
+            b_d = 0
+            c_d = 0
+            a_d = 0
+            for pi in range(params_open_idx + 1, min(params_close_idx - 1, n)):
+                pk, pv = tokens[pi][0], tokens[pi][1]
+                if pk == "SYM":
+                    if pv == "(":
+                        p_d += 1
+                    elif pv == ")":
+                        p_d = max(0, p_d - 1)
+                    elif pv == "[":
+                        b_d += 1
+                    elif pv == "]":
+                        b_d = max(0, b_d - 1)
+                    elif pv == "{":
+                        c_d += 1
+                    elif pv == "}":
+                        c_d = max(0, c_d - 1)
+                    elif pv == "<":
+                        a_d += 1
+                    elif pv == ">":
+                        a_d = max(0, a_d - 1)
+                    elif pv == "=" and p_d == 0 and b_d == 0 and c_d == 0 and a_d == 0:
+                        has_defaults = True
+                        break
+
+            idx = params_close_idx
+            sig_end_off = tokens[idx - 1][4]
+            sig_end_line = tokens[idx - 1][2]
+
+            # Optional return type `: ...` and `where ...` until `{`, `=`, or end of abstract/expect decl
+            body_kind = "none"
+            a_d = 0
+            p_d = 0
+            b_d = 0
+            while idx < n:
+                tk, tv, tln, tsoff, teoff = tokens[idx]
+                if tk == "NEWLINE":
+                    if a_d == 0 and p_d == 0 and b_d == 0:
+                        nxt = _skip_ws_newlines(tokens, idx + 1)
+                        if nxt >= n:
+                            idx = nxt
+                            break
+                        nk, nv = tokens[nxt][0], tokens[nxt][1]
+                        if nv in {"{", "=", ":", "where"}:
+                            idx = nxt
+                            continue
+                        # If we just read `:` or `->` or `,`, return type continues on next line
+                        prev_t = tokens[idx - 1][1] if idx > 0 else ""
+                        if prev_t in {":", "->", ",", "<", "&"}:
+                            idx = nxt
+                            continue
+                        # Otherwise abstract/interface/expect function ended on previous line
+                        idx = nxt
+                        break
+                    idx += 1
+                    continue
+                if tk == "KDOC":
+                    if a_d == 0 and p_d == 0 and b_d == 0:
+                        break
+                    idx += 1
+                    continue
+                if tk == "SYM" and a_d == 0 and p_d == 0 and b_d == 0:
+                    if tv == "{":
+                        body_kind = "block"
+                        break
+                    if tv == "=":
+                        body_kind = "expr"
+                        break
+                    if tv in {"}", ";"}:
+                        break
+                if tk == "SYM":
+                    if tv == "<":
+                        a_d += 1
+                    elif tv == ">":
+                        a_d = max(0, a_d - 1)
+                    elif tv == "(":
+                        p_d += 1
+                    elif tv == ")":
+                        p_d = max(0, p_d - 1)
+                    elif tv == "[":
+                        b_d += 1
+                    elif tv == "]":
+                        b_d = max(0, b_d - 1)
+                sig_end_off = teoff
+                sig_end_line = tln
+                idx += 1
+
+            # Advance past function body & find exact end_line
+            end_line = sig_end_line
+            if body_kind == "block" and idx < n and tokens[idx][1] == "{":
+                idx = _skip_balanced(tokens, idx, "{", "}")
+                end_line = tokens[idx - 1][2] if idx > 0 else sig_end_line
+            elif body_kind == "expr" and idx < n and tokens[idx][1] == "=":
+                idx, end_line = _skip_expr_body(tokens, idx + 1, decl_indent, lines)
+
+            if not is_hidden:
+                owner = current_owner()
+                is_comp = "Composable" in ann_names
+                visibility = "internal" if "internal" in mod_words else "public"
+                results.append({
+                    "name": func_name,
+                    "owner": owner,
+                    "qualified_name": f"{owner}.{func_name}" if owner else func_name,
+                    "fq_package": fq_package,
+                    "kind": "composable" if is_comp else "fun",
+                    "visibility": visibility,
+                    "is_composable": is_comp,
+                    "annotations": ann_names,
+                    "kdoc_start_line": kdoc_start_line,
+                    "start_line": start_line,
+                    "end_line": max(end_line, start_line),
+                    "has_defaults": has_defaults,
+                    "kotlin_signature": clean_kotlin_signature(source[sig_start_off:sig_end_off]),
+                    "kdoc": kdoc_text,
+                })
+            continue
+
+        # ------------------------------------------------------------------
+        # Type declaration: class / interface / object (incl. companion object)
+        # ------------------------------------------------------------------
+        if kind == "IDENT" and val in {"class", "interface", "object"}:
+            mod_words = {m[0] for m in pending_mods}
+            is_hidden = "private" in mod_words or "protected" in mod_words
+            is_companion = val == "object" and "companion" in mod_words
+            sig_start_off, start_line = sig_start_offset_and_line(soff, ln)
+            kdoc_text = pending_kdoc[0] if pending_kdoc else ""
+            kdoc_start_line = pending_kdoc[1] if pending_kdoc else start_line
+            ann_names = list(dict.fromkeys(a[0] for a in pending_anns))
+            reset_pending()
+
+            idx += 1
+            idx = _skip_ws_newlines(tokens, idx)
+
+            type_name = ""
+            if idx < n and tokens[idx][0] == "IDENT":
+                # For `companion object : Super {` or `companion object {`, no name
+                if not is_companion or (tokens[idx][1] not in {"where"}):
+                    type_name = tokens[idx][1].strip("`")
+                    idx += 1
+            elif is_companion:
+                type_name = ""
+
+            # Scan class header (generics, primary constructor, supertypes, where) until `{` or end of header
+            sig_end_off = tokens[idx - 1][4] if idx > 0 else eoff
+            sig_end_line = tokens[idx - 1][2] if idx > 0 else ln
+            has_defaults = False
+            has_body = False
+            p_d = 0
+            a_d = 0
+            b_d = 0
+            seen_primary_ctor = False
+
+            while idx < n:
+                tk, tv, tln, tsoff, teoff = tokens[idx]
+                if tk == "NEWLINE":
+                    if p_d == 0 and a_d == 0 and b_d == 0:
+                        nxt = _skip_ws_newlines(tokens, idx + 1)
+                        if nxt >= n:
+                            idx = nxt
+                            break
+                        nk, nv = tokens[nxt][0], tokens[nxt][1]
+                        if nv in {"{", ":", "where", "("}:
+                            idx = nxt
+                            continue
+                        prev_t = tokens[idx - 1][1] if idx > 0 else ""
+                        if prev_t in {":", ",", "<"}:
+                            idx = nxt
+                            continue
+                        idx = nxt
+                        break
+                    idx += 1
+                    continue
+                if tk == "KDOC":
+                    if p_d == 0 and a_d == 0 and b_d == 0:
+                        break
+                    idx += 1
+                    continue
+                if tk == "SYM" and p_d == 0 and a_d == 0 and b_d == 0:
+                    if tv == "{":
+                        has_body = True
+                        break
+                    if tv in {"}", ";"}:
+                        break
+                if tk == "SYM":
+                    if tv == "(":
+                        p_d += 1
+                    elif tv == ")":
+                        p_d = max(0, p_d - 1)
+                        if p_d == 0:
+                            seen_primary_ctor = True
+                    elif tv == "<":
+                        a_d += 1
+                    elif tv == ">":
+                        a_d = max(0, a_d - 1)
+                    elif tv == "[":
+                        b_d += 1
+                    elif tv == "]":
+                        b_d = max(0, b_d - 1)
+                    elif tv == "=" and p_d == 1 and b_d == 0 and a_d == 0 and not seen_primary_ctor:
+                        has_defaults = True
+                sig_end_off = teoff
+                sig_end_line = tln
+                idx += 1
+
+            # Hidden type: skip entire body if present
+            if is_hidden:
+                if has_body and idx < n and tokens[idx][1] == "{":
+                    idx = _skip_balanced(tokens, idx, "{", "}")
+                continue
+
+            owner = current_owner()
+            if is_companion:
+                # Enter companion body using enclosing owner so Foo.bar() maps to owner="Foo"
+                comp_owner = owner if not type_name else (f"{owner}.{type_name}" if owner else type_name)
+                if has_body and idx < n and tokens[idx][1] == "{":
+                    scope_stack.append((comp_owner, None))
+                    idx += 1
+                continue
+
+            if not type_name:
+                if has_body and idx < n and tokens[idx][1] == "{":
+                    idx = _skip_balanced(tokens, idx, "{", "}")
+                continue
+
+            decl_kind = "enum" if "enum" in mod_words else val
+            visibility = "internal" if "internal" in mod_words else "public"
+            qname = f"{owner}.{type_name}" if owner else type_name
+            rec: dict[str, Any] = {
+                "name": type_name,
+                "owner": owner,
+                "qualified_name": qname,
+                "fq_package": fq_package,
+                "kind": decl_kind,
+                "visibility": visibility,
+                "is_composable": False,
+                "annotations": ann_names,
+                "kdoc_start_line": kdoc_start_line,
+                "start_line": start_line,
+                "end_line": max(sig_end_line, start_line),
+                "has_defaults": has_defaults,
+                "kotlin_signature": clean_kotlin_signature(source[sig_start_off:sig_end_off]),
+                "kdoc": kdoc_text,
+            }
+            results.append(rec)
+            if has_body and idx < n and tokens[idx][1] == "{":
+                scope_stack.append((qname, rec))
+                idx += 1
+            continue
+
+        # ------------------------------------------------------------------
+        # Property declaration: val / var
+        # ------------------------------------------------------------------
+        if kind == "IDENT" and val in {"val", "var"}:
+            mod_words = {m[0] for m in pending_mods}
+            is_hidden = "private" in mod_words or "protected" in mod_words
+            sig_start_off, start_line = sig_start_offset_and_line(soff, ln)
+            decl_indent = _line_indent(lines, start_line)
+            kdoc_text = pending_kdoc[0] if pending_kdoc else ""
+            kdoc_start_line = pending_kdoc[1] if pending_kdoc else start_line
+            ann_names = list(dict.fromkeys(a[0] for a in pending_anns))
+            reset_pending()
+
+            idx += 1
+            idx = _skip_ws_newlines(tokens, idx)
+
+            # Skip optional generic type params <...>
+            if idx < n and tokens[idx][1] == "<":
+                idx = _skip_balanced(tokens, idx, "<", ">")
+                idx = _skip_ws_newlines(tokens, idx)
+
+            # Skip destructuring `val (a, b) = ...`
+            if idx < n and tokens[idx][1] == "(":
+                idx = _skip_balanced(tokens, idx, "(", ")")
+                continue
+
+            # Scan optional receiver + property name until `:`, `=`, `by`, newline, or `;`
+            prop_name = ""
+            a_d = 0
+            while idx < n:
+                tk, tv = tokens[idx][0], tokens[idx][1]
+                if tk == "NEWLINE":
+                    break
+                if tk == "SYM" and tv == "<":
+                    a_d += 1
+                elif tk == "SYM" and tv == ">":
+                    a_d = max(0, a_d - 1)
+                elif a_d == 0 and (
+                    (tk == "SYM" and tv in {":", "=", ";", "}", "{"})
+                    or (tk == "IDENT" and tv == "by")
+                ):
+                    break
+                elif tk == "IDENT" and a_d == 0:
+                    prop_name = tv.strip("`")
+                idx += 1
+
+            sig_end_off = tokens[idx - 1][4] if idx > 0 else eoff
+            end_line = tokens[idx - 1][2] if idx > 0 else start_line
+
+            # Optional `: Type`
+            if idx < n and tokens[idx][1] == ":":
+                idx += 1
+                a_d = 0
+                p_d = 0
+                while idx < n:
+                    tk, tv, tln, _, teoff = tokens[idx]
+                    if tk == "NEWLINE" and a_d == 0 and p_d == 0:
+                        break
+                    if a_d == 0 and p_d == 0 and (
+                        (tk == "SYM" and tv in {"=", ";", "}", "{"})
+                        or (tk == "IDENT" and tv in {"by", "get", "set"})
+                    ):
+                        break
+                    if tk == "SYM":
+                        if tv == "<":
+                            a_d += 1
+                        elif tv == ">":
+                            a_d = max(0, a_d - 1)
+                        elif tv == "(":
+                            p_d += 1
+                        elif tv == ")":
+                            p_d = max(0, p_d - 1)
+                    sig_end_off = teoff
+                    end_line = tln
+                    idx += 1
+
+            # Optional `= expr` or `by expr`
+            eq_idx = _skip_ws_newlines(tokens, idx)
+            if eq_idx < n and (tokens[eq_idx][1] == "=" or (tokens[eq_idx][0] == "IDENT" and tokens[eq_idx][1] == "by")):
+                is_eq = tokens[eq_idx][1] == "="
+                expr_start_idx = eq_idx + 1
+                idx, expr_end_line = _skip_expr_body(tokens, expr_start_idx, decl_indent, lines)
+                end_line = max(end_line, expr_end_line)
+                # Keep concise single-line `= expr` inside signature (e.g. token constants / defaults)
+                if is_eq and idx > expr_start_idx:
+                    expr_end_off = tokens[idx - 1][4]
+                    if expr_end_off - sig_start_off <= 220 and "\n" not in source[tokens[eq_idx][3] : expr_end_off]:
+                        sig_end_off = expr_end_off
+
+            # Consume any following `get()` / `set(...)` accessors belonging to this property
+            while True:
+                acc = _skip_ws_newlines(tokens, idx)
+                # Allow annotations/modifiers on accessor like `@Composable get() = ...`
+                scan = acc
+                while scan < n and (
+                    tokens[scan][1] == "@"
+                    or (tokens[scan][0] == "IDENT" and tokens[scan][1] in KT_MODIFIERS)
+                ):
+                    if tokens[scan][1] == "@":
+                        scan += 1
+                        while scan < n and tokens[scan][0] == "IDENT":
+                            scan += 1
+                            if scan < n and tokens[scan][1] == ".":
+                                scan += 1
+                            else:
+                                break
+                        if scan < n and tokens[scan][1] == "(":
+                            scan = _skip_balanced(tokens, scan, "(", ")")
+                    else:
+                        scan += 1
+                    scan = _skip_ws_newlines(tokens, scan)
+                if (
+                    scan + 1 < n
+                    and tokens[scan][0] == "IDENT"
+                    and tokens[scan][1] in {"get", "set"}
+                    and tokens[scan + 1][1] == "("
+                ):
+                    scan = _skip_balanced(tokens, scan + 1, "(", ")")
+                    scan = _skip_ws_newlines(tokens, scan)
+                    if scan < n and tokens[scan][1] == "{":
+                        scan = _skip_balanced(tokens, scan, "{", "}")
+                        end_line = max(end_line, tokens[scan - 1][2])
+                        idx = scan
+                        continue
+                    elif scan < n and tokens[scan][1] == "=":
+                        scan, aend = _skip_expr_body(tokens, scan + 1, decl_indent, lines)
+                        end_line = max(end_line, aend)
+                        idx = scan
+                        continue
+                    else:
+                        end_line = max(end_line, tokens[scan - 1][2])
+                        idx = scan
+                        continue
+                break
+
+            if not is_hidden and prop_name:
+                owner = current_owner()
+                visibility = "internal" if "internal" in mod_words else "public"
+                results.append({
+                    "name": prop_name,
+                    "owner": owner,
+                    "qualified_name": f"{owner}.{prop_name}" if owner else prop_name,
+                    "fq_package": fq_package,
+                    "kind": "val",
+                    "visibility": visibility,
+                    "is_composable": "Composable" in ann_names,
+                    "annotations": ann_names,
+                    "kdoc_start_line": kdoc_start_line,
+                    "start_line": start_line,
+                    "end_line": max(end_line, start_line),
+                    "has_defaults": False,
+                    "kotlin_signature": clean_kotlin_signature(source[sig_start_off:sig_end_off]),
+                    "kdoc": kdoc_text,
+                })
+            continue
+
+        # ------------------------------------------------------------------
+        # typealias declaration
+        # ------------------------------------------------------------------
+        if kind == "IDENT" and val == "typealias":
+            mod_words = {m[0] for m in pending_mods}
+            is_hidden = "private" in mod_words or "protected" in mod_words
+            sig_start_off, start_line = sig_start_offset_and_line(soff, ln)
+            decl_indent = _line_indent(lines, start_line)
+            kdoc_text = pending_kdoc[0] if pending_kdoc else ""
+            kdoc_start_line = pending_kdoc[1] if pending_kdoc else start_line
+            ann_names = list(dict.fromkeys(a[0] for a in pending_anns))
+            reset_pending()
+
+            idx += 1
+            idx = _skip_ws_newlines(tokens, idx)
+            alias_name = ""
+            if idx < n and tokens[idx][0] == "IDENT":
+                alias_name = tokens[idx][1].strip("`")
+                idx += 1
+            while idx < n and tokens[idx][1] != "=" and tokens[idx][0] != "NEWLINE":
+                idx += 1
+            end_line = start_line
+            sig_end_off = tokens[idx - 1][4] if idx > 0 else eoff
+            if idx < n and tokens[idx][1] == "=":
+                idx, end_line = _skip_expr_body(tokens, idx + 1, decl_indent, lines)
+                sig_end_off = tokens[idx - 1][4] if idx > 0 else sig_end_off
+            if not is_hidden and alias_name:
+                owner = current_owner()
+                visibility = "internal" if "internal" in mod_words else "public"
+                results.append({
+                    "name": alias_name,
+                    "owner": owner,
+                    "qualified_name": f"{owner}.{alias_name}" if owner else alias_name,
+                    "fq_package": fq_package,
+                    "kind": "typealias",
+                    "visibility": visibility,
+                    "is_composable": False,
+                    "annotations": ann_names,
+                    "kdoc_start_line": kdoc_start_line,
+                    "start_line": start_line,
+                    "end_line": max(end_line, start_line),
+                    "has_defaults": False,
+                    "kotlin_signature": clean_kotlin_signature(source[sig_start_off:sig_end_off]),
+                    "kdoc": kdoc_text,
+                })
+            continue
+
+        # ------------------------------------------------------------------
+        # Non-declaration blocks inside class bodies: init { ... }, constructor(...) { ... },
+        # anonymous/enum blocks { ... } — skip their bodies cleanly
+        # ------------------------------------------------------------------
+        if kind == "IDENT" and val in {"init", "constructor"}:
+            reset_pending()
+            idx += 1
+            while idx < n and tokens[idx][1] not in {"{", ";", "}"} and tokens[idx][0] != "NEWLINE":
+                if tokens[idx][1] == "(":
+                    idx = _skip_balanced(tokens, idx, "(", ")")
+                    continue
+                idx += 1
+            nxt = _skip_ws_newlines(tokens, idx)
+            if nxt < n and tokens[nxt][1] == "{":
+                idx = _skip_balanced(tokens, nxt, "{", "}")
+            continue
+
+        if kind == "SYM" and val == "{":
+            reset_pending()
+            idx = _skip_balanced(tokens, idx, "{", "}")
+            continue
+
+        if kind == "SYM" and val == "(":
+            idx = _skip_balanced(tokens, idx, "(", ")")
+            continue
+
+        # Any other unrelated token clears stray pending modifiers/annotations
+        if kind not in {"SYM"} or val == ";":
+            reset_pending()
+        idx += 1
+
+    return results
+
+
+def parse_java_source(source: str) -> list[dict[str, Any]]:
+    """Parse public Java class/interface/enum and method declarations with exact line ranges."""
+    tokens = tokenize_kotlin(source)
+    n = len(tokens)
+    fq_package = ""
+    results: list[dict[str, Any]] = []
+    scope_stack: list[tuple[str, dict[str, Any] | None]] = []
+
+    pending_kdoc: tuple[str, int, int] | None = None
+    pending_anns: list[tuple[str, int, int]] = []
+    pending_mods: list[tuple[str, int, int]] = []
+
+    def reset_pending() -> None:
+        nonlocal pending_kdoc, pending_anns, pending_mods
+        pending_kdoc = None
+        pending_anns = []
+        pending_mods = []
+
+    idx = 0
+    while idx < n:
+        kind, val, ln, soff, eoff = tokens[idx]
+        if kind == "NEWLINE":
+            idx += 1
+            continue
+        if kind == "KDOC":
+            if not pending_mods:
+                pending_kdoc = (clean_kdoc(val), ln, ln + val.count("\n"))
+            idx += 1
+            continue
+        if kind == "SYM" and val == "}":
+            reset_pending()
+            if scope_stack:
+                _, rec = scope_stack.pop()
+                if rec is not None:
+                    rec["end_line"] = ln
+            idx += 1
+            continue
+        if kind == "IDENT" and val == "package" and not scope_stack:
+            reset_pending()
+            idx += 1
+            parts: list[str] = []
+            while idx < n and tokens[idx][1] != ";":
+                if tokens[idx][0] == "IDENT":
+                    parts.append(tokens[idx][1])
+                idx += 1
+            fq_package = ".".join(parts)
+            idx += 1
+            continue
+        if kind == "IDENT" and val == "import" and not scope_stack:
+            reset_pending()
+            while idx < n and tokens[idx][1] != ";":
+                idx += 1
+            idx += 1
+            continue
+        if kind == "SYM" and val == "@":
+            a_off, a_line = soff, ln
+            idx += 1
+            if idx < n and tokens[idx][1] == "interface":
+                # `@interface` annotation type declaration
+                pending_mods.append(("annotation", a_off, a_line))
+                continue
+            parts = []
+            while idx < n and tokens[idx][0] == "IDENT":
+                parts.append(tokens[idx][1])
+                idx += 1
+                if idx < n and tokens[idx][1] == ".":
+                    idx += 1
+                else:
+                    break
+            if idx < n and tokens[idx][1] == "(":
+                idx = _skip_balanced(tokens, idx, "(", ")")
+            if parts:
+                pending_anns.append((parts[-1], a_off, a_line))
+            continue
+        if kind == "IDENT" and val in JAVA_MODIFIERS:
+            pending_mods.append((val, soff, ln))
+            idx += 1
+            continue
+        if kind == "IDENT" and val in {"class", "interface", "enum", "record"}:
+            mod_words = {m[0] for m in pending_mods}
+            is_hidden = "private" in mod_words or "protected" in mod_words
+            start_off = pending_mods[0][1] if pending_mods else soff
+            start_line = pending_anns[0][2] if pending_anns else (pending_mods[0][2] if pending_mods else ln)
+            kdoc_text = pending_kdoc[0] if pending_kdoc else ""
+            kdoc_start_line = pending_kdoc[1] if pending_kdoc else start_line
+            ann_names = list(dict.fromkeys(a[0] for a in pending_anns))
+            reset_pending()
+
+            idx += 1
+            idx = _skip_ws_newlines(tokens, idx)
+            tname = tokens[idx][1] if idx < n and tokens[idx][0] == "IDENT" else ""
+            while idx < n and tokens[idx][1] not in {"{", ";"}:
+                idx += 1
+            sig_end_off = tokens[idx - 1][4] if idx > 0 else eoff
+            has_body = idx < n and tokens[idx][1] == "{"
+            if is_hidden or not tname:
+                if has_body:
+                    idx = _skip_balanced(tokens, idx, "{", "}")
+                continue
+            owner = scope_stack[-1][0] if scope_stack else ""
+            qname = f"{owner}.{tname}" if owner else tname
+            rec = {
+                "name": tname,
+                "owner": owner,
+                "qualified_name": qname,
+                "fq_package": fq_package,
+                "kind": "class" if val == "record" else val,
+                "visibility": "public" if "public" in mod_words else "internal",
+                "is_composable": False,
+                "annotations": ann_names,
+                "kdoc_start_line": kdoc_start_line,
+                "start_line": start_line,
+                "end_line": start_line,
+                "has_defaults": False,
+                "kotlin_signature": clean_kotlin_signature(source[start_off:sig_end_off]),
+                "kdoc": kdoc_text,
+            }
+            results.append(rec)
+            if has_body:
+                scope_stack.append((qname, rec))
+                idx += 1
+            continue
+
+        # Java method inside a class/interface
+        if scope_stack and pending_mods and kind in {"IDENT", "SYM"}:
+            mod_words = {m[0] for m in pending_mods}
+            is_hidden = "private" in mod_words or "protected" in mod_words
+            start_off = pending_mods[0][1]
+            start_line = pending_anns[0][2] if pending_anns else pending_mods[0][2]
+            kdoc_text = pending_kdoc[0] if pending_kdoc else ""
+            kdoc_start_line = pending_kdoc[1] if pending_kdoc else start_line
+            ann_names = list(dict.fromkeys(a[0] for a in pending_anns))
+            reset_pending()
+
+            # Scan to `(`, `;`, `=`, or `{`
+            mname = ""
+            a_d = 0
+            while idx < n:
+                tk, tv = tokens[idx][0], tokens[idx][1]
+                if tk == "SYM" and tv == "<":
+                    a_d += 1
+                elif tk == "SYM" and tv == ">":
+                    a_d = max(0, a_d - 1)
+                elif a_d == 0 and tk == "SYM" and tv in {"(", ";", "=", "{", "}"}:
+                    break
+                elif a_d == 0 and tk == "IDENT":
+                    mname = tv
+                idx += 1
+
+            if idx < n and tokens[idx][1] == "(":
+                idx = _skip_balanced(tokens, idx, "(", ")")
+                while idx < n and tokens[idx][1] not in {"{", ";", "}"}:
+                    idx += 1
+                sig_end_off = tokens[idx - 1][4] if idx > 0 else eoff
+                end_line = tokens[idx - 1][2] if idx > 0 else start_line
+                if idx < n and tokens[idx][1] == "{":
+                    idx = _skip_balanced(tokens, idx, "{", "}")
+                    end_line = tokens[idx - 1][2]
+                elif idx < n and tokens[idx][1] == ";":
+                    idx += 1
+                owner = scope_stack[-1][0]
+                if not is_hidden and mname and mname != owner.rsplit(".", 1)[-1]:
+                    results.append({
+                        "name": mname,
+                        "owner": owner,
+                        "qualified_name": f"{owner}.{mname}",
+                        "fq_package": fq_package,
+                        "kind": "fun",
+                        "visibility": "public" if "public" in mod_words else "internal",
+                        "is_composable": False,
+                        "annotations": ann_names,
+                        "kdoc_start_line": kdoc_start_line,
+                        "start_line": start_line,
+                        "end_line": max(end_line, start_line),
+                        "has_defaults": False,
+                        "kotlin_signature": clean_kotlin_signature(source[start_off:sig_end_off]),
+                        "kdoc": kdoc_text,
+                    })
+                continue
+            elif idx < n and tokens[idx][1] == "{":
+                idx = _skip_balanced(tokens, idx, "{", "}")
+                continue
+            elif idx < n and tokens[idx][1] == ";":
+                idx += 1
+                continue
+
+        if kind == "SYM" and val == "{":
+            reset_pending()
+            idx = _skip_balanced(tokens, idx, "{", "}")
+            continue
+        if kind == "SYM" and val == ";":
+            reset_pending()
+        idx += 1
+
+    return results
+
+
+def index_source_jar(
+    jar_path: Path,
+    *,
+    artifact_key: str,
+    coordinate: str,
+    version: str,
+    platform: str,
+    ecosystem: str,
+    url: str,
+    sha256: str,
+    num_bytes: int,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    """Parse all .kt and .java entries inside a cached *-sources.jar."""
+    jar_name = jar_path.name
+    symbols: list[dict[str, Any]] = []
+    file_count = 0
+
+    with zipfile.ZipFile(jar_path) as zf:
+        for entry_path in sorted(zf.namelist()):
+            if entry_path.endswith("/") or entry_path.startswith("META-INF/"):
+                continue
+            is_kt = entry_path.endswith(".kt")
+            is_java = entry_path.endswith(".java")
+            if not (is_kt or is_java):
+                continue
+            file_count += 1
+            try:
+                raw = zf.read(entry_path).decode("utf-8", errors="replace")
+            except Exception:
+                continue
+            decls = parse_kotlin_source(raw) if is_kt else parse_java_source(raw)
+            for d in decls:
+                d["jar_name"] = jar_name
+                d["artifact_key"] = artifact_key
+                d["coordinate"] = coordinate
+                d["version"] = version
+                d["platform"] = platform
+                d["entry_path"] = entry_path
+                symbols.append(d)
+
+    jar_meta = {
+        "jar_name": jar_name,
+        "artifact_key": artifact_key,
+        "coordinate": coordinate,
+        "version": version,
+        "platform": platform,
+        "ecosystem": ecosystem,
+        "url": url,
+        "sha256": sha256,
+        "bytes": num_bytes,
+        "file_count": file_count,
+        "symbol_count": len(symbols),
+    }
+    return jar_meta, symbols
+
+
+def enrich_surface_with_source_defaults(
+    watchlist_out: list[dict[str, Any]],
+    flat_symbols: list[dict[str, Any]],
+    source_symbols: list[dict[str, Any]],
+) -> None:
+    """Attach Kotlin source signatures (including default parameter expressions) to
+    watchlist items and flat_symbols in material3-expressive-surface.json while
+    keeping total manifest size compact.
+    """
+    # Build fast lookup: symbol_name -> ranked declarations (prefer public, non-deprecated, has_defaults)
+    by_name: dict[str, list[dict[str, Any]]] = {}
+    for rec in source_symbols:
+        if rec.get("owner") and rec.get("kind") not in {"class", "interface", "object", "enum"}:
+            # Skip nested methods for top-level name collisions unless qualified
+            continue
+        by_name.setdefault(rec["name"], []).append(rec)
+
+    def _is_hidden_deprecated(rec: dict[str, Any]) -> bool:
+        sig = rec.get("kotlin_signature") or ""
+        return "DeprecationLevel.HIDDEN" in sig
+
+    def _rank_decl(rec: dict[str, Any], preferred_pkg: str = "") -> tuple[int, int, int, int, int, int]:
+        vis_rank = 0 if rec.get("visibility") == "public" else 1
+        dep_rank = 1 if "Deprecated" in (rec.get("annotations") or []) else 0
+        pkg_match = 0 if (preferred_pkg and rec.get("fq_package") == preferred_pkg) else 1
+        defaults_rank = 0 if rec.get("has_defaults") else 1
+        kind_rank = 0 if rec.get("kind") == "composable" else (1 if rec.get("kind") == "fun" else 2)
+        eco_rank = 0 if rec.get("platform") == "android" else 1
+        return (vis_rank, dep_rank, pkg_match, defaults_rank, kind_rank, eco_rank)
+
+    def _pick_sigs(
+        name: str,
+        preferred_pkg: str = "",
+        *,
+        max_items: int = 3,
+        max_chars: int = 700,
+        require_defaults: bool = False,
+        allow_internal: bool = False,
+    ) -> list[str]:
+        cands = by_name.get(name) or []
+        if not cands:
+            return []
+        ordered = sorted(cands, key=lambda r: _rank_decl(r, preferred_pkg))
+        seen: set[str] = set()
+        out: list[str] = []
+        for r in ordered:
+            if not allow_internal and r.get("visibility") != "public":
+                continue
+            if _is_hidden_deprecated(r):
+                continue
+            if require_defaults and not r.get("has_defaults"):
+                continue
+            csig = compact_signature(r.get("kotlin_signature") or "", max_chars=max_chars)
+            if csig and csig not in seen:
+                seen.add(csig)
+                out.append(csig)
+                if len(out) >= max_items:
+                    break
+        return out
+
+    for item in watchlist_out:
+        sigs = _pick_sigs(item["symbol"], max_items=3, max_chars=900, require_defaults=False, allow_internal=True)
+        item["kotlin_defaults_signatures"] = sigs
+
+    for sym in flat_symbols:
+        pkg = sym.get("package") or ""
+        sigs = _pick_sigs(sym["name"], pkg, max_items=2, max_chars=700, require_defaults=True, allow_internal=False)
+        sym["kotlin_defaults_signature"] = "\n".join(sigs)
 
 
 # ---------------------------------------------------------------------------
@@ -1451,10 +3043,11 @@ def build_token_constants_markdown(token_constants: dict[str, dict[str, str]], g
 def run(args: argparse.Namespace) -> int:
     out: Path = args.out.resolve()
     jars_dir = out / "jars"
+    sources_dir = out / "sources"
     pages_dir = out / "pages"
     raw_dir = out / "raw"
     meta_dir = out / "metadata"
-    for d in (jars_dir, pages_dir, raw_dir, meta_dir):
+    for d in (jars_dir, sources_dir, pages_dir, raw_dir, meta_dir):
         d.mkdir(parents=True, exist_ok=True)
 
     api_dir = REPO_ROOT / "manifests" / "api"
@@ -1619,6 +3212,139 @@ def run(args: argparse.Namespace) -> int:
             print(f"  ERR jar {name_key}: {err}", file=sys.stderr)
 
     write_json(jar_cache_path, jar_cache)
+
+    # 2b. Download official Maven *-sources.jar archives & build Kotlin/Java source-index.json
+    print("Syncing official Maven *-sources.jar archives...", flush=True)
+    t_src0 = time.time()
+    source_cache_path = meta_dir / "source-cache.json"
+    source_cache: dict[str, Any] = read_json(source_cache_path, {})
+    source_index_path = out / "source-index.json"
+    source_parser_version = 2
+
+    src_tasks: list[tuple[str, str, str, str, str, str, str, str]] = []
+    for item in SOURCE_JAR_TARGETS:
+        key = item["key"]
+        info = artifacts_info.get(key)
+        if info and info.get("latest_any"):
+            src_tasks.append((
+                key,
+                info["repo_base"],
+                info["group_id"],
+                info["artifact_id"],
+                info["latest_any"],
+                item["target"],
+                item["platform"],
+                info.get("ecosystem") or ("jetbrains" if info["group_id"].startswith("org.jetbrains") else "androidx"),
+            ))
+
+    def _fetch_one_source_jar(
+        task: tuple[str, str, str, str, str, str, str, str],
+    ) -> tuple[str, Path | None, dict[str, Any] | None, str, str | None]:
+        key, repo_base, gid, aid, ver, target, platform, eco = task
+        try:
+            sp, meta, status = ensure_source_jar_on_disk(
+                sources_dir,
+                source_cache,
+                key,
+                repo_base,
+                gid,
+                aid,
+                ver,
+                target,
+                refresh=args.refresh,
+            )
+            meta = dict(meta)
+            meta["platform"] = platform
+            meta["ecosystem"] = eco
+            return key, sp, meta, status, None
+        except Exception as err:
+            return key, None, None, "error", f"{type(err).__name__}: {err}"
+
+    downloaded_source_jars: list[tuple[Path, dict[str, Any]]] = []
+    src_status_counts: dict[str, int] = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+        for key, sp, meta, status, err in pool.map(_fetch_one_source_jar, src_tasks):
+            src_status_counts[status] = src_status_counts.get(status, 0) + 1
+            if sp is not None and meta is not None:
+                source_cache[key] = meta
+                downloaded_source_jars.append((sp, meta))
+                if status != "cached":
+                    print(f"  sources {key} ({meta['version']}): {status} ({meta['bytes']:,} bytes)", flush=True)
+            elif err:
+                errors.append({"source_jar": key, "error": err})
+                print(f"  ERR sources {key}: {err}", file=sys.stderr)
+
+    write_json(source_cache_path, source_cache)
+    print(
+        f"  sources.jar sync finished in {time.time() - t_src0:.2f}s "
+        f"({len(downloaded_source_jars)}/{len(src_tasks)} ready: {src_status_counts})",
+        flush=True,
+    )
+
+    # Check if existing source-index.json already matches every jar's sha256 + parser_version
+    prev_source_index = read_json(source_index_path, {}) if source_index_path.exists() and not args.refresh else {}
+    prev_jars_map = prev_source_index.get("jars") or {}
+    index_up_to_date = (
+        prev_source_index.get("parser_version") == source_parser_version
+        and len(prev_jars_map) == len(downloaded_source_jars)
+        and all(
+            (prev_jars_map.get(sp.name) or {}).get("sha256") == meta.get("sha256")
+            for sp, meta in downloaded_source_jars
+        )
+    )
+
+    if index_up_to_date and isinstance(prev_source_index.get("symbols"), list):
+        source_index_doc = prev_source_index
+        source_symbols: list[dict[str, Any]] = prev_source_index["symbols"]
+        print(
+            f"  source-index.json cached ({source_index_doc.get('jar_count', 0)} jars, "
+            f"{len(source_symbols)} symbols)",
+            flush=True,
+        )
+    else:
+        t_parse0 = time.time()
+        print("Indexing Kotlin/Java declarations from *-sources.jar archives...", flush=True)
+        jars_summary: dict[str, dict[str, Any]] = {}
+        source_symbols = []
+
+        def _parse_one_jar(item: tuple[Path, dict[str, Any]]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+            sp, meta = item
+            return index_source_jar(
+                sp,
+                artifact_key=meta["artifact_key"],
+                coordinate=meta["coordinate"],
+                version=meta["version"],
+                platform=meta["platform"],
+                ecosystem=meta["ecosystem"],
+                url=meta["url"],
+                sha256=meta["sha256"],
+                num_bytes=meta["bytes"],
+            )
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
+            for jmeta, syms in pool.map(_parse_one_jar, downloaded_source_jars):
+                jars_summary[jmeta["jar_name"]] = jmeta
+                source_symbols.extend(syms)
+
+        source_index_doc = {
+            "schema_version": 1,
+            "parser_version": source_parser_version,
+            "generated_at": fetched_at,
+            "sources_dir": ".corpus/compose-maven-api/sources",
+            "jar_count": len(jars_summary),
+            "symbol_count": len(source_symbols),
+            "jars": jars_summary,
+            "symbols": source_symbols,
+        }
+        write_text(
+            source_index_path,
+            json.dumps(source_index_doc, ensure_ascii=False, separators=(",", ":")) + "\n",
+        )
+        print(
+            f"  Wrote {source_index_path} ({len(jars_summary)} jars, {len(source_symbols)} symbols "
+            f"in {time.time() - t_parse0:.1f}s)",
+            flush=True,
+        )
 
     print("Running javap bytecode inspection...", flush=True)
     inspected_symbols: dict[str, dict[str, Any]] = {}
@@ -1830,10 +3556,12 @@ def run(args: argparse.Namespace) -> int:
                 "doc": f"Module `{emod}`",
             })
 
+    enrich_surface_with_source_defaults(watchlist_out, flat_symbols, source_symbols)
+
     surface_doc = {
         "schema_version": 1,
         "generated_at": fetched_at,
-        "tool": "javap (OpenJDK 21)",
+        "tool": "javap (OpenJDK 21) + Maven *-sources.jar Kotlin parser",
         "watchlist": watchlist_out,
         "symbols": flat_symbols,
         "token_constants": token_constants,
@@ -1841,8 +3569,24 @@ def run(args: argparse.Namespace) -> int:
         "modules": modules_out,
         "extra_modules": extra_out,
     }
-    write_json(api_dir / "material3-expressive-surface.json", surface_doc)
-    print(f"Wrote {api_dir / 'material3-expressive-surface.json'} ({len(watchlist_out)} watchlist items)", flush=True)
+    surface_text = json.dumps(surface_doc, ensure_ascii=False, indent=2) + "\n"
+    if len(surface_text.encode("utf-8")) > MAX_SURFACE_JSON_BYTES:
+        # Keep watchlist default signatures intact; trim per-symbol defaults if needed to stay <= 5 MB
+        for sym in flat_symbols:
+            if sym.get("kotlin_defaults_signature"):
+                sym["kotlin_defaults_signature"] = compact_signature(sym["kotlin_defaults_signature"], max_chars=240)
+        surface_text = json.dumps(surface_doc, ensure_ascii=False, indent=2) + "\n"
+        if len(surface_text.encode("utf-8")) > MAX_SURFACE_JSON_BYTES:
+            for sym in flat_symbols:
+                sym.pop("kotlin_defaults_signature", None)
+            surface_text = json.dumps(surface_doc, ensure_ascii=False, indent=2) + "\n"
+    surface_path = api_dir / "material3-expressive-surface.json"
+    write_text(surface_path, surface_text)
+    print(
+        f"Wrote {surface_path} ({len(watchlist_out)} watchlist items, "
+        f"{len(surface_text.encode('utf-8')) / (1024 * 1024):.2f} MB)",
+        flush=True,
+    )
 
     # 4. Fetch AndroidX Release Notes (respecting robots.txt)
     print("Fetching AndroidX release notes...", flush=True)
@@ -1977,7 +3721,7 @@ def run(args: argparse.Namespace) -> int:
         "base_url": GOOGLE_MAVEN,
         "fetched_at": fetched_at,
         "page_count": len(page_records) + 1,
-        "asset_count": len(jar_paths),
+        "asset_count": len(jar_paths) + len(downloaded_source_jars),
         "failed_count": len(errors),
         "status": "ok" if not errors else "partial",
         "upstream_version": f"androidx-m3={((artifacts_info.get('androidx-material3') or {}).get('latest_any') or '')} / cmp-m3={((artifacts_info.get('cmp-material3') or {}).get('latest_any') or '')}",
@@ -1994,10 +3738,17 @@ def run(args: argparse.Namespace) -> int:
             "cmp_skiko_awt": (artifacts_info.get("cmp-skiko-awt") or {}).get("latest_any") or "",
         },
         "sections": section_counts,
-        "notes": f"JDK javap bytecode verification across {len(jar_paths)} JARs/AARs; {len(flat_symbols)} symbols indexed ({len(watchlist_out)} watchlist items).",
+        "notes": (
+            f"JDK javap bytecode verification across {len(jar_paths)} JARs/AARs; "
+            f"{len(flat_symbols)} bytecode symbols ({len(watchlist_out)} watchlist items); "
+            f"{len(downloaded_source_jars)} upstream *-sources.jar archives indexed "
+            f"({len(source_symbols)} Kotlin/Java declarations)."
+        ),
         "coordinate_count": len(artifacts_info),
         "watchlist_count": len(watchlist_out),
         "symbol_count": len(flat_symbols),
+        "source_jar_count": len(downloaded_source_jars),
+        "source_symbol_count": len(source_symbols),
         "modules_inspected": list(modules_out.keys()) + list(extra_out.keys()),
         "failures": errors,
     }
@@ -2009,14 +3760,24 @@ def run(args: argparse.Namespace) -> int:
 
 def verify_outputs(out: Path, api_dir: Path, sources_manifest_dir: Path) -> int:
     problems: list[str] = []
+    source_index_path = out / "source-index.json"
+    sources_dir = out / "sources"
+    surface_path = api_dir / "material3-expressive-surface.json"
+
     for req_json in (
         api_dir / "compose-versions.json",
-        api_dir / "material3-expressive-surface.json",
+        surface_path,
         sources_manifest_dir / f"{SOURCE_ID}.json",
         out / "manifest.json",
+        source_index_path,
     ):
         if not req_json.exists():
             problems.append(f"missing {req_json}")
+
+    if surface_path.exists():
+        surf_bytes = surface_path.stat().st_size
+        if surf_bytes > MAX_SURFACE_JSON_BYTES:
+            problems.append(f"material3-expressive-surface.json exceeds 5 MB: {surf_bytes} bytes")
 
     pages_dir = out / "pages"
     md_files = sorted(pages_dir.rglob("*.md")) if pages_dir.exists() else []
@@ -2030,15 +3791,75 @@ def verify_outputs(out: Path, api_dir: Path, sources_manifest_dir: Path) -> int:
             if len(line) > MAX_LINE_LENGTH:
                 problems.append(f"{md.name}:{idx} line length {len(line)} > {MAX_LINE_LENGTH}")
 
-    surface = read_json(api_dir / "material3-expressive-surface.json", {})
+    surface = read_json(surface_path, {})
     if len(surface.get("watchlist", [])) < 20:
         problems.append(f"watchlist too small: {len(surface.get('watchlist', []))}")
+
+    src_index = read_json(source_index_path, {})
+    src_jars = src_index.get("jars") or {}
+    src_symbols = src_index.get("symbols") or []
+    if len(src_jars) < 15:
+        problems.append(f"source-index.json jar_count too small: {len(src_jars)}")
+    if len(src_symbols) < 5000:
+        problems.append(f"source-index.json symbol_count too small: {len(src_symbols)}")
+
+    missing_jars = [jname for jname in src_jars if not (sources_dir / jname).exists()]
+    if missing_jars:
+        problems.append(f"missing cached source jars: {missing_jars[:5]}")
+
+    # Spot-check key Kotlin declarations & verify JAR line ranges
+    spot_checks = {
+        "HorizontalMultiBrowseCarousel": "singleAdvanceFlingBehavior",
+        "TabRowDefaults.PrimaryIndicator": "PrimaryIndicator",
+        "WideNavigationRailItem": "WideNavigationRailItem",
+        "SkiaLayer": "SkiaLayer",
+    }
+    spot_results: dict[str, dict[str, Any]] = {}
+    for target_qname, must_contain in spot_checks.items():
+        matches = [
+            s for s in src_symbols
+            if s.get("qualified_name") == target_qname or s.get("name") == target_qname
+        ]
+        # Prefer exact qualified_name match and has_defaults
+        matches.sort(key=lambda s: (0 if s.get("qualified_name") == target_qname else 1, 0 if s.get("has_defaults") else 1))
+        if not matches:
+            problems.append(f"spot-check symbol missing from source-index.json: {target_qname}")
+            continue
+        hit = matches[0]
+        sig = hit.get("kotlin_signature") or ""
+        if must_contain not in sig:
+            problems.append(f"spot-check {target_qname} signature missing '{must_contain}'")
+        jar_file = sources_dir / hit["jar_name"]
+        if jar_file.exists():
+            try:
+                with zipfile.ZipFile(jar_file) as zf:
+                    src_lines = zf.read(hit["entry_path"]).decode("utf-8", errors="replace").splitlines()
+                sline = int(hit["start_line"])
+                eline = int(hit["end_line"])
+                if not (1 <= sline <= eline <= len(src_lines)):
+                    problems.append(f"spot-check {target_qname} invalid line range {sline}..{eline} (file has {len(src_lines)} lines)")
+            except Exception as err:
+                problems.append(f"spot-check {target_qname} jar read failed: {err}")
+        if target_qname == "SkiaLayer" and (int(hit["end_line"]) - int(hit["start_line"])) < 100:
+            problems.append(
+                f"spot-check SkiaLayer body span too short: {hit['start_line']}..{hit['end_line']}"
+            )
+        spot_results[target_qname] = {
+            "jar_name": hit.get("jar_name"),
+            "entry_path": hit.get("entry_path"),
+            "lines": f"{hit.get('start_line')}..{hit.get('end_line')}",
+            "has_defaults": hit.get("has_defaults"),
+        }
 
     report = {
         "checked_at": utc_now(),
         "markdown_files": len(md_files),
         "max_line_length": max_len,
         "watchlist_count": len(surface.get("watchlist", [])),
+        "surface_bytes": surface_path.stat().st_size if surface_path.exists() else 0,
+        "source_jar_count": len(src_jars),
+        "source_symbol_count": len(src_symbols),
+        "spot_checks": spot_results,
         "problems": problems,
         "passed": not problems,
     }

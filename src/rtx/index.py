@@ -28,6 +28,7 @@ class IndexStats:
     api_versions: int
     design_tokens: int
     built_at: str
+    kotlin_sources: int = 0
 
 
 def _create_schema(conn: sqlite3.Connection) -> None:
@@ -43,6 +44,8 @@ def _create_schema(conn: sqlite3.Connection) -> None:
         DROP TABLE IF EXISTS api_versions;
         DROP TABLE IF EXISTS tokens_fts;
         DROP TABLE IF EXISTS design_tokens;
+        DROP TABLE IF EXISTS kotlin_sources_fts;
+        DROP TABLE IF EXISTS kotlin_sources;
         DROP TABLE IF EXISTS index_meta;
 
         CREATE TABLE docs_meta (
@@ -85,6 +88,7 @@ def _create_schema(conn: sqlite3.Connection) -> None:
             cmp_signature TEXT NOT NULL,
             parity_status TEXT NOT NULL,
             doc TEXT NOT NULL,
+            kotlin_defaults_signature TEXT NOT NULL,
             source_file TEXT NOT NULL,
             raw_json TEXT NOT NULL
         );
@@ -140,6 +144,47 @@ def _create_schema(conn: sqlite3.Connection) -> None:
             spec_version,
             notes,
             content='design_tokens',
+            content_rowid='id',
+            tokenize='unicode61'
+        );
+
+        CREATE TABLE kotlin_sources (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            owner TEXT NOT NULL,
+            qualified_name TEXT NOT NULL,
+            fq_package TEXT NOT NULL,
+            kind TEXT NOT NULL,
+            visibility TEXT NOT NULL,
+            is_composable INTEGER NOT NULL,
+            annotations TEXT NOT NULL,
+            jar_name TEXT NOT NULL,
+            artifact_key TEXT NOT NULL,
+            coordinate TEXT NOT NULL,
+            version TEXT NOT NULL,
+            platform TEXT NOT NULL,
+            entry_path TEXT NOT NULL,
+            kdoc_start_line INTEGER NOT NULL,
+            start_line INTEGER NOT NULL,
+            end_line INTEGER NOT NULL,
+            has_defaults INTEGER NOT NULL,
+            kotlin_signature TEXT NOT NULL,
+            kdoc TEXT NOT NULL
+        );
+
+        CREATE INDEX idx_kotlin_sources_name ON kotlin_sources(lower(name));
+        CREATE INDEX idx_kotlin_sources_qname ON kotlin_sources(lower(qualified_name));
+
+        CREATE VIRTUAL TABLE kotlin_sources_fts USING fts5(
+            name,
+            owner,
+            qualified_name,
+            fq_package,
+            kotlin_signature,
+            artifact_key,
+            coordinate,
+            kdoc,
+            content='kotlin_sources',
             content_rowid='id',
             tokenize='unicode61'
         );
@@ -513,8 +558,68 @@ def _extract_token_records(data: Any, source_file: str) -> list[tuple[Any, ...]]
     return tokens
 
 
+def _extract_kotlin_source_records(data: Any) -> list[tuple[Any, ...]]:
+    """Extract Kotlin/Java source symbols from `.corpus/compose-maven-api/source-index.json`."""
+    if not isinstance(data, dict):
+        return []
+    raw_symbols = data.get("symbols")
+    if not isinstance(raw_symbols, list):
+        return []
+    rows: list[tuple[Any, ...]] = []
+    for item in raw_symbols:
+        if not isinstance(item, dict):
+            continue
+        name = str(item.get("name") or "")
+        if not name:
+            continue
+        owner = str(item.get("owner") or "")
+        qname = str(item.get("qualified_name") or (f"{owner}.{name}" if owner else name))
+        fq_package = str(item.get("fq_package") or item.get("package") or "")
+        kind = str(item.get("kind") or "fun")
+        visibility = str(item.get("visibility") or "public")
+        is_composable = 1 if item.get("is_composable") else 0
+        annotations = _as_str_list(item.get("annotations"))
+        jar_name = str(item.get("jar_name") or "")
+        artifact_key = str(item.get("artifact_key") or "")
+        coordinate = str(item.get("coordinate") or "")
+        version = str(item.get("version") or "")
+        platform = str(item.get("platform") or "")
+        entry_path = str(item.get("entry_path") or "")
+        kdoc_start_line = int(item.get("kdoc_start_line") or 0)
+        start_line = int(item.get("start_line") or 1)
+        end_line = int(item.get("end_line") or start_line)
+        has_defaults = 1 if item.get("has_defaults") else 0
+        kotlin_signature = str(item.get("kotlin_signature") or "")
+        kdoc = str(item.get("kdoc") or "")
+        rows.append(
+            (
+                name,
+                owner,
+                qname,
+                fq_package,
+                kind,
+                visibility,
+                is_composable,
+                json.dumps(annotations, ensure_ascii=False),
+                jar_name,
+                artifact_key,
+                coordinate,
+                version,
+                platform,
+                entry_path,
+                kdoc_start_line,
+                start_line,
+                end_line,
+                has_defaults,
+                kotlin_signature,
+                kdoc,
+            )
+        )
+    return rows
+
+
 def build_index(paths: RepoPaths | None = None) -> IndexStats:
-    """Build `.corpus/index.db` from `knowledge/`, `.corpus/*/pages/`, `manifests/api/`, and `manifests/tokens/`."""
+    """Build `.corpus/index.db` from `knowledge/`, `.corpus/*/pages/`, `manifests/api/`, `manifests/tokens/`, and `source-index.json`."""
     repo = paths or get_paths()
     repo.corpus_dir.mkdir(parents=True, exist_ok=True)
     db_path = repo.index_db
@@ -571,15 +676,27 @@ def build_index(paths: RepoPaths | None = None) -> IndexStats:
                     continue
                 symbols, versions = _extract_api_records(payload, rel)
                 if symbols:
+                    enriched_symbols = []
+                    for row in symbols:
+                        try:
+                            raw_obj = json.loads(row[13])
+                            kt_def = str(
+                                raw_obj.get("kotlin_defaults_signature")
+                                or raw_obj.get("kotlin_signature")
+                                or ""
+                            )
+                        except Exception:
+                            kt_def = ""
+                        enriched_symbols.append((*row[:12], kt_def, row[12], row[13]))
                     conn.executemany(
                         """
                         INSERT INTO api_symbols (
                             name, package, kind, signature, annotations, artifact, version,
                             targets, androidx_signature, cmp_signature, parity_status, doc,
-                            source_file, raw_json
-                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            kotlin_defaults_signature, source_file, raw_json
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                         """,
-                        symbols,
+                        enriched_symbols,
                     )
                     api_symbol_count += len(symbols)
                 if versions:
@@ -614,10 +731,33 @@ def build_index(paths: RepoPaths | None = None) -> IndexStats:
                     )
                     token_count += len(tokens)
 
+        kotlin_source_count = 0
+        source_index_file = repo.corpus_dir / "compose-maven-api" / "source-index.json"
+        if source_index_file.is_file():
+            try:
+                source_payload = json.loads(source_index_file.read_text(encoding="utf-8"))
+                kotlin_rows = _extract_kotlin_source_records(source_payload)
+                if kotlin_rows:
+                    conn.executemany(
+                        """
+                        INSERT INTO kotlin_sources (
+                            name, owner, qualified_name, fq_package, kind, visibility,
+                            is_composable, annotations, jar_name, artifact_key, coordinate,
+                            version, platform, entry_path, kdoc_start_line, start_line,
+                            end_line, has_defaults, kotlin_signature, kdoc
+                        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """,
+                        kotlin_rows,
+                    )
+                    kotlin_source_count = len(kotlin_rows)
+            except Exception:
+                pass
+
         # Populate external-content FTS5 tables
         conn.execute("INSERT INTO docs_fts(docs_fts) VALUES('rebuild')")
         conn.execute("INSERT INTO api_fts(api_fts) VALUES('rebuild')")
         conn.execute("INSERT INTO tokens_fts(tokens_fts) VALUES('rebuild')")
+        conn.execute("INSERT INTO kotlin_sources_fts(kotlin_sources_fts) VALUES('rebuild')")
 
         built_at = utc_now_iso()
         conn.executemany(
@@ -630,6 +770,7 @@ def build_index(paths: RepoPaths | None = None) -> IndexStats:
                 ("api_symbols", str(api_symbol_count)),
                 ("api_versions", str(api_version_count)),
                 ("design_tokens", str(token_count)),
+                ("kotlin_sources", str(kotlin_source_count)),
             ],
         )
         conn.commit()
@@ -646,4 +787,5 @@ def build_index(paths: RepoPaths | None = None) -> IndexStats:
         api_versions=api_version_count,
         design_tokens=token_count,
         built_at=built_at,
+        kotlin_sources=kotlin_source_count,
     )

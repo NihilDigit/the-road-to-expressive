@@ -28,6 +28,10 @@ from rtx.query import (
     query_component,
     query_component_batch,
     query_copy,
+    query_source,
+    query_source_batch,
+    query_spec,
+    query_spec_batch,
     query_tokens,
     query_tokens_batch,
     run_doctor,
@@ -51,6 +55,7 @@ def _cmd_status(paths: RepoPaths, args: argparse.Namespace) -> int:
         + (
             f" (chunks={status['index_meta'].get('doc_chunks', '?')}, "
             f"api_symbols={status['index_meta'].get('api_symbols', '?')}, "
+            f"kotlin_sources={status['index_meta'].get('kotlin_sources', '0')}, "
             f"tokens={status['index_meta'].get('design_tokens', '?')}, "
             f"built_at={status['index_meta'].get('built_at', '?')})"
             if status["index_exists"]
@@ -177,6 +182,7 @@ def _cmd_index(paths: RepoPaths, args: argparse.Namespace) -> int:
         "api_symbols": stats.api_symbols,
         "api_versions": stats.api_versions,
         "design_tokens": stats.design_tokens,
+        "kotlin_sources": stats.kotlin_sources,
         "built_at": stats.built_at,
     }
     if args.json:
@@ -186,7 +192,7 @@ def _cmd_index(paths: RepoPaths, args: argparse.Namespace) -> int:
         f"Built {stats.db_path}: {stats.doc_chunks} doc chunks "
         f"({stats.knowledge_files} knowledge, {stats.mirror_files} mirror), "
         f"{stats.api_symbols} API symbols, {stats.api_versions} artifact versions, "
-        f"{stats.design_tokens} tokens."
+        f"{stats.kotlin_sources} Kotlin source symbols, {stats.design_tokens} tokens."
     )
     return 0
 
@@ -250,7 +256,16 @@ def _print_api_result(paths: RepoPaths, res: dict, *, target: str | None, diff_o
         parity = f" [{sym['parity_status']}]" if sym["parity_status"] else ""
         targets = ",".join(sym["targets"]) if sym["targets"] else "common"
         print(f"- {sym['package']}.{sym['name']} ({sym['kind']}, targets={targets}){parity}{ann}")
-        if sym["signature"]:
+        kt_sigs = sym.get("kotlin_signatures") or []
+        if kt_sigs:
+            for kt_sig in kt_sigs[:2]:
+                kt_lines = kt_sig.splitlines()
+                print(f"  kotlin:   {kt_lines[0]}")
+                for extra_line in kt_lines[1:14]:
+                    print(f"            {extra_line}")
+                if len(kt_lines) > 14:
+                    print(f"            ... (+{len(kt_lines) - 14} more lines; run `rtx source {sym['name']}`)")
+        if sym["signature"] and (not kt_sigs or sym["signature"].strip() != kt_sigs[0].strip()):
             for sig_line in sym["signature"].splitlines()[:6]:
                 print(f"  sig:      {sig_line}")
             if len(sym["signature"].splitlines()) > 6:
@@ -305,46 +320,92 @@ def _cmd_api(paths: RepoPaths, args: argparse.Namespace) -> int:
     return 0
 
 
+def _print_indented(text: str, prefix: str = "  ") -> None:
+    for line in text.splitlines():
+        if line.strip():
+            print(f"{prefix}{line}")
+        else:
+            print()
+
+
 def _print_component_result(res: dict) -> None:
     print(f"=== Component: {res['component']} ===")
 
+    dossiers = res.get("m3_dossier") or []
+    for dossier in dossiers:
+        url_part = f" ({dossier['url']})" if dossier.get("url") else ""
+        print(f"\n[M3 Expressive Official Spec: {dossier['title']}]")
+        print(f"  Source: {dossier['path']}{url_part}")
+
+        if dossier.get("overview_and_variants"):
+            print("\n  -- Overview & Variants --")
+            _print_indented(dossier["overview_and_variants"], "  ")
+
+        if dossier.get("usage"):
+            print("\n  -- Usage & When to Use / Avoid --")
+            _print_indented(dossier["usage"], "  ")
+
+        if dossier.get("do_dont_rules"):
+            print("\n  -- Official Do & Don't Rules --")
+            for cap in dossier["do_dont_rules"]:
+                print(f"  - {cap}")
+
+        if dossier.get("adaptive_and_placement"):
+            print("\n  -- Adaptive Design & Placement --")
+            _print_indented(dossier["adaptive_and_placement"], "  ")
+
+        if dossier.get("behavior"):
+            print("\n  -- Behavior --")
+            _print_indented(dossier["behavior"], "  ")
+
+    hig_counterparts = res.get("hig_counterparts") or []
+    if hig_counterparts:
+        print("\n[Desktop & Mobile HIG Counterparts]")
+        for item in hig_counterparts:
+            url_part = f" ({item['url']})" if item.get("url") else ""
+            print(f"  - [{item['source_id']}] {item['title']} :: {item['path']}{url_part}")
+            _print_indented(item["summary"], "    ")
+
     if res["knowledge"]:
-        print("\n[Knowledge Guides]")
+        print("\n[Knowledge Engineering Notes]")
         for h in res["knowledge"][:5]:
             print(f"  - {h['path']}:{h['line']} ({h['heading']}) :: {h['snippet']}")
 
+    if res["tokens"]:
+        print("\n[Key M3 Expressive Tokens]")
+        for tok in res["tokens"][:8]:
+            comp = f" | {tok['compose_token']}" if tok["compose_token"] else ""
+            print(f"  - {tok['name']} ({tok['category']}): {tok['value']}{comp}")
+
     if res["compose_apis"]:
-        print("\n[Compose API Surface]")
+        print("\n[Compose Kotlin Signatures & Defaults]")
         for sym in res["compose_apis"][:8]:
             clean_anns = [a.lstrip("@") for a in sym["annotations"] if a]
             ann = f" @{', @'.join(clean_anns)}" if clean_anns else ""
             parity = f" [{sym['parity_status']}]" if sym["parity_status"] else ""
-            sig = (sym["signature"] or sym["androidx_signature"]).splitlines()[0]
-            if len(sig) > 160:
-                sig = sig[:157] + "..."
-            print(f"  - {sym['name']}{parity}{ann}: {sig}")
+            kt_sigs = sym.get("kotlin_signatures") or []
+            if kt_sigs:
+                print(f"  - {sym['name']}{parity}{ann}:")
+                kt_lines = kt_sigs[0].splitlines()
+                for ln in kt_lines[:10]:
+                    print(f"      {ln}")
+                if len(kt_lines) > 10:
+                    print(f"      ... (+{len(kt_lines) - 10} lines; run `rtx source {sym['name']}`)")
+            else:
+                sig = (sym["signature"] or sym["androidx_signature"]).splitlines()[0]
+                if len(sig) > 160:
+                    sig = sig[:157] + "..."
+                print(f"  - {sym['name']}{parity}{ann}: {sig}")
 
-    if res["tokens"]:
-        print("\n[M3 Expressive Tokens]")
-        for tok in res["tokens"][:8]:
-            print(f"  - {tok['name']} ({tok['category']}): {tok['value']} {tok['compose_token']}")
-
-    if res["m3_expressive"]:
+    if not dossiers and res["m3_expressive"]:
         print("\n[Material 3 Spec]")
         for h in res["m3_expressive"]:
             print(f"  - {h['path']}:{h['line']} ({h['heading']}) :: {h['snippet']}")
 
-    if res["compose_docs"]:
-        print("\n[Compose Official Docs]")
-        for h in res["compose_docs"]:
-            print(f"  - [{h['source_id']}] {h['path']}:{h['line']} ({h['heading']})")
-
-    if res["platform_hig"]:
-        print("\n[Platform HIG Notes]")
-        for h in res["platform_hig"]:
-            print(f"  - [{h['source_id']}] {h['path']}:{h['line']} ({h['heading']}) :: {h['snippet']}")
-
-    if not any(res[k] for k in ("knowledge", "compose_apis", "tokens", "m3_expressive", "compose_docs", "platform_hig")):
+    if not any(
+        res.get(k)
+        for k in ("m3_dossier", "hig_counterparts", "knowledge", "compose_apis", "tokens", "m3_expressive", "platform_hig")
+    ):
         print("No component entries found yet. Run `rtx sync` / `rtx index` or check spelling.")
 
 
@@ -365,6 +426,120 @@ def _cmd_component(paths: RepoPaths, args: argparse.Namespace) -> int:
     for idx, item in enumerate(batch["results"], start=1):
         _print_component_result(item)
         if idx < len(names):
+            print()
+    return 0
+
+
+def _print_spec_result(res: dict) -> None:
+    sections = res["sections"]
+    if not sections:
+        print(f"No upstream design spec sections matched: {res['query']}")
+        return
+
+    for idx, sec in enumerate(sections, start=1):
+        url_part = f" ({sec['url']})" if sec.get("url") else ""
+        print(f"=== [{idx}/{len(sections)}] [{sec['source_id']}] {sec['title']} > {sec['heading']} ===")
+        print(f"Source: {sec['path']}:{sec['start_line']}-{sec['end_line']}{url_part}\n")
+        print(sec["content"])
+        if idx < len(sections):
+            print()
+
+
+def _cmd_spec(paths: RepoPaths, args: argparse.Namespace) -> int:
+    raw_args = list(args.query)
+    # If multiple quoted multi-word queries were passed, run as batch; otherwise join unquoted words into one query.
+    if len(raw_args) > 1 and any(any(ch.isspace() for ch in item) for item in raw_args):
+        queries = raw_args
+    else:
+        queries = [" ".join(raw_args)]
+
+    if len(queries) == 1:
+        res = query_spec(paths, queries[0], source=args.source, limit=args.limit, max_chars=args.max_chars)
+        if args.json:
+            _print_json(res)
+            return 0
+        _print_spec_result(res)
+        return 0
+
+    batch = query_spec_batch(paths, queries, source=args.source, limit=args.limit, max_chars=args.max_chars)
+    if args.json:
+        _print_json(batch)
+        return 0
+    for idx, item in enumerate(batch["results"], start=1):
+        print(f"########## Spec Query [{idx}/{len(queries)}]: {item['query']} ##########")
+        _print_spec_result(item)
+        if idx < len(queries):
+            print()
+    return 0
+
+
+def _print_source_result(res: dict) -> None:
+    matches = res["matches"]
+    if not matches:
+        print(
+            f"No Kotlin/Java source declarations matched '{res['symbol']}'. "
+            "Run `rtx sync compose-maven-api` and `rtx index` if `source-index.json` has not been built yet."
+        )
+        return
+
+    for idx, m in enumerate(matches, start=1):
+        fq = f"{m['fq_package']}.{m['qualified_name']}" if m["fq_package"] else m["qualified_name"]
+        clean_anns = [a.lstrip("@") for a in m["annotations"] if a]
+        ann = f" @{', @'.join(clean_anns)}" if clean_anns else ""
+        coord = f"{m['coordinate']}:{m['version']}" if m["coordinate"] else m["artifact_key"]
+        print(f"=== [{idx}/{len(matches)}] {fq} ({m['visibility']} {m['kind']}){ann} ===")
+        print(f"Artifact: {coord} ({m['platform']})")
+        print(f"Source:   .corpus/compose-maven-api/sources/{m['jar_name']}!{m['entry_path']}:{m['display_start_line']}-{m['display_end_line']}")
+        if m.get("also_in"):
+            print(f"Also in:  {', '.join(m['also_in'][:3])}")
+        print()
+        if m.get("source_code"):
+            print(m["source_code"])
+            if m.get("truncated_lines"):
+                print(
+                    f"... (+{m['truncated_lines']} more lines; pass --max-lines {m['end_line'] - m['start_line'] + 20} to view full body)"
+                )
+        else:
+            if m.get("kdoc"):
+                print(f"/* {m['kdoc']} */")
+            if m.get("kotlin_signature"):
+                print(m["kotlin_signature"])
+        if idx < len(matches):
+            print()
+
+
+def _cmd_source(paths: RepoPaths, args: argparse.Namespace) -> int:
+    symbols = list(args.symbol)
+    if len(symbols) == 1:
+        res = query_source(
+            paths,
+            symbols[0],
+            artifact=args.artifact,
+            context_lines=args.context_lines,
+            limit=args.limit,
+            max_lines=args.max_lines,
+        )
+        if args.json:
+            _print_json(res)
+            return 0
+        _print_source_result(res)
+        return 0
+
+    batch = query_source_batch(
+        paths,
+        symbols,
+        artifact=args.artifact,
+        context_lines=args.context_lines,
+        limit=args.limit,
+        max_lines=args.max_lines,
+    )
+    if args.json:
+        _print_json(batch)
+        return 0
+    for idx, item in enumerate(batch["results"], start=1):
+        print(f"########## Source [{idx}/{len(symbols)}]: {item['symbol']} ##########")
+        _print_source_result(item)
+        if idx < len(symbols):
             print()
     return 0
 
@@ -538,10 +713,27 @@ def build_parser() -> argparse.ArgumentParser:
     p_api.add_argument("--json", action="store_true", help="Emit JSON output")
     p_api.set_defaults(func=_cmd_api)
 
-    p_comp = sub.add_parser("component", help="Unified M3E tokens + Compose API + Adaptive + HIG view")
-    p_comp.add_argument("name", nargs="+", help="One or more component names (e.g. SplitButton FloatingToolbar NavigationRail)")
+    p_comp = sub.add_parser("component", help="Lossless official M3E spec dossier + HIG counterparts + tokens + Kotlin defaults")
+    p_comp.add_argument("name", nargs="+", help="One or more component names (e.g. SearchBar Carousel Tabs Snackbar NavigationRail)")
     p_comp.add_argument("--json", action="store_true", help="Emit JSON output")
     p_comp.set_defaults(func=_cmd_component)
+
+    p_spec = sub.add_parser("spec", help="Read complete, noise-stripped official M3E & HIG design sections for patterns/layouts")
+    p_spec.add_argument("query", nargs="+", help="Design pattern query (or multiple quoted queries)")
+    p_spec.add_argument("--source", help="Filter by source_id (e.g. m3-expressive, apple-hig, windows-fluent, linux-hig, compose-android, google-design)")
+    p_spec.add_argument("--limit", type=int, default=5, help="Max sections per query (default: 5)")
+    p_spec.add_argument("--max-chars", type=int, default=1600, help="Max characters per section body (default: 1600)")
+    p_spec.add_argument("--json", action="store_true", help="Emit JSON output")
+    p_spec.set_defaults(func=_cmd_spec)
+
+    p_src = sub.add_parser("source", help="Read upstream Kotlin/Java KDoc + source code from cached Maven *-sources.jar")
+    p_src.add_argument("symbol", nargs="+", help="One or more symbol names (e.g. HorizontalMultiBrowseCarousel TabRowDefaults.PrimaryIndicator SkiaLayer)")
+    p_src.add_argument("--artifact", help="Filter by artifact key, coordinate, jar name, or platform (e.g. cmp-material3, skiko, foundation)")
+    p_src.add_argument("--context-lines", type=int, default=0, help="Extra surrounding source lines above and below (default: 0)")
+    p_src.add_argument("--limit", type=int, default=5, help="Max matches per symbol (default: 5)")
+    p_src.add_argument("--max-lines", type=int, default=140, help="Max lines to print per match (default: 140)")
+    p_src.add_argument("--json", action="store_true", help="Emit JSON output")
+    p_src.set_defaults(func=_cmd_source)
 
     p_tok = sub.add_parser("token", help="Query M3 Expressive color, shape, typography, and motion tokens")
     p_tok.add_argument("query", nargs="+", help="One or more token queries (e.g. MotionScheme largeIncreased displayLargeEmphasized)")
